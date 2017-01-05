@@ -1,0 +1,235 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!--<link rel="stylesheet" href="css/form-mini.css"> -->
+        <!-- Include meta tag to ensure proper rendering and touch zooming -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Include jQuery Mobile stylesheets -->
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <!-- Include the jQuery library -->
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <!-- Include the jQuery Mobile library -->
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/vendor/modernizr-2.8.3.min.js">
+        </script>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+        <div data-role="page" id="pageone" data-theme="b">
+            <div data-role="header">
+                <h1>Meta-Data</h1>
+                <img src="img/logo.png" class="ui-btn-left" />
+            </div>
+            <div data-role="main" class="ui-content">
+                <form >
+                    <label for="experiment_title" class="ui-hidden-accessible">Experiment Title:</label>
+                    <input type="text" name="experiment_title" id="experiment_title" placeholder="Experiment Title" required>
+                    <label for="experimenter_name" class="ui-hidden-accessible">Experimenter Name:</label>
+                    <input type="text" name="experimenter_name" id="experimenter_name" placeholder="Experimenter Name" required>
+                    <label for="female" class="ui-hidden-accessible">Female Number:</label>
+                    <input type="number" name="female" id="female" placeholder="Female Number">
+                    <label for="stud" class="ui-hidden-accessible">Stud Number:</label>
+                    <input type="number" name="stud" id="stud" placeholder="Stud Number">
+                    <label for="date" class="ui-hidden-accessible"> Date and Time:</label>
+                    <input type="text" name="date" id="date" placeholder="Date and Time">
+                    <!--                 <label for="date_test" class="ui-hidden-accessible"> date_test and Time:</label>
+                    <input type="time" name="date_test" id="date_test" placeholder="date_test and Time"> -->
+                    <label for="notes" class="ui-hidden-accessible"> Notes:</label>
+                    <input type="text" name="notes" id="notes" placeholder="Notes">
+                    <label for="experiment_type" class="ui-hidden-accessible">Experiment Type:</label>
+                    <input type="text" name="experiment_type" id="experiment_type" placeholder="Experiment Type">
+                    <a href="#pagetwo" class="ui-btn ui-icon-carat-r ui-btn-icon-right" data-transition="slide">Next</a>
+                </form >
+            </div>
+            <div data-role="footer">
+                <h1></h1>
+            </div>
+        </div>
+        
+        
+        <div data-role="page" id="pagetwo" data-theme="b">
+            <div data-role="header">
+                <h1>Experiment</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <a href="#pageone" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
+                
+                <table align="left" id = "live_data" data-role="table" class="ui-responsive">
+                    <thead>
+                        <tr>
+                            <th style="width: 33%;">Test Time </th>
+                            <th style="width: 33%;">Intro Count </th>
+                            <th style="width: 33%;">Time with Male </th>
+                            <!--  <th>Male Ins</th>
+                            <th>Male Outs</th>
+                            <th>Hops In</th>
+                            <th>Hops Out</th>
+                            <th>Ears In</th>
+                            <th>Ears Out</th>
+                            <th>Rejection Beh</th>
+                            <th>lrAvg</th>
+                            <th>percent exit mount</th>
+                            <th>percent exit intro</th>
+                            <th>percent exit ejac</th>
+                            <th>pacing lq</th> -->
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style = "text-align: center"> <output id="display-area">00:00</output></td>
+                            <td style = "text-align: center" id="intro_count"> 0</td>
+                            <td style = "text-align: center" id = "time_with_male" >00:00 </td>
+                            <!--                             <td id = "male_ins"></td>
+                            <td id = "male_outs"></td>
+                            <td id = "hops_in"></td>
+                            <td id = "hops_out"></td>
+                            <td id = "ears_in"></td>
+                            <td id = "ears_out"></td>
+                            <td id = "rejection_beh"></td>
+                            <td id = "lqAvg"></td>
+                            <td id = "percentExitMount"></td>
+                            <td id = "percentExitIntro"></td>
+                            <td id = "percentExitEjac"></td>
+                            <td id = "pacingLq"></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+                <table id ="test_buttons" align="center" data-role="table" class="ui-responsive">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th style = "text-align: center" > Mount </th>
+                            <th style = "text-align: center" > Intro </th>
+                            <th style = "text-align: center" > Ejac </th>
+                            
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td><button class = "withMale" type="Button" onclick="mount_zero()">0</button></td>
+                            <td><button class = "withMale" type="Button" onclick="intro_zero()">0</button></td>
+                            <td><button class = "withMale" type="Button"  onclick="ejac_zero()">0</button></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button type="Button" onclick="hop()">Hops</button></td>
+                            <td><button class = "withMale" type="Button" onclick="mount_one()">1</button></td>
+                            <td><button class = "withMale" type="Button" onclick="intro_one()">1</button></td>
+                            <td><button class = "withMale" type="Button" onclick="ejac_one()">1</button></td>
+                            <td><button type="Button" onclick="squeak()">Squeak</button></td>
+                            
+                        </tr>
+                        <tr>
+                            
+                            <td><button type="Button" onclick="ears()">Ears</button></td>
+                            
+                            <td><button class = "withMale" type="Button" onclick="mount_two()">2</button></td>
+                            <td><button class = "withMale" type="Button" onclick="intro_two()">2</button></td>
+                            <td><button class = "withMale" type="Button" onclick="ejac_two()">2</button></td>
+                            <td><button class = "withMale" type="Button" onclick="kick()">Kick</button></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><button  id="in_enter" type="Button" onclick="in_enter()">In</button></td>
+                            <td><button class = "withMale" type="Button" onclick="mount_three()">3</button></td>
+                            <td><button class = "withMale" type="Button" onclick="intro_three()">3</button></td>
+                            <td><button class = "withMale" type="Button" onclick="ejac_three()">3</button></td>
+                            <td><button class = "withMale" type="Button" onclick="out()">Out</button></td>
+                            
+                        </tr>
+                        <tr>
+                            
+                            <td align="center" > <button id="start" onClick="start()">Start</button></td>
+                            <td align="center" ><button id="toggle-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stop()">Stop</button></td>
+                            <!--  <td align="center" ><button id="reset-button" onClick="reset()">Reset</button></td> -->
+                            <td><button  id="flag" onClick="flag()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
+                            <td align="center" > <a href="#pagethree" data-transition="slide"><button id="finish-test" onClick="finishTest()">Finish Test</button></a></td>
+                            <td align="center" ><button id="download-csv" class="ui-btn ui-icon-action ui-btn-icon-right" onClick="downloadCSV()">Download CSV</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+            </div>
+            <div data-role="footer">
+                <h1></h1>
+            </div>
+            
+        </div>
+        
+        <div data-role="page" id="pagethree" data-theme="b">
+            <div data-role="header">
+                <h1 id="resultsHeader">Results</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <table id = "tableresults" data-role="table" class="ui-responsive" >
+                    <thead>
+                        <tr>
+                            <th>IN</th>
+                            <th>OUT</th>
+                            <th>Mount</th>
+                            <th>LQ</th>
+                            <th>Intro</th>
+                            <th>LQ</th>
+                            <th>Ejac</th>
+                            <th>LQ</th>
+                            <th>TTE</th>
+                            <th>CRL</th>
+                        </tr>
+                        <thead>
+                        </table>
+                        <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b">
+                            <h3>Flags</h3>
+                            <p id="paragraphFlags"></p>
+                        </div>
+                        <a href="#pagetwo"><button>Back</button></a>
+                        <div id = "hidden" hidden>
+                            
+                            <p id = "male_ins">male ins</p>
+                            <p id = "male_outs">male outs</p>
+                            <p id = "hops_in">Hops In</p>
+                            <p id = "hops_out">Hops Out</p>
+                            <p id = "ears_in">Ears In</p>
+                            <p id = "ears_out">Ears Out</p>
+                            <p id = "rejection_beh">Rejection Beh</p>
+                            <p id = "time_with_male">Time with male</p>
+                            <p id = "lqAvg">lrAvg</p>
+                            <p id = "percentExitMount">percent exit mount</p>
+                            <p id = "percentExitIntro">percent exit intro</p>
+                            <p id = "percentExitEjac">percent exit ejac</p>
+                            <p id = "pacingLq">pacing lq</p>
+                        <ul id = "CRL">CRL_TTE</ul>
+                        
+                    </div>
+                    <div data-role="footer">
+                        <h1></h1>
+                    </div>
+                    
+                </div>
+                
+                <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+                <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.0.min.js"><\/script>')</script>
+                <script src="js/plugins.js"></script>
+                <script src="js/main.js"></script>
+                <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+                <script>
+                window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+                ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+                </script>
+                <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+            </body>
+        </html>
