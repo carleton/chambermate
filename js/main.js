@@ -49,6 +49,16 @@
  var stimLQOverTwo = 0;
  var flags =[];
 
+var tmpColDelim = String.fromCharCode(11); // vertical tab character
+var tmpRowDelim = String.fromCharCode(0); // null character
+
+                    // actual delimiter characters for CSV format
+var colDelim = '","';
+var rowDelim = '"\r\n"';
+
+// Grab text from table into CSV formatted string
+ var csv = '"';
+
  function maleStart() {
      if (maleTimeBegan === null) {
          maleTimeBegan = new Date();
@@ -226,6 +236,8 @@
              console.log(str);
          }
          document.getElementById("intro_count").innerHTML = introCount;
+         document.getElementById("mount_count").innerHTML = mountCount;
+         document.getElementById("ejac_count").innerHTML = ejacCount;
      } else {
          time = document.getElementById("display-area").innerHTML;
          proceptive_rejection.push(stim + " at " + time);
@@ -684,6 +696,38 @@
  //newStim is false if female went in and out without a stim
  //set newStim false when in is clicked, and true when stim
  //push crl and tte only on last stim - use stim id
+
+ 
+                //------------------------------------------------------------
+                // Helper Functions 
+                //------------------------------------------------------------
+                // Format the output so it has the appropriate delimiters
+                function formatRows(rows){
+                    return rows.get().join(tmpRowDelim)
+                        .split(tmpRowDelim).join(rowDelim)
+                        .split(tmpColDelim).join(colDelim);
+                }
+                // Grab and format a row from the table
+                function grabRow(i,row){
+                     
+                    var $row = $(row);
+                    //for some reason $cols = $row.find('td') || $row.find('th') won't work...
+                    var $cols = $row.find('td'); 
+                    if(!$cols.length) $cols = $row.find('th');  
+
+                    return $cols.map(grabCol)
+                                .get().join(tmpColDelim);
+                }
+                // Grab and format a column from the table 
+                function grabCol(j,col){
+                    var $col = $(col),
+                        $text = $col.text();
+
+                    return $text.replace('"', '""'); // escape double quotes
+
+                }
+            
+
  function downloadCSV() {
      var date = document.getElementById("date").value;
      var female = document.getElementById("female").value;
@@ -697,6 +741,9 @@
      var tteMountAvg = tteMountTotal / tteTotal;
      var tteIntroAvg = tteIntroTotal / tteTotal;
      var tteEjacAvg = tteEjacTotal / tteTotal;
+     var table = document.getElementById("tableresults");
+
+
      /*
      Male Ins
      Male Outs
@@ -748,11 +795,38 @@
          ["Mean Time To Exit Intro", " ", tteIntroAvg],
          ["Mean Time To Exit Ejac", " ", tteEjacAvg]
      ];
+
+
+               var $headers = $('#resultstable').find('tr:has(th)')
+                    ,$rows = $('#resultstable').find('tr:has(td input[value!=""])');
+
+                    // Temporary delimiter characters unlikely to be typed by keyboard
+                    // This is to avoid accidentally splitting the actual contents
+                    csv += formatRows($headers.map(grabRow));
+                    csv += rowDelim;
+                    csv += formatRows($rows.map(grabRow)) + '"';
+
+console.log(csv);
+
+        // Data URI
+
+    //$('#resultstable').tableToCSV();
+    //var table = $("#tableresults").html();
+    
      var csvContent = "data:text/csv;charset=utf-8,";
      data.forEach(function(infoArray, index) {
          dataString = infoArray.join(",");
          csvContent += index < data.length ? dataString + "\n" : dataString;
      });
+// console.log(csvContent);
+//     console.log(csv);
+
+  //  csvContent = csvContent +csv;
+    //csvContent = csvContent.concat(table);
+    csvContent = csvContent.concat(csv);
+     //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+
      var encodedUri = encodeURI(csvContent);
      var link = document.createElement("a");
      link.setAttribute("href", encodedUri);

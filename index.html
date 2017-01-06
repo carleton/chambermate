@@ -19,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <!-- Include the jQuery Mobile library -->
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
         <script src="js/vendor/modernizr-2.8.3.min.js">
         </script>
     </head>
@@ -68,10 +69,12 @@
                 <table align="left" id = "live_data" data-role="table" class="ui-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 33%;">Test Time </th>
-                            <th style="width: 33%;">Intro Count </th>
-                            <th style="width: 33%;">Time with Male </th>
-                            <!--  <th>Male Ins</th>
+                            <th style="width: 25%;">Test Time </th>
+                            <th style="width: 25%;">Mount Count </th>
+                            <th style="width: 25%;">Intro Count </th>
+                            <th style="width: 25%;">Ejac Count </th>
+                            <!--<th style="width: 33%;">Time with Male </th> 
+                             <th>Male Ins</th>
                             <th>Male Outs</th>
                             <th>Hops In</th>
                             <th>Hops Out</th>
@@ -89,9 +92,12 @@
                     <tbody>
                         <tr>
                             <td style = "text-align: center"> <output id="display-area">00:00</output></td>
+                            <td style = "text-align: center" id="mount_count"> 0</td>
                             <td style = "text-align: center" id="intro_count"> 0</td>
-                            <td style = "text-align: center" id = "time_with_male" >00:00 </td>
-                            <!--                             <td id = "male_ins"></td>
+                            <td style = "text-align: center" id="ejac_count"> 0</td>
+
+                           <!--  <td style = "text-align: center" id = "time_with_male" >00:00 </td>
+                                                        <td id = "male_ins"></td>
                             <td id = "male_outs"></td>
                             <td id = "hops_in"></td>
                             <td id = "hops_out"></td>
