@@ -332,7 +332,7 @@ var rowDelim = '"\r\n"';
  }
 
  function ejac_zero() {
-     introCount++;
+    // introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -341,7 +341,7 @@ var rowDelim = '"\r\n"';
  }
 
  function ejac_one() {
-     introCount++;
+    // introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -350,7 +350,7 @@ var rowDelim = '"\r\n"';
  }
 
  function ejac_two() {
-     introCount++;
+    // introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -359,7 +359,7 @@ var rowDelim = '"\r\n"';
  }
 
  function ejac_three() {
-     introCount++;
+   //  introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
