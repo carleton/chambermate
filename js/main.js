@@ -822,8 +822,8 @@ console.log(csv);
 //     console.log(csv);
 
   //  csvContent = csvContent +csv;
-    //csvContent = csvContent.concat(table);
-    csvContent = csvContent.concat(csv);
+    csvContent = csvContent.concat(table.innerHTML);
+    //csvContent = csvContent.concat(csv);
      //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
 
