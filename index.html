@@ -19,9 +19,10 @@
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <!-- Include the jQuery Mobile library -->
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
         <script src="js/vendor/modernizr-2.8.3.min.js">
         </script>
+
+        
     </head>
     <body>
         <!--[if lte IE 9]>
@@ -73,8 +74,8 @@
                             <th style="width: 25%;">Mount Count </th>
                             <th style="width: 25%;">Intro Count </th>
                             <th style="width: 25%;">Ejac Count </th>
-                            <!--<th style="width: 33%;">Time with Male </th> 
-                             <th>Male Ins</th>
+                            <!--<th style="width: 33%;">Time with Male </th>
+                            <th>Male Ins</th>
                             <th>Male Outs</th>
                             <th>Hops In</th>
                             <th>Hops Out</th>
@@ -95,9 +96,8 @@
                             <td style = "text-align: center" id="mount_count"> 0</td>
                             <td style = "text-align: center" id="intro_count"> 0</td>
                             <td style = "text-align: center" id="ejac_count"> 0</td>
-
-                           <!--  <td style = "text-align: center" id = "time_with_male" >00:00 </td>
-                                                        <td id = "male_ins"></td>
+                            <!--  <td style = "text-align: center" id = "time_with_male" >00:00 </td>
+                            <td id = "male_ins"></td>
                             <td id = "male_outs"></td>
                             <td id = "hops_in"></td>
                             <td id = "hops_out"></td>
@@ -196,9 +196,12 @@
                             <th>TTE</th>
                             <th>CRL</th>
                         </tr>
-                        <thead>
-                        </table>
-                        <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b">
+                    </thead>
+                    <tbody id = "testBody">
+                        
+                    </tbody>       
+                </table>
+            <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b">
                             <h3>Flags</h3>
                             <p id="paragraphFlags"></p>
                         </div>

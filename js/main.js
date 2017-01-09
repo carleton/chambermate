@@ -531,8 +531,9 @@ var rowDelim = '"\r\n"';
      var female = document.getElementById("female").innerHTML;
      var stud = document.getElementById("stud").innerHTML;
      var columns = ["in", "out", "mount", "lq", "intro", "lq", "ejac", "lq"];
-     var resultTable = document.getElementById("tableresults");
-     resultTable.appendChild(document.createElement('tbody'))
+     //var resultTable = document.getElementById("tableresults");
+     var resultTable = document.getElementById("testBody");
+     //resultTable.appendChild(document.createElement('tbody'));
      var numberRows = 0;
      var row;
      var i = 0;
@@ -540,8 +541,8 @@ var rowDelim = '"\r\n"';
      while (j <= sexualBehavior.length) {
          while (i <= columns.length) {
              if (i == 8 || numberRows == 0) {
-                 numberRows++;
                  row = resultTable.insertRow(numberRows);
+                 numberRows++;
                  i = 0;
              }
 
@@ -577,8 +578,8 @@ var rowDelim = '"\r\n"';
 
      }
 
-     var table = document.getElementById("tableresults");
-
+     //var table = document.getElementById("tableresults");
+     var table = document.getElementById("testBody");
 
 
      //console.log("i is: " + i + "  tte" + [l] + "row is " + tte[l]['row']);
@@ -586,20 +587,20 @@ var rowDelim = '"\r\n"';
      var i = 0;
      while (l <= tte.length) {
          while (i <= table.rows.length) {
-             if (i == tte[l]['row']) {
-                 if (i == 0) {
-                     row = table.rows[i + 1];
-                     var cell = row.insertCell(8);
-                     cell.setAttribute('contentEditable', 'true');
-                     cell.innerHTML = tte[l]['TTE'];
-                     var cell2 = row.insertCell(9);
-                     cell2.setAttribute('contentEditable', 'true');
-                     cell2.innerHTML = crl[l]['CRL'];
-                     console.log("row number: " + i + " tte number " + l);
-                     l++;
-                     i++;
+             if (i+1 == tte[l]['row']) {
+                 // if (i == 0) {
+                 //     row = table.rows[i + 1];
+                 //     var cell = row.insertCell(8);
+                 //     cell.setAttribute('contentEditable', 'true');
+                 //     cell.innerHTML = tte[l]['TTE'];
+                 //     var cell2 = row.insertCell(9);
+                 //     cell2.setAttribute('contentEditable', 'true');
+                 //     cell2.innerHTML = crl[l]['CRL'];
+                 //     console.log("row number: " + i + " tte number " + l);
+                 //     l++;
+                 //     i++;
 
-                 } else {
+                 // } else {
                      row = table.rows[i];
                      var cell = row.insertCell(8);
                      cell.setAttribute('contentEditable', 'true');
@@ -613,18 +614,18 @@ var rowDelim = '"\r\n"';
 
                  }
 
-             } else {
-                 if (i == 0) {
-                     // row = table.rows[i +1];
-                     // var cell = row.insertCell(8);
-                     // cell.innerHTML = " ";
-                     // var cell2 = row.insertCell(9);
-                     // cell2.innerHTML = " ";
-                     // console.log("row number: "+i+" tte number "+l);
+              else {
+                 // if (i == 0) {
+                 //     // row = table.rows[i +1];
+                 //     // var cell = row.insertCell(8);
+                 //     // cell.innerHTML = " ";
+                 //     // var cell2 = row.insertCell(9);
+                 //     // cell2.innerHTML = " ";
+                 //     // console.log("row number: "+i+" tte number "+l);
 
-                     i++;
+                 //     i++;
 
-                 } else {
+                 // } else {
                      row = table.rows[i];
                      var cell = row.insertCell(8);
                      cell.setAttribute('contentEditable', 'true');
@@ -633,9 +634,8 @@ var rowDelim = '"\r\n"';
                      cell2.setAttribute('contentEditable', 'true');
                      cell2.innerHTML = "&nbsp";
                      console.log("row number: " + i + " tte number " + l);
-
                      i++;
-                 }
+                 
 
              }
          }
@@ -769,8 +769,9 @@ var rowDelim = '"\r\n"';
      */
      var data = [
          [],
-         ["date", " ", date],
-         ["female", " ", female],
+         ["Date", " ", date],
+         ["Female", " ", female],
+         ["Stud", " ", stud],
          ["Male Ins", " ", maleIns],
          ["Male Outs", " ", maleOuts],
          ["Time", " ", time],
@@ -793,24 +794,24 @@ var rowDelim = '"\r\n"';
          ["Mean Contact Return Ejac", " ", crlEjacAvg],
          ["Mean Time To Exit Mount", " ", tteMountAvg],
          ["Mean Time To Exit Intro", " ", tteIntroAvg],
-         ["Mean Time To Exit Ejac", " ", tteEjacAvg]
+         ["Mean Time To Exit Ejac", " ", tteEjacAvg],
+         []
      ];
 
 
-               var $headers = $('#resultstable').find('tr:has(th)')
-                    ,$rows = $('#resultstable').find('tr:has(td input[value!=""])');
+//                var $headers = $('#resultstable').find('tr:has(th)')
+//                     ,$rows = $('#resultstable').find('tr:has(td input[value!=""])');
 
-                    // Temporary delimiter characters unlikely to be typed by keyboard
-                    // This is to avoid accidentally splitting the actual contents
-                    csv += formatRows($headers.map(grabRow));
-                    csv += rowDelim;
-                    csv += formatRows($rows.map(grabRow)) + '"';
+//                     // Temporary delimiter characters unlikely to be typed by keyboard
+//                     // This is to avoid accidentally splitting the actual contents
+//                     csv += formatRows($headers.map(grabRow));
+//                     csv += rowDelim;
+//                     csv += formatRows($rows.map(grabRow)) + '"';
 
-console.log(csv);
+// console.log(csv);
 
         // Data URI
 
-    //$('#resultstable').tableToCSV();
     //var table = $("#tableresults").html();
     
      var csvContent = "data:text/csv;charset=utf-8,";
@@ -822,9 +823,30 @@ console.log(csv);
 //     console.log(csv);
 
   //  csvContent = csvContent +csv;
-    csvContent = csvContent.concat(table.innerHTML);
+    //csvContent = csvContent.concat(table.innerHTML);
     //csvContent = csvContent.concat(csv);
      //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+     csvContent+="IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,TTE,CRL \n"
+    var rows = $("#testBody > tr");
+    console.log("THOMAS");
+    console.log(rows.length);
+    for (var i = 0; i < rows.length; ++i) {
+        var cells = $(rows[i]).find("> td");
+        console.log(cells.length);
+        for (var j = 0; j < cells.length; ++j) {
+            if (j != 0) csvContent += ",";
+            //console.log(cvsContent);
+            //console.log(cells[j].innerHTML);
+            var str = cells[j].innerHTML;
+            str = str.substr(str.indexOf("</b>")+4);
+            if (str.charAt(0) == "&")
+                str = str.substr(6);
+            csvContent += str;
+            
+        }
+        csvContent += "\n";
+    }
 
 
      var encodedUri = encodeURI(csvContent);
