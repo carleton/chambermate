@@ -697,35 +697,6 @@ var rowDelim = '"\r\n"';
  //set newStim false when in is clicked, and true when stim
  //push crl and tte only on last stim - use stim id
 
- 
-                //------------------------------------------------------------
-                // Helper Functions 
-                //------------------------------------------------------------
-                // Format the output so it has the appropriate delimiters
-                function formatRows(rows){
-                    return rows.get().join(tmpRowDelim)
-                        .split(tmpRowDelim).join(rowDelim)
-                        .split(tmpColDelim).join(colDelim);
-                }
-                // Grab and format a row from the table
-                function grabRow(i,row){
-                     
-                    var $row = $(row);
-                    //for some reason $cols = $row.find('td') || $row.find('th') won't work...
-                    var $cols = $row.find('td'); 
-                    if(!$cols.length) $cols = $row.find('th');  
-
-                    return $cols.map(grabCol)
-                                .get().join(tmpColDelim);
-                }
-                // Grab and format a column from the table 
-                function grabCol(j,col){
-                    var $col = $(col),
-                        $text = $col.text();
-
-                    return $text.replace('"', '""'); // escape double quotes
-
-                }
             
 
  function downloadCSV() {
