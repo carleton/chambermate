@@ -45,12 +45,19 @@
                     <input type="text" name="date" id="date" placeholder="Date and Time">
                     <!--                 <label for="date_test" class="ui-hidden-accessible"> date_test and Time:</label>
                     <input type="time" name="date_test" id="date_test" placeholder="date_test and Time"> -->
+                    <label for="notes" class="ui-hidden-accessible"> Notes:</label>
+                    <input type="text" name="notes" id="notes" placeholder="Notes">
+                    <label for="experiment_type" class="ui-hidden-accessible">Experiment Type:</label>
+                    <input type="text" name="experiment_type" id="experiment_type" placeholder="Experiment Type">
 
 
                     <label for="obj_one" class="ui-hidden-accessible">Object One</label>
                     <input type="text" name="obj_one" id="obj_one" placeholder="Object One">
                     <label for="obj_two" class="ui-hidden-accessible">Object Two</label>
                     <input type="text" name="obj_two" id="obj_two" placeholder="Object Two">
+
+                    <label for="female_two" class="ui-hidden-accessible">Female Two</label>
+                    <input type="text" name="female_two" id="female_two" placeholder="Female Two">
 
 
                     <div class="ui-grid-a ui-responsive">
@@ -71,7 +78,7 @@
         
         <div data-role="page" id="cop" data-theme="b">
             <div data-role="header">
-                <h1 id= "cop_header">COP</h1>
+                <h1>COP</h1>
             </div>
             <div data-role="main" class="ui-content">
                 <a href="#pageone" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
@@ -79,54 +86,56 @@
                 <table align="left" id = "live_data" data-role="table" class="ui-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 100%"> COP Test  </th>
+                            <th style="width: 50%">Test One </th>
+                            <th style="width: 50%">Test Two </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style = "text-align: center;font-size: 30px"> <output id="clock-area">00:00</output></td>
+                            <td style = "text-align: center"> <output id="clock-area">00:00</output></td>
+                            <td style = "text-align: center"> What would be useful here?</td>
                         </tr>
                     </tbody>
                 </table>
                 <table id ="cop_test_buttons" align="center" data-role="table" class="ui-responsive">
                     <thead>
                         <tr>
-                            <th> </th>
-                            <th> </th>
                             <th>  </th>
-                            <th> </th>
+                            <th style = "text-align: center" > Test One </th>
+                            <th >  </th>
+                            <th></th>
                             <th>  </th>
-                            <th> </th>
+                            <th style = "text-align: center" > Test Two </th>
                             <th>  </th>
                         
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <th id = "in_obj_1" style = "text-align: center">  </th>
+                            <th style = "text-align: center" >  </th>
+                            <th id = "in_obj_2" style = "text-align: center" >  </th>
                             <th></th>
-                            <th id = "in_obj_1" style="font-size: 30px;text-align: center">  </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th id = "in_obj_2" style="font-size: 30px;text-align: center" >  </th>
-                            <th></th>
+                            <th id = "in_obj_1_2" style = "text-align: center" >  </th>
+                            <th style = "text-align: center">  </th>
+                            <th id = "in_obj_2_2" style = "text-align: center">  </th>
+                        </tr>
+                        <tr>
+                            <td ><button onClick="in_Object_One()" style="font-size: 30px" type="Button">In</button></td>
+                            <td></td>
+                            <td ><button onClick="in_Object_Two()" style="font-size: 30px" type="Button"  >In</button></td>
+                            <td></td>
+                            <td ><button onClick="in_Object_One_Two()" style="font-size: 30px" type="Button">In</button></td>
+                            <td></td>
+                            <td ><button onClick="in_Object_Two_Two()" style="font-size: 30px"  type="Button" >In</button></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td ><button id = "in_1" onClick="in_Object_One()" style="font-size: 50px" type="Button">In</button></td>
+                            <td ><button style="font-size: 30px" onClick="centerOne()" type="Button" >Center</button></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ><button id = "in_2" onClick="in_Object_Two()" style="font-size: 50px" type="Button"  >In</button></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                                                        <td ><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
-                            <td></td>
-                            <td></td>
+                            <td ><button  style="font-size: 30px" onClick="centerTwo()" type="Button" >Center</button></td>
                             <td></td>
                             
                         </tr>
@@ -134,15 +143,14 @@
                             
                             <td align="center" ><button id="startCop" onClick="startCop()">Start</button></td>
                             <td align="center" ><button id="toggle-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stopCop()">Stop</button></td>
-<td></td>
+
                             <td><button  id="flagCop" onClick="flag()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
                       
-                            
                             <td></td>
-                                  <td align="center" > <a href="#copResults" data-transition="slide" class="ui-btn" id="finish-test-cop" onClick="return finishTestCop()">
+                                  <td align="center" > <a href="#copResults" data-transition="slide" class="ui-btn" id="finish-test" onClick="return finishTestCop()">
                             Finish </a></td>
-                            
-                            <td align="center"><button id="download-csv-cop" class="ui-btn ui-icon-action ui-btn-icon-right" onClick="copDownloadCSV()"> CSV</button></td>
+                            <td></td>
+                            <td align="center"><button id="download-csv" class="ui-btn ui-icon-action ui-btn-icon-right" onClick="copDownloadCSV()"> CSV</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -301,7 +309,7 @@
                     <h3>Flags</h3>
                     <p id="paragraphFlags"></p>
                 </div>
-                <a href="#pagetwo" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
+                <a href="#pagetwo"><button>Back</button></a>
                 <div id = "hidden" hidden>
                     
                     <p id = "male_ins">male ins</p>
@@ -339,11 +347,27 @@
                     <thead>
                         <tr>
                             <th id="inOne">IN</th>
-                            <th id="center_test">CENTER</th>
+                            <th>CENTER</th>
                             <th id="inTwo">IN</th>
                         </tr>
                     </thead>
                     <tbody id = "copTestBody">
+                        
+                    </tbody>
+                </table>
+</br>
+
+
+
+                <table id = "coptwotableresults" data-role="table" class="ui-responsive" >
+                    <thead>
+                        <tr>
+                            <th id="inOne" >IN</th>
+                            <th>CENTER</th>
+                            <th id="inTwo">IN</th>
+                        </tr>
+                    </thead>
+                    <tbody id = "copTwoTestBody">
                         
                     </tbody>
                 </table>
@@ -354,11 +378,8 @@
                     <p id="copParagraphFlags"></p>
                 </div>
 
-                    <label for="notes" class="ui-hidden-accessible"> Notes:</label>
-                    <input type="text" name="notes" id="copnotes" placeholder="Notes">
 
-
-                <a href="#cop" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
+                <a href="#cop"><button>Back</button></a>
 
             <div data-role="footer">
                 <h1></h1>

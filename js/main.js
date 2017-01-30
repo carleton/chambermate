@@ -98,7 +98,8 @@ var rowDelim = '"\r\n"';
  }
 
  function start() {
-     document.getElementById("finish-test").disabled = true;
+    console.log("Start Called");
+$('#finish-test').addClass('ui-disabled');
      document.getElementById("download-csv").disabled = true;
      if (timeBegan === null) {
          var myDate = new Date();
@@ -138,7 +139,7 @@ var rowDelim = '"\r\n"';
      timeStopped = new Date();
      maleStop();
      clearInterval(started);
-     document.getElementById("finish-test").disabled = false;
+     $('#finish-test').removeClass('ui-disabled');
      document.getElementById("download-csv").disabled = false;
      document.getElementById("start").disabled = false;
  }
@@ -203,6 +204,7 @@ var rowDelim = '"\r\n"';
      //     (sec > 9 ? sec : "0" + sec) + "." +
      //     (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
  }
+
 
  function track_beh(stim, opts) {
      if (opts['lq'] != null) {
@@ -615,17 +617,6 @@ var rowDelim = '"\r\n"';
                  }
 
               else {
-                 // if (i == 0) {
-                 //     // row = table.rows[i +1];
-                 //     // var cell = row.insertCell(8);
-                 //     // cell.innerHTML = " ";
-                 //     // var cell2 = row.insertCell(9);
-                 //     // cell2.innerHTML = " ";
-                 //     // console.log("row number: "+i+" tte number "+l);
-
-                 //     i++;
-
-                 // } else {
                      row = table.rows[i];
                      var cell = row.insertCell(8);
                      cell.setAttribute('contentEditable', 'true');
@@ -635,12 +626,11 @@ var rowDelim = '"\r\n"';
                      cell2.innerHTML = "&nbsp";
                      console.log("row number: " + i + " tte number " + l);
                      i++;
-                 
-
              }
          }
 
      }
+}
 
      /*    for (var j = 0; j < sexualBehavior.length; j++) {
              for (var i = 0; i <= columns.length; i++) {
@@ -669,7 +659,7 @@ var rowDelim = '"\r\n"';
                  }
              }
          } */
- }
+ 
  //iterate through sexual behavior
  //fill out a table, for each column, if the next key has that type put it there, 
  //otherwise go to the next column (Add a comma and move on)
@@ -836,14 +826,6 @@ var rowDelim = '"\r\n"';
      //     },
      //     focusInvalid: false
      // });
-     //iterate through sexual behavior
-     //fill out a table, for each column, if the next key has that type put it there, 
-     //otherwise go to the next column (Add a comma and move on)
-     //fix crl and tte
-     //mean contact return
-     //mean time to exit fix averages
-     //differentiate lq and lr
-     //make table saveable
-     //add flag functionality
-     //Add list of flagged time, remind sarah that it won't change the stats
+//debug TTE and CRL
+//
  }

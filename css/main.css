@@ -114,22 +114,54 @@ body {
     padding: 3px;
 }
 
-#tableresults td, #tableresults th, #live_data td, #live_data th {
+#coptableresults {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 3px;
+}
+
+#coptwotableresults {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 3px;
+}
+
+#coptwotableresults td, #coptwotableresults th, #coptableresults td, #coptableresults th, #tableresults td, #tableresults th, #live_data td, #live_data th {
     border: 1px solid #111;
     padding: 8px;
 }
 
 #tableresults tr:nth-child(even){background-color: #40152a;}
+#coptableresults tr:nth-child(even){background-color: #40152a;}
+#coptwotableresults tr:nth-child(even){background-color: #40152a;}
 
 #live_data tr:nth-child(even){background-color: #40152a;}
 
 #tableresults tr:nth-child(odd){background-color: #261822;}
 
+#coptableresults tr:nth-child(odd){background-color: #261822;}
+
+#coptwotableresults tr:nth-child(odd){background-color: #261822;}
+
 #tableresults tr:hover {background-color: #731630;}
+
+#coptableresults tr:hover {background-color: #731630;}
+#coptwotableresults tr:hover {background-color: #731630;}
+
 /*
 #live_data tr:hover {background-color: #731630;}
 */
 #tableresults th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #731630;
+    color: white;
+}
+
+#coptableresults th{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -144,6 +176,7 @@ body {
     background-color: #731630;
     color: white;
 }
+
 
 
 
