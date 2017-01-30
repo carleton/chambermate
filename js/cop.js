@@ -51,6 +51,9 @@ document.getElementById("cop_header").innerHTML=title+" COP";
 
 
  function startCop() {
+document.getElementById('in_1').disabled = false;
+document.getElementById('btncenter').disabled = false;
+document.getElementById('in_2').disabled = false;
     console.log("Start Called");
      //document.getElementById("finish-test").disabled = true;
      document.getElementById("download-csv-cop").disabled = true;
@@ -107,6 +110,10 @@ function clockRunningCop() {
      document.getElementById("startCop").disabled = false;
 
  }
+
+document.getElementById('in_1').disabled = true;
+document.getElementById('btncenter').disabled = true;
+document.getElementById('in_2').disabled = true;
 
   function in_Object_One() {
      track_beh_cop("inOne");
