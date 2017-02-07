@@ -19,7 +19,10 @@ document.getElementById("cop_header").innerHTML=title+" COP";
 
  function track_beh_cop(stim) {
          time = document.getElementById("clock-area").innerHTML;
-        // time = time.replace(/:/g,'');
+         //strip out colon
+         time = time.replace(/:/g,'');
+         //strip out leading 0s
+         time=time.replace(/^[0]+/g,'');
          if (stim == 'center') {
              copBehavior.push({
                  "stim": "center",

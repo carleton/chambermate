@@ -325,6 +325,8 @@ $('#finish-test').addClass('ui-disabled');
  function stringToIntTime(stringTime) {
      var strTime = stringTime.split(":");
      var seconds = ((+strTime[0]) * 60 + (+strTime[1]));
+     console.log("string time in seconds "+seconds)
+     console.log("Minute time "+stringTime)
      return seconds;
  }
 
