@@ -22,7 +22,9 @@ document.getElementById("cop_header").innerHTML=title+" COP";
          //strip out colon
          time = time.replace(/:/g,'');
          //strip out leading 0s
-         time=time.replace(/^[0]+/g,'');
+         time = parseInt(time,10);
+        // time=time.replace(/^[0]+/g,'');
+
          if (stim == 'center') {
              copBehavior.push({
                  "stim": "center",
@@ -120,12 +122,14 @@ document.getElementById('in_2').disabled = true;
 
   function in_Object_One() {
      track_beh_cop("inOne");
+    document.getElementById('in_1').disabled = true;
     document.getElementById('in_2').disabled = true;
 }
 
   function in_Object_Two() {
      track_beh_cop("inTwo");
      document.getElementById('in_1').disabled = true;
+     document.getElementById('in_2').disabled = true;
 }
 
  function centerOne() {
