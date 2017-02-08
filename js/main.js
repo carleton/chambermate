@@ -210,6 +210,9 @@ $('#finish-test').addClass('ui-disabled');
      if (opts['lq'] != null) {
          lq = opts['lq'];
          time = document.getElementById("display-area").innerHTML;
+         secondsTime = document.getElementById("display-area").innerHTML;
+         secondsTime = timeToSeconds(secondsTime);
+
          mostRecentStim = time;
          mostRecentStimType = stim;
          newStim = true;
@@ -219,10 +222,12 @@ $('#finish-test').addClass('ui-disabled');
          }
          lqAvg = lqSum / stimNumber;
          pacingLq = stimLQOverTwo / stimNumber;
+
+
          sexualBehavior.push({
              "stim": stim,
              "lq": lq,
-             "time": time
+             "time": secondsTime
          });
          sexualBehavior.push({
              "stim": "lq",
@@ -241,7 +246,9 @@ $('#finish-test').addClass('ui-disabled');
          document.getElementById("mount_count").innerHTML = mountCount;
          document.getElementById("ejac_count").innerHTML = ejacCount;
      } else {
-         time = document.getElementById("display-area").innerHTML;
+        time = document.getElementById("display-area").innerHTML;
+        //secondsTime = document.getElementById("display-area").innerHTML;
+        secondsTime = timeToSeconds(time);
          proceptive_rejection.push(stim + " at " + time);
          if (stim == 'out') {
              numberExits++;
@@ -250,7 +257,7 @@ $('#finish-test').addClass('ui-disabled');
              percentExitEjac = numberExits / ejacCount;
              sexualBehavior.push({
                  "stim": "out",
-                 "time": time
+                 "time": secondsTime
              });
              if (newStim == true) {
                  // console.log(Integer.valueOf(time));
@@ -278,7 +285,7 @@ $('#finish-test').addClass('ui-disabled');
          if (stim == 'in') {
              sexualBehavior.push({
                  "stim": "in",
-                 "time": time
+                 "time": secondsTime
              });
              if (newStim == true) {
                  contactReturnLatency = stringToIntTime(time) - stringToIntTime(mostRecentStim);
@@ -322,11 +329,23 @@ $('#finish-test').addClass('ui-disabled');
      }
  }
 
+
+
+
+ function timeToSeconds(stringTimePassed) {
+          //strip out colon
+         timeNoColon = stringTimePassed.replace(/:/g,'');
+         //strip out leading 0s
+         timesec = parseInt(timeNoColon,10);
+        // time=time.replace(/^[0]+/g,'');
+        return timesec;
+ }
+
  function stringToIntTime(stringTime) {
+     console.log("Minute time "+stringTime)
      var strTime = stringTime.split(":");
      var seconds = ((+strTime[0]) * 60 + (+strTime[1]));
      console.log("string time in seconds "+seconds)
-     console.log("Minute time "+stringTime)
      return seconds;
  }
 
