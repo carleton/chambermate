@@ -6,6 +6,10 @@
     copBehavior_two = [];
 var objectOne = "";
 var objectTwo = "";
+var withOne = false;
+var withTwo = false;
+var chewOne = 0;
+var chewTwo = 0;
 
 
 function setUpCop() {
@@ -57,7 +61,7 @@ document.getElementById("cop_header").innerHTML=title+" COP";
 
  function startCop() {
 document.getElementById('in_1').disabled = false;
-document.getElementById('btncenter').disabled = false;
+document.getElementById('btncenter').disabled = true;
 document.getElementById('in_2').disabled = false;
     console.log("Start Called");
      //document.getElementById("finish-test").disabled = true;
@@ -124,18 +128,34 @@ document.getElementById('in_2').disabled = true;
      track_beh_cop("inOne");
     document.getElementById('in_1').disabled = true;
     document.getElementById('in_2').disabled = true;
+    document.getElementById('btncenter').disabled = false;
+    withOne = true;
 }
 
   function in_Object_Two() {
      track_beh_cop("inTwo");
      document.getElementById('in_1').disabled = true;
      document.getElementById('in_2').disabled = true;
+     document.getElementById('btncenter').disabled = false;
+     withTwo = true;
 }
 
  function centerOne() {
      track_beh_cop("center");
     document.getElementById('in_2').disabled = false;
+    document.getElementById('btncenter').disabled = true;
     document.getElementById('in_1').disabled = false;
+    withOne = false;
+    withTwo = false;
+}
+
+ function chew() {
+    if(withOne){
+        chewOne++;
+    }
+    else if(withTwo){
+        chewTwo++;
+    }
 }
 
 
@@ -222,8 +242,8 @@ document.getElementById('in_2').disabled = true;
          ["Date", " ", date],
         ["Name", " ", name],
         ["Notes", " ", notes],
-
-
+        [objectOne+" Chews", " ", chewOne],
+        [objectTwo+" Chews", " ", chewTwo],
          []
      ];
 
