@@ -47,7 +47,7 @@ document.getElementById("cop_header").innerHTML=title+" COP";
              var str = JSON.stringify(copBehavior[k]);
          }
 
-             for (k = 0; k < copBehavior.length - 1; k++) {
+             for (k = 0; k < copBehavior.length; k++) {
              var str = JSON.stringify(copBehavior[k]);
              console.log("copBehavior"+str);
          }
@@ -135,7 +135,7 @@ document.getElementById('in_2').disabled = true;
  function centerOne() {
      track_beh_cop("center");
     document.getElementById('in_2').disabled = false;
-     document.getElementById('in_1').disabled = false;
+    document.getElementById('in_1').disabled = false;
 }
 
 
@@ -170,9 +170,13 @@ document.getElementById('in_2').disabled = true;
                  var cell = row.insertCell(i);
                  cell.setAttribute('contentEditable', 'true');
                      cell.innerHTML = copBehavior[j]['time'];
-                     twoPerLine++;
+                     if(copBehavior[j]['stim']=='inOne' || copBehavior[j]['stim']=='center'){
+                        twoPerLine++;
+                     }
+                     
                      i++;
                      j++;
+                     
                      if(twoPerLine==2){
                         var cell = row.insertCell(i);
                         cell.setAttribute('contentEditable', 'true');
@@ -188,6 +192,8 @@ document.getElementById('in_2').disabled = true;
              }
 
              console.log("j is" + j + " copBehavior length is " + copBehavior.length);
+             console.log("I am working on "+ copBehavior[j]['stim'] + "Which happened at "+copBehavior[j]['time']);
+
              if (j == copBehavior.length) {
                  break;
              }
@@ -200,9 +206,7 @@ document.getElementById('in_2').disabled = true;
 
 
 }
-
-
-            
+      
 
  function copDownloadCSV() {
      var date = document.getElementById("date").value;
@@ -212,7 +216,6 @@ document.getElementById('in_2').disabled = true;
      var name = document.getElementById("experimenter_name").value;
      var time = document.getElementById("display-area").innerHTML;
      var table = document.getElementById("coptableresults");
-
      var data = [
      ["Experiment", " ", filename],
          ["Female", " ", female],
