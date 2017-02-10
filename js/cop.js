@@ -10,7 +10,7 @@ var withOne = false;
 var withTwo = false;
 var chewOne = 0;
 var chewTwo = 0;
-
+var executed = false;
 
 function setUpCop() {
  objectOne = document.getElementById("obj_one").value;
@@ -160,6 +160,8 @@ document.getElementById('in_2').disabled = true;
 
 
  function finishTestCop() {
+    if(!executed){
+        executed = true;
     document.getElementById("copParagraphFlags").innerHTML = flags;
     document.getElementById("copResultsHeader").innerHTML=document.getElementById("experiment_title").value+" Results";
     document.getElementById("inOne").innerHTML=objectOne;
@@ -172,7 +174,6 @@ document.getElementById('in_2').disabled = true;
      var stud = document.getElementById("stud").innerHTML;
      var columns = ["inOne", "center", "inTwo"];
      var resultTable = document.getElementById("copTestBody");
-
      var numberRows = 0;
      var row;
      var i = 0;
@@ -193,7 +194,6 @@ document.getElementById('in_2').disabled = true;
                      if(copBehavior[j]['stim']=='inOne' || copBehavior[j]['stim']=='center'){
                         twoPerLine++;
                      }
-                     
                      i++;
                      j++;
                      
@@ -223,10 +223,13 @@ document.getElementById('in_2').disabled = true;
          }
 
      }
-
+ }
 
 }
-      
+
+ // function resetTable(){
+ //    $("#copTestBody > tr").remove();
+ // }
 
  function copDownloadCSV() {
      var date = document.getElementById("date").value;
@@ -260,26 +263,39 @@ csvContent+=objectTwo +"\n";
      // csvContent+="Left,Center,Out, \n"
     var rows = $("#copTestBody > tr");
 
-    console.log(rows.length);
     for (var i = 0; i < rows.length; ++i) {
         var cells = $(rows[i]).find("> td");
-        console.log(cells.length);
         for (var j = 0; j < cells.length; ++j) {
             if (j != 0) csvContent += ",";
   
             var str = cells[j].innerHTML;
-            console.log("STR: "+str);
-            console.log("STR indexOf: "+(str.indexOf("</b>")+4));
+            // var str = cells[j].value;
+            // console.log("value: "+str);
+            // console.log("STR: "+str);
+            // console.log("STR indexOf: "+(str.indexOf("</b>")+4));
+            console.log("STR in its entirefy"+str);
+
+            if(str.charAt(0)=="<"){
+
             str = str.substr(str.indexOf("</b>")+4);
-            if (str.charAt(0) == "&")
-                str = str.substr(6);
-                        console.log("STR 6: "+(str.substr(6)));
+            console.log("STR not number"+str);
+
+                if (str.charAt(0) == "&"){
+                    str = str.substr(6);
+                    console.log("STR 6: "+(str));
+
+                        }
+                        str=str.replace(/\&nbsp;/g, '');
+
+            }
+
 
             csvContent += str;
             
         }
         csvContent += "\n";
     }
+    
      var encodedUri = encodeURI(csvContent);
      var link = document.createElement("a");
      link.setAttribute("href", encodedUri);
@@ -287,6 +303,7 @@ csvContent+=objectTwo +"\n";
      document.body.appendChild(link); // Required for FF
      link.click();
 
- }
+ 
+}
 
   
