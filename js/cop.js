@@ -286,12 +286,8 @@ csvContent+=objectTwo +"\n";
 
                         }
                         str=str.replace(/\&nbsp;/g, '');
-
             }
-
-
             csvContent += str;
-            
         }
         csvContent += "\n";
     }

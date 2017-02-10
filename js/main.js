@@ -48,6 +48,7 @@
  var mountCount = 0;
  var stimLQOverTwo = 0;
  var flags =[];
+  var pacingexecuted =false;
 
 var tmpColDelim = String.fromCharCode(11); // vertical tab character
 var tmpRowDelim = String.fromCharCode(0); // null character
@@ -543,6 +544,8 @@ $('#finish-test').addClass('ui-disabled');
  var csvData = [];
 
  function finishTest() {
+        if(!pacingexecuted){
+        pacingexecuted = true;
     document.getElementById("paragraphFlags").innerHTML = flags;
     document.getElementById("resultsHeader").innerHTML=document.getElementById("experiment_title").value+" Results";
      console.log(crl);
@@ -651,6 +654,7 @@ $('#finish-test').addClass('ui-disabled');
          }
 
      }
+}
 }
 
      /*    for (var j = 0; j < sexualBehavior.length; j++) {
@@ -811,21 +815,27 @@ $('#finish-test').addClass('ui-disabled');
 
      csvContent+="IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,TTE,CRL \n"
     var rows = $("#testBody > tr");
-    console.log("THOMAS");
-    console.log(rows.length);
     for (var i = 0; i < rows.length; ++i) {
         var cells = $(rows[i]).find("> td");
         console.log(cells.length);
         for (var j = 0; j < cells.length; ++j) {
             if (j != 0) csvContent += ",";
-            //console.log(cvsContent);
-            //console.log(cells[j].innerHTML);
             var str = cells[j].innerHTML;
+
+
+            if(str.charAt(0)=="<"){
+
             str = str.substr(str.indexOf("</b>")+4);
-            if (str.charAt(0) == "&")
-                str = str.substr(6);
+            console.log("STR not number"+str);
+
+                if (str.charAt(0) == "&"){
+                    str = str.substr(6);
+                    console.log("STR 6: "+(str));
+
+                        }
+                        str=str.replace(/\&nbsp;/g, '');
+            }
             csvContent += str;
-            
         }
         csvContent += "\n";
     }
