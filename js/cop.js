@@ -172,7 +172,7 @@ document.getElementById('in_2').disabled = true;
      var date = document.getElementById("date").innerHTML;
      var female = document.getElementById("female").innerHTML;
      var stud = document.getElementById("stud").innerHTML;
-     var columns = ["inOne", "center", "inTwo"];
+     var columns = ["drag","inOne", "center", "inTwo","delete"];
      var resultTable = document.getElementById("copTestBody");
      var numberRows = 0;
      var row;
@@ -181,16 +181,17 @@ document.getElementById('in_2').disabled = true;
      var twoPerLine = 0;
      while (j <= copBehavior.length) {
          while (i <= columns.length) {
-             if (i == 3 || numberRows == 0) {
+             if (i == 5 || numberRows == 0) {
                  row = resultTable.insertRow(numberRows);
                  numberRows++;
                  i = 0;
                  twoPerLine=0;
              }
              if (columns[i] == copBehavior[j]['stim']) {
-                 var cell = row.insertCell(i);
-                 cell.setAttribute('contentEditable', 'true');
-                     cell.innerHTML = copBehavior[j]['time'];
+                var cell = row.insertCell(i);
+                cell.setAttribute('contentEditable', 'true');
+                cell.innerHTML = copBehavior[j]['time'];
+                cell.className ='recipe-table__cell';
                      if(copBehavior[j]['stim']=='inOne' || copBehavior[j]['stim']=='center'){
                         twoPerLine++;
                      }
@@ -199,15 +200,33 @@ document.getElementById('in_2').disabled = true;
                      
                      if(twoPerLine==2){
                         var cell = row.insertCell(i);
+                        cell.className ='recipe-table__cell';
                         cell.setAttribute('contentEditable', 'true');
                         cell.innerHTML = "&nbsp";
                         i++;
                      }
-                 
-             } else {
+             }
+             else if(columns[i]=='drag'){
+                var cell = row.insertCell(i);
+                 cell.innerHTML = "";
+                 cell.className ='drag-handler';
+                 i++;
+
+             }
+
+            else if(columns[i]=='delete'){
+                var cell = row.insertCell(i);
+                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
+                cell.className ='recipe-table__cell';
+                cell.style.width = "5%";
+                i++;
+
+             }
+              else {
                  var cell = row.insertCell(i);
                  cell.setAttribute('contentEditable', 'true');
                  cell.innerHTML = "&nbsp";
+                 cell.className ='recipe-table__cell';
                  i++;
              }
 
@@ -256,7 +275,7 @@ document.getElementById('in_2').disabled = true;
          csvContent += index < data.length ? dataString + "\n" : dataString;
      });
 
-csvContent+=objectOne+",";
+csvContent+=","+objectOne+",";
 csvContent+="Center,";
 csvContent+=objectTwo +"\n";
 
@@ -274,19 +293,24 @@ csvContent+=objectTwo +"\n";
             // console.log("STR: "+str);
             // console.log("STR indexOf: "+(str.indexOf("</b>")+4));
             console.log("STR in its entirefy"+str);
+        console.log("PRESTR at 0"+str.charAt(0));
 
             if(str.charAt(0)=="<"){
-
-            str = str.substr(str.indexOf("</b>")+4);
-            console.log("STR not number"+str);
-
+                str = str.substr(str.indexOf("</b>")+4);
+                if (str.charAt(0) == "t"){
+                    str = "";
+                    console.log("STR 6: "+(str));
+                    }
                 if (str.charAt(0) == "&"){
                     str = str.substr(6);
                     console.log("STR 6: "+(str));
-
-                        }
-                        str=str.replace(/\&nbsp;/g, '');
-            }
+                    }
+                str=str.replace(/\&nbsp;/g, '');
+                }
+            if (str.includes("del")){
+                str = "";
+                console.log("STR null: "+(str));
+                }
             csvContent += str;
         }
         csvContent += "\n";
@@ -301,5 +325,28 @@ csvContent+=objectTwo +"\n";
 
  
 }
+//-------------
+$(document).ready(function () {
+    $(document).on('click', '.recipe-table__add-row-btn', function (e) {
+        var $el = $(e.currentTarget);
+        var $tableBody = $('#copTestBody');
+        var htmlString = $('#rowTemplate').html();
+        $tableBody.append(htmlString);
+        return false;
+    });
 
-  
+    $(document).on('click', '.recipe-table__del-row-btn', function (e) {
+        var $el = $(e.currentTarget);
+        var $row = $el.closest('tr');
+        $row.remove();
+        return false;
+    });
+  Sortable.create(
+        $('#copTestBody')[0],
+        {
+            animation: 150,
+            scroll: true,
+            handle: '.drag-handler'
+        }
+    );
+}); 

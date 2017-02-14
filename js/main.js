@@ -607,7 +607,6 @@ $('#finish-test').addClass('ui-disabled');
      //var table = document.getElementById("tableresults");
      var table = document.getElementById("testBody");
 
-
      //console.log("i is: " + i + "  tte" + [l] + "row is " + tte[l]['row']);
      var l = 0;
      var i = 0;
