@@ -299,21 +299,20 @@ csvContent+=objectTwo +"\n";
                 str = str.substr(str.indexOf("</b>")+4);
                 if (str.charAt(0) == "t"){
                     str = "";
-                    console.log("STR 6: "+(str));
                     }
                 if (str.charAt(0) == "&"){
                     str = str.substr(6);
-                    console.log("STR 6: "+(str));
                     }
                 str=str.replace(/\&nbsp;/g, '');
                 }
             if (str.includes("del")){
                 str = "";
-                console.log("STR null: "+(str));
                 }
             csvContent += str;
         }
         csvContent += "\n";
+
+
     }
     
      var encodedUri = encodeURI(csvContent);
