@@ -46,14 +46,10 @@
                     <input type="text" name="date" id="date" placeholder="Date and Time">
                     <!--                 <label for="date_test" class="ui-hidden-accessible"> date_test and Time:</label>
                     <input type="time" name="date_test" id="date_test" placeholder="date_test and Time"> -->
-
-
                     <label for="obj_one" class="ui-hidden-accessible">Object One</label>
                     <input type="text" name="obj_one" id="obj_one" placeholder="Object One">
                     <label for="obj_two" class="ui-hidden-accessible">Object Two</label>
                     <input type="text" name="obj_two" id="obj_two" placeholder="Object Two">
-
-
                     <div class="ui-grid-a ui-responsive">
                         <div class="ui-block-a">
                             <a href="#cop" class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="return setUpCop()" data-transition="slide">COP</a>
@@ -99,7 +95,7 @@
                             <th>  </th>
                             <th> </th>
                             <th>  </th>
-                        
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -125,27 +121,23 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                                                        <td ><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
+                            <td ><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
                             <td></td>
                             <td></td>
-                             <td><button  id="chewCop" onClick="chew()" >Chew</button></td>
+                            <td><button  id="chewCop" onClick="chew()" >Chew</button></td>
                             
                         </tr>
                         <tr>
                             
                             <td align="center" ><button id="startCop" onClick="startCop()">Start</button></td>
-
                             <td align="center" ><button id="toggle-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stopCop()">Stop</button></td>
-<td></td>
-                            <td><button  id="flagCop" onClick="flag()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
-
                             <td></td>
-                      
-                           
-                                
-
-
-                                  <td align="center" > <a href="#copResults" data-transition="slide" class="ui-btn" id="finish-test-cop" onClick="return finishTestCop()">
+                            <td><button  id="flagCop" onClick="flag()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
+                            <td></td>
+                            
+                            
+                            
+                            <td align="center" > <a href="#copResults" data-transition="slide" class="ui-btn" id="finish-test-cop" onClick="return finishTestCop()">
                             Finish </a></td>
                             
                             <td align="center"><button id="download-csv-cop" class="ui-btn ui-icon-action ui-btn-icon-right" onClick="copDownloadCSV()"> CSV</button></td>
@@ -287,6 +279,7 @@
                 <table id = "tableresults" data-role="table" class="ui-responsive" >
                     <thead>
                         <tr>
+                            <th></th>
                             <th>IN</th>
                             <th>OUT</th>
                             <th>Mount</th>
@@ -297,13 +290,17 @@
                             <th>LQ</th>
                             <th>TTE</th>
                             <th>CRL</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id = "testBody">
                         
                     </tbody>
                 </table>
-                <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b">
+                <div class="pacing-table__add-row">
+                    <span class="pacing-table__add-row-btn">+</span>
+                </div>
+                <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b" style="padding-top: 25px">
                     <h3>Flags</h3>
                     <p id="paragraphFlags"></p>
                 </div>
@@ -332,42 +329,35 @@
             
         </div>
     </div>
-
-
-            <div data-role="page" id="copResults" data-theme="b">
-            <div data-role="header">
-                <h1 id="copResultsHeader">Results</h1>
+    <div data-role="page" id="copResults" data-theme="b">
+        <div data-role="header">
+            <h1 id="copResultsHeader">Results</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <table id = "coptableresults" align="center" data-role="table" class="ui-responsive" >
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th id="inOne">IN</th>
+                        <th id="center_test">CENTER</th>
+                        <th id="inTwo">IN</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id = "copTestBody">
+                    
+                </tbody>
+            </table>
+            <div class="recipe-table__add-row">
+                <span class="recipe-table__add-row-btn">+</span>
             </div>
-
-            <div data-role="main" class="ui-content">  
-                <table id = "coptableresults" align="center" data-role="table" class="ui-responsive" >
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th id="inOne">IN</th>
-                            <th id="center_test">CENTER</th>
-                            <th id="inTwo">IN</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id = "copTestBody">
-                        
-                    </tbody>
-                </table>
-                    <div class="recipe-table__add-row">
-      <span class="recipe-table__add-row-btn">+</span>
-    </div>
-                <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b" style="padding-top: 25px">
-                    <h3>Flags</h3>
-                    <p id="copParagraphFlags"></p>
-                </div>
-
-                    <label for="notes" class="ui-hidden-accessible"> Notes:</label>
-                    <input type="text" name="notes" id="copnotes" placeholder="Notes">
-
-
-                <a href="#cop" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
-
+            <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="b" style="padding-top: 25px">
+                <h3>Flags</h3>
+                <p id="copParagraphFlags"></p>
+            </div>
+            <label for="notes" class="ui-hidden-accessible"> Notes:</label>
+            <input type="text" name="notes" id="copnotes" placeholder="Notes">
+            <a href="#cop" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
             <div data-role="footer">
                 <h1></h1>
             </div>
@@ -381,17 +371,36 @@
         <td class="recipe-table__cell" contenteditable="true"></td>
         <td class="recipe-table__cell" contenteditable="true"></td>
         <td class="recipe-table__cell" style="width:5%">
-        <button class="recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext"></button>
+            <button class="recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext"></button>
         </td>
     </tr>
-</script>
+    </script>
+
+    <script id="pacingRowTemplate" type="text/template">
+    <tr>
+        <td class="drag-handler"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" contenteditable="true"></td>
+        <td class="recipe-table__cell" style="width:5%">
+            <button class="recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext"></button>
+        </td>
+    </tr>
+    </script>
     
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.1.0.min.js"><\/script>')</script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="js/cop.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
     <script>
     window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;

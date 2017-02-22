@@ -315,6 +315,89 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 
+
+
+
+
+
+
+.pacing-table {
+  position: relative;
+  padding:  1em;
+  border: 1px solid #DDD;
+  box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+  z-index: 10;
+}
+
+.pacing-table__cell {
+  vertical-align: top;
+  padding: 3px 5px;
+}
+.pacing__text-field {
+  margin:0;
+  padding: .45em 0.92em;
+  font-size: 1em;
+  line-height: 1.4;
+  color: #555555;
+  background-color: #FFF;
+  background-image: none;
+  border: 1px solid #CCC;
+  border-left:1px solid #CCC;
+}
+.pacing-table__add-row {
+  margin-top: 0;
+  position: relative;
+  border-top: 1px solid #EEE;
+  z-index: 8;
+}
+
+.pacing-table__add-row-btn {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 4em;
+  margin: 0 auto;
+  -webkit-transition: all .2s easy-in;
+  transition: all .2s easy-in;
+  text-align: center;
+  opacity: 0.5;
+  color: #fff;
+  border: 1px solid #16A085;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+  background: #16A085;
+  height: 1.5em;
+  line-height: 1.5em;
+}
+.pacing-table__add-row-btn:hover {
+  opacity: 1;
+}
+
+.pacing-table__del-row-btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: .45em 0.92em;
+  font-size: 1em;
+  line-height: 1.4;
+  border: 1px solid #F39C12;
+  color: #F39C12;
+  text-decoration: none;
+  transition: all .3s;
+  text-align: center;
+  background-color: #fff;
+}
+.pacing-table__del-row-btn:hover {
+  background: #F39C12;
+  color: #fff;
+}
+
+
+
+
+
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

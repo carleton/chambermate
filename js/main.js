@@ -556,7 +556,7 @@ $('#finish-test').addClass('ui-disabled');
      var date = document.getElementById("date").innerHTML;
      var female = document.getElementById("female").innerHTML;
      var stud = document.getElementById("stud").innerHTML;
-     var columns = ["in", "out", "mount", "lq", "intro", "lq", "ejac", "lq"];
+     var columns = ["drag","in", "out", "mount", "lq", "intro", "lq", "ejac", "lq"];
      //var resultTable = document.getElementById("tableresults");
      var resultTable = document.getElementById("testBody");
      //resultTable.appendChild(document.createElement('tbody'));
@@ -566,7 +566,7 @@ $('#finish-test').addClass('ui-disabled');
      var j = 0;
      while (j <= sexualBehavior.length) {
          while (i <= columns.length) {
-             if (i == 8 || numberRows == 0) {
+             if (i == 9 || numberRows == 0) {
                  row = resultTable.insertRow(numberRows);
                  numberRows++;
                  i = 0;
@@ -576,6 +576,8 @@ $('#finish-test').addClass('ui-disabled');
              if (columns[i] == sexualBehavior[j]['stim']) {
                  var cell = row.insertCell(i);
                  cell.setAttribute('contentEditable', 'true');
+                 cell.className ='recipe-table__cell';
+
                  if (sexualBehavior[j]['stim'] == "lq") {
                      cell.innerHTML = sexualBehavior[j]['lq'];
                      i++;
@@ -585,9 +587,20 @@ $('#finish-test').addClass('ui-disabled');
                      i++;
                      j++;
                  }
-             } else {
+             }
+
+          else if(columns[i]=='drag'){
+                var cell = row.insertCell(i);
+                 cell.innerHTML = "";
+                 cell.className ='drag-handler';
+                 i++;
+
+             }
+
+              else {
                  var cell = row.insertCell(i);
                  cell.setAttribute('contentEditable', 'true');
+                 cell.className ='recipe-table__cell';
                  cell.innerHTML = "&nbsp";
                  //  cell.innerHTML = "row "+numberRows+"col "+i;
                  i++;
@@ -627,13 +640,18 @@ $('#finish-test').addClass('ui-disabled');
 
                  // } else {
                      row = table.rows[i];
-                     var cell = row.insertCell(8);
+                     var cell = row.insertCell(9);
                      cell.setAttribute('contentEditable', 'true');
                      cell.innerHTML = tte[l]['TTE'];
-                     var cell2 = row.insertCell(9);
+                     var cell2 = row.insertCell(10);
                      cell2.setAttribute('contentEditable', 'true');
                      cell2.innerHTML = crl[l]['CRL'];
                      console.log("row number: " + i + " tte number " + l);
+                    var cell = row.insertCell(11);
+                    cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
+                    cell.className ='recipe-table__cell';
+                    cell.style.width = "5%";
+
                      l++;
                      i++;
 
@@ -641,13 +659,17 @@ $('#finish-test').addClass('ui-disabled');
 
               else {
                      row = table.rows[i];
-                     var cell = row.insertCell(8);
+                     var cell = row.insertCell(9);
                      cell.setAttribute('contentEditable', 'true');
                      cell.innerHTML = "&nbsp";
-                     var cell2 = row.insertCell(9);
+                     var cell2 = row.insertCell(10);
                      cell2.setAttribute('contentEditable', 'true');
                      cell2.innerHTML = "&nbsp";
                      console.log("row number: " + i + " tte number " + l);
+                    var cell = row.insertCell(11);
+                    cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
+                    cell.className ='recipe-table__cell';
+                    cell.style.width = "5%";
                      i++;
              }
          }
@@ -812,7 +834,7 @@ $('#finish-test').addClass('ui-disabled');
     //csvContent = csvContent.concat(csv);
      //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
-     csvContent+="IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,TTE,CRL \n"
+     csvContent+=",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,TTE,CRL \n"
     var rows = $("#testBody > tr");
     for (var i = 0; i < rows.length; ++i) {
         var cells = $(rows[i]).find("> td");
@@ -822,22 +844,45 @@ $('#finish-test').addClass('ui-disabled');
             var str = cells[j].innerHTML;
 
 
+
             if(str.charAt(0)=="<"){
-
-            str = str.substr(str.indexOf("</b>")+4);
-            console.log("STR not number"+str);
-
+                str = str.substr(str.indexOf("</b>")+4);
+                if (str.charAt(0) == "t"){
+                    str = "";
+                    }
                 if (str.charAt(0) == "&"){
                     str = str.substr(6);
-                    console.log("STR 6: "+(str));
-
-                        }
-                        str=str.replace(/\&nbsp;/g, '');
-            }
+                    }
+                str=str.replace(/\&nbsp;/g, '');
+                }
+            if (str.includes("del")){
+                str = "";
+                }
             csvContent += str;
         }
         csvContent += "\n";
+
+
     }
+
+
+
+    //         if(str.charAt(0)=="<"){
+
+    //         str = str.substr(str.indexOf("</b>")+4);
+    //         console.log("STR not number"+str);
+
+    //             if (str.charAt(0) == "&"){
+    //                 str = str.substr(6);
+    //                 console.log("STR 6: "+(str));
+
+    //                     }
+    //                     str=str.replace(/\&nbsp;/g, '');
+    //         }
+    //         csvContent += str;
+    //     }
+    //     csvContent += "\n";
+    // }
 
 
      var encodedUri = encodeURI(csvContent);
@@ -859,3 +904,32 @@ $('#finish-test').addClass('ui-disabled');
 //debug TTE and CRL
 //
  }
+
+
+$(document).ready(function () {
+    $(document).on('click', '.pacing-table__add-row-btn', function (e) {
+        var $el = $(e.currentTarget);
+        var $tableBody = $('#testBody');
+        var htmlString = $('#pacingRowTemplate').html();
+        $tableBody.append(htmlString);
+        return false;
+    });
+
+    $(document).on('click', '.recipe-table__del-row-btn', function (e) {
+        var $el = $(e.currentTarget);
+        var $row = $el.closest('tr');
+        $row.remove();
+        return false;
+    });
+  Sortable.create(
+        $('#testBody')[0],
+        {
+            animation: 150,
+            scroll: true,
+            handle: '.drag-handler'
+        }
+    );
+}); 
+
+
+
