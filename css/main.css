@@ -177,6 +177,10 @@ body {
     color: white;
 }
 
+.ui-btn:focus {
+   
+}
+
 /* ==========================================================================
    From Banana Muffin Recipe CodePen
    http://codepen.io/asakasinsky/pen/zqpawR

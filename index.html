@@ -22,8 +22,13 @@
         <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js">
         </script>
+        <script>
+        function myFunction() {
+        return "Are you sure you want to reload?";
+        }
+        </script>
     </head>
-    <body>
+    <body onbeforeunload="return myFunction()">
         <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -124,15 +129,15 @@
                             <td ><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
                             <td></td>
                             <td></td>
-                            <td><button  id="chewCop" onClick="chew()" >Chew</button></td>
+                            <td><button  id="chewCop" onClick="chew()">Chew</button></td>
                             
                         </tr>
                         <tr>
                             
-                            <td align="center" ><button id="startCop" onClick="startCop()">Start</button></td>
-                            <td align="center" ><button id="toggle-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stopCop()">Stop</button></td>
+                            <td align="center"><button id="startCop" onClick="startCop()">Start</button></td>
+                            <td align="center"><button id="toggle-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stopCop()">Stop</button></td>
                             <td></td>
-                            <td><button  id="flagCop" onClick="flag()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
+                            <td><button  id="flagCop" onClick="flagCop()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
                             <td></td>
                             
                             
@@ -212,42 +217,40 @@
                             <th style = "text-align: center" > Mount </th>
                             <th style = "text-align: center" > Intro </th>
                             <th style = "text-align: center" > Ejac </th>
-                            
                             <th> </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
+                            <td><button type="Button" onclick="hop()">Hops</button></td>
                             <td><button class = "withMale" type="Button" onclick="mount_zero()">0</button></td>
                             <td><button class = "withMale" type="Button" onclick="intro_zero()">0</button></td>
                             <td><button class = "withMale" type="Button"  onclick="ejac_zero()">0</button></td>
-                            <td></td>
+                            <td><button type="Button" onclick="squeak()">Squeak</button></td>
                         </tr>
                         <tr>
-                            <td><button type="Button" onclick="hop()">Hops</button></td>
+                            <td><button type="Button" onclick="ears()">Ears</button></td>
                             <td><button class = "withMale" type="Button" onclick="mount_one()">1</button></td>
                             <td><button class = "withMale" type="Button" onclick="intro_one()">1</button></td>
                             <td><button class = "withMale" type="Button" onclick="ejac_one()">1</button></td>
-                            <td><button type="Button" onclick="squeak()">Squeak</button></td>
-                            
-                        </tr>
-                        <tr>
-                            
-                            <td><button type="Button" onclick="ears()">Ears</button></td>
-                            
-                            <td><button class = "withMale" type="Button" onclick="mount_two()">2</button></td>
-                            <td><button class = "withMale" type="Button" onclick="intro_two()">2</button></td>
-                            <td><button class = "withMale" type="Button" onclick="ejac_two()">2</button></td>
                             <td><button class = "withMale" type="Button" onclick="kick()">Kick</button></td>
+                            
                         </tr>
                         <tr>
                             
-                            <td><button  id="in_enter" type="Button" onclick="in_enter()">In</button></td>
+                            <td></td>
+                            <td><button class = "withMale" style="font-size: 20px;" type="Button" onclick="mount_two()">2</button></td>
+                            <td><button class = "withMale" style="font-size: 20px;" type="Button" onclick="intro_two()">2</button></td>
+                            <td><button class = "withMale" style="font-size: 20px;" type="Button" onclick="ejac_two()">2</button></td>
+                             <td></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><button  id="in_enter" type="Button" style="font-size: 30px;" onclick="in_enter()">In</button></td>
                             <td><button class = "withMale" type="Button" onclick="mount_three()">3</button></td>
                             <td><button class = "withMale" type="Button" onclick="intro_three()">3</button></td>
                             <td><button class = "withMale" type="Button" onclick="ejac_three()">3</button></td>
-                            <td><button class = "withMale" type="Button" onclick="out()">Out</button></td>
+                            <td><button class = "withMale" type="Button" style="font-size: 30px;" onclick="out()">Out</button></td>
                             
                         </tr>
                         <tr>
@@ -288,8 +291,8 @@
                             <th>LQ</th>
                             <th>Ejac</th>
                             <th>LQ</th>
-                            <th>TTE</th>
-                            <th>CRL</th>
+<!--                             <th>TTE</th>
+                            <th>CRL</th> -->
                             <th></th>
                         </tr>
                     </thead>
@@ -375,12 +378,9 @@
         </td>
     </tr>
     </script>
-
     <script id="pacingRowTemplate" type="text/template">
     <tr>
         <td class="drag-handler"></td>
-        <td class="recipe-table__cell" contenteditable="true"></td>
-        <td class="recipe-table__cell" contenteditable="true"></td>
         <td class="recipe-table__cell" contenteditable="true"></td>
         <td class="recipe-table__cell" contenteditable="true"></td>
         <td class="recipe-table__cell" contenteditable="true"></td>

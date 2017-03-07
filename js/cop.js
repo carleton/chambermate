@@ -11,6 +11,8 @@ var withTwo = false;
 var chewOne = 0;
 var chewTwo = 0;
 var executed = false;
+ var flagscop =[];
+
 
 function setUpCop() {
  objectOne = document.getElementById("obj_one").value;
@@ -111,6 +113,7 @@ function clockRunningCop() {
  }
 
 
+
   function stopCop() {
      copTimeStopped = new Date();
      clearInterval(copStarted);
@@ -129,6 +132,7 @@ document.getElementById('in_2').disabled = true;
     document.getElementById('in_1').disabled = true;
     document.getElementById('in_2').disabled = true;
     document.getElementById('btncenter').disabled = false;
+    document.getElementById('in_obj_1').style.color = "magenta";
     withOne = true;
 }
 
@@ -137,6 +141,7 @@ document.getElementById('in_2').disabled = true;
      document.getElementById('in_1').disabled = true;
      document.getElementById('in_2').disabled = true;
      document.getElementById('btncenter').disabled = false;
+    document.getElementById('in_obj_2').style.color = "magenta";
      withTwo = true;
 }
 
@@ -145,6 +150,9 @@ document.getElementById('in_2').disabled = true;
     document.getElementById('in_2').disabled = false;
     document.getElementById('btncenter').disabled = true;
     document.getElementById('in_1').disabled = false;
+        document.getElementById('in_obj_2').style.color = "white";
+    document.getElementById('in_obj_1').style.color = "white";
+
     withOne = false;
     withTwo = false;
 }
@@ -158,11 +166,15 @@ document.getElementById('in_2').disabled = true;
     }
 }
 
+ function flagCop() {
+    flagscop.push(time = " "+document.getElementById("display-area").innerHTML);
+ }
+
 
  function finishTestCop() {
     if(!executed){
         executed = true;
-    document.getElementById("copParagraphFlags").innerHTML = flags;
+    document.getElementById("copParagraphFlags").innerHTML = flagscop;
     document.getElementById("copResultsHeader").innerHTML=document.getElementById("experiment_title").value+" Results";
     document.getElementById("inOne").innerHTML=objectOne;
     document.getElementById("inTwo").innerHTML=objectTwo;
