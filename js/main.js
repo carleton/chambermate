@@ -47,18 +47,19 @@
  var introCount_exit_var = 0;
  var mountCount = 0;
  var stimLQOverTwo = 0;
- var flags =[];
-  var pacingexecuted =false;
+ var flags = [];
+ var pacingexecuted = false;
 
-var tmpColDelim = String.fromCharCode(11); // vertical tab character
-var tmpRowDelim = String.fromCharCode(0); // null character
+ var tmpColDelim = String.fromCharCode(11); // vertical tab character
+ var tmpRowDelim = String.fromCharCode(0); // null character
 
-                    // actual delimiter characters for CSV format
-var colDelim = '","';
-var rowDelim = '"\r\n"';
+ // actual delimiter characters for CSV format
+ var colDelim = '","';
+ var rowDelim = '"\r\n"';
 
-// Grab text from table into CSV formatted string
+ // Grab text from table into CSV formatted string
  var csv = '"';
+    document.getElementById("in_enter").disabled = true;
 
  function maleStart() {
      if (maleTimeBegan === null) {
@@ -99,8 +100,10 @@ var rowDelim = '"\r\n"';
  }
 
  function start() {
-    console.log("Start Called");
-$('#finish-test').addClass('ui-disabled');
+     console.log("Start Called");
+     $('#finish-test').addClass('ui-disabled');
+    document.getElementById("in_enter").disabled = false;
+
      document.getElementById("download-csv").disabled = true;
      if (timeBegan === null) {
          var myDate = new Date();
@@ -141,7 +144,6 @@ $('#finish-test').addClass('ui-disabled');
      maleStop();
      clearInterval(started);
      $('#finish-test').removeClass('ui-disabled');
-     document.getElementById("download-csv").disabled = false;
      document.getElementById("start").disabled = false;
  }
 
@@ -247,9 +249,9 @@ $('#finish-test').addClass('ui-disabled');
          document.getElementById("mount_count").innerHTML = mountCount;
          document.getElementById("ejac_count").innerHTML = ejacCount;
      } else {
-        time = document.getElementById("display-area").innerHTML;
-        //secondsTime = document.getElementById("display-area").innerHTML;
-        secondsTime = timeToSeconds(time);
+         time = document.getElementById("display-area").innerHTML;
+         //secondsTime = document.getElementById("display-area").innerHTML;
+         secondsTime = timeToSeconds(time);
          proceptive_rejection.push(stim + " at " + time);
          if (stim == 'out') {
              numberExits++;
@@ -334,29 +336,29 @@ $('#finish-test').addClass('ui-disabled');
 
 
  function timeToSeconds(stringTimePassed) {
-          //strip out colon
-         timeNoColon = stringTimePassed.replace(/:/g,'');
-         //strip out leading 0s
-         timesec = parseInt(timeNoColon,10);
-        // time=time.replace(/^[0]+/g,'');
-        return timesec;
+     //strip out colon
+     timeNoColon = stringTimePassed.replace(/:/g, '');
+     //strip out leading 0s
+     timesec = parseInt(timeNoColon, 10);
+     // time=time.replace(/^[0]+/g,'');
+     return timesec;
  }
 
  function stringToIntTime(stringTime) {
-     console.log("Minute time "+stringTime)
+     console.log("Minute time " + stringTime)
      var strTime = stringTime.split(":");
      var seconds = ((+strTime[0]) * 60 + (+strTime[1]));
-     console.log("string time in seconds "+seconds)
+     console.log("string time in seconds " + seconds)
      return seconds;
  }
 
 
  function flag() {
-    flags.push(time = " "+document.getElementById("display-area").innerHTML);
+     flags.push(time = " " + document.getElementById("display-area").innerHTML);
  }
 
  function ejac_zero() {
-    // introCount++;
+     // introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -365,7 +367,7 @@ $('#finish-test').addClass('ui-disabled');
  }
 
  function ejac_one() {
-    // introCount++;
+     // introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -374,7 +376,7 @@ $('#finish-test').addClass('ui-disabled');
  }
 
  function ejac_two() {
-    // introCount++;
+     // introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -383,7 +385,7 @@ $('#finish-test').addClass('ui-disabled');
  }
 
  function ejac_three() {
-   //  introCount++;
+     //  introCount++;
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
@@ -544,172 +546,212 @@ $('#finish-test').addClass('ui-disabled');
  var csvData = [];
 
  function finishTest() {
-        if(!pacingexecuted){
-        pacingexecuted = true;
-    document.getElementById("paragraphFlags").innerHTML = flags;
-    document.getElementById("resultsHeader").innerHTML=document.getElementById("experiment_title").value+" Results";
-     console.log(crl);
-     console.log(tte);
-     var date = "null";
-     var female = "null";
-     var stud = "null";
-     var date = document.getElementById("date").innerHTML;
-     var female = document.getElementById("female").innerHTML;
-     var stud = document.getElementById("stud").innerHTML;
-     var columns = ["drag","in", "out", "mount", "lq", "intro", "lq", "ejac", "lq","del"];
-     //var resultTable = document.getElementById("tableresults");
-     var resultTable = document.getElementById("testBody");
-     //resultTable.appendChild(document.createElement('tbody'));
-     var numberRows = 0;
-     var row;
-     var i = 0;
-     var j = 0;
-     while (j <= sexualBehavior.length) {
-         while (i <= columns.length) {
-             if (i == 10 || numberRows == 0) {
-                 row = resultTable.insertRow(numberRows);
-                 numberRows++;
-                 i = 0;
-             }
+         document.getElementById("download-csv").disabled = false;
 
-             // if(sexualBehavior[j] != undefined){
-             if (columns[i] == sexualBehavior[j]['stim']) {
-                 var cell = row.insertCell(i);
-                 cell.setAttribute('contentEditable', 'true');
-                 cell.className ='recipe-table__cell';
+     if (!pacingexecuted) {
+         pacingexecuted = true;
+         document.getElementById("paragraphFlags").innerHTML = flags;
+         document.getElementById("resultsHeader").innerHTML = document.getElementById("experiment_title").value + " Results";
+         console.log(crl);
+         console.log(tte);
+         var date = "null";
+         var female = "null";
+         var stud = "null";
+         var date = document.getElementById("date").innerHTML;
+         var female = document.getElementById("female").innerHTML;
+         var stud = document.getElementById("stud").innerHTML;
+         var columns = ["drag", "in", "out", "mount", "lq", "intro", "lq", "ejac", "lq", "del"];
+         //var resultTable = document.getElementById("tableresults");
+         var resultTable = document.getElementById("testBody");
+         //resultTable.appendChild(document.createElement('tbody'));
+         var numberRows = 0;
+         var rowsToDelete = [];
+         var mostRecentStim_row = 0;
+         var row;
+         var i = 0;
+         var j = 0;
+         while (j <= sexualBehavior.length) {
+             while (i <= columns.length) {
+                 if (i == 10 || numberRows == 0) {
+                  //  if(j>1){
+                    //    if ((sexualBehavior[j-1]['stim']!='lq')&&(sexualBehavior[j+1]['stim']!='out')){
 
-                 if (sexualBehavior[j]['stim'] == "lq") {
-                     cell.innerHTML = sexualBehavior[j]['lq'];
+                         row = resultTable.insertRow(numberRows);
+                         row.id = numberRows;
+                         numberRows++;
+                         i = 0;
+                  //   }
+                // }
+                 }
+console.log("I is:", i);
+console.log("J is:", j);
+
+                 // if(sexualBehavior[j] != undefined){
+                 if (columns[i] == sexualBehavior[j]['stim']) {
+                    console.log("stim:", sexualBehavior[j]['stim']);
+                     var cell = row.insertCell(i);
+                     cell.setAttribute('contentEditable', 'true');
+                     cell.className = 'recipe-table__cell';
+
+                     if (sexualBehavior[j]['stim'] == "out") {
+                         if (sexualBehavior[j - 1]['stim'] == "in") {
+                             cell.innerHTML = sexualBehavior[j]['time'];
+                             i++;
+                             j++;
+                         }
+                         else{
+                         var cell_out = resultTable.rows[mostRecentStim_row-1].cells[2];
+                         cell_out.innerHTML = sexualBehavior[j]['time'];
+                         rowsToDelete.push({
+                             "rowToDelete": row
+                         });
+                         i++;
+                         j++;
+                     }
+                     }
+
+                     else if (sexualBehavior[j]['stim'] == "lq") {
+                         cell.innerHTML = sexualBehavior[j]['lq'];
+                         mostRecentStim_row = numberRows;
+                         i++;
+                         j++;
+                     }
+
+                     // else if (sexualBehavior[j]['stim'] != ("out" || "drag" || "delete" )) {
+                     //    var mostRecentStim_row = numberRows;
+                     //     cell_out.innerHTML = "Sex";
+                     //     //cell_out.innerHTML = sexualBehavior[j]['time'];
+                     //    // cell.innerHTML = "cell";
+                     //     i++;
+                     //     j++;
+                     // }  
+
+                     //  && (sexualBehavior[j]['stim'] != "out")
+                     else {
+                         cell.innerHTML = sexualBehavior[j]['time'];
+                         i++;
+                         j++;
+                     }
+                 } else if (columns[i] == 'drag') {
+                     var cell = row.insertCell(i);
+                     cell.innerHTML = "";
+                     cell.className = 'drag-handler';
                      i++;
-                     j++;
+
+                 } else if (columns[i] == 'del') {
+                     var cell = row.insertCell(i);
+                     cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
+                     cell.className = 'recipe-table__cell';
+                     cell.style.width = "5%";
+                     i++;
                  } else {
-                     cell.innerHTML = sexualBehavior[j]['time'];
+                     var cell = row.insertCell(i);
+                     cell.setAttribute('contentEditable', 'true');
+                     cell.className = 'recipe-table__cell';
+                     cell.innerHTML = "&nbsp";
                      i++;
-                     j++;
+                 }
+                 
+                 if (j == sexualBehavior.length) {
+                     break;
                  }
              }
-
-          else if(columns[i]=='drag'){
-                var cell = row.insertCell(i);
-                 cell.innerHTML = "";
-                 cell.className ='drag-handler';
-                 i++;
-
-             }
-        else if(columns[i]=='del'){
-               var cell = row.insertCell(i);
-                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
-                cell.className ='recipe-table__cell';
-                cell.style.width = "5%";
-                i++;
-                }
-
-              else {
-                 var cell = row.insertCell(i);
-                 cell.setAttribute('contentEditable', 'true');
-                 cell.className ='recipe-table__cell';
-                 cell.innerHTML = "&nbsp";
-                 //  cell.innerHTML = "row "+numberRows+"col "+i;
-                 i++;
-             }
-             //}
-             console.log("j is" + j + " sexualBehavior length is " + sexualBehavior.length);
              if (j == sexualBehavior.length) {
                  break;
              }
+
          }
-         if (j == sexualBehavior.length) {
-             break;
-         }
+
+         //var table = document.getElementById("tableresults");
+
+
+
+         // var table = document.getElementById("testBody");
+
+
+         // var l = 0;
+         // var i = 0;
+         // while (l <= tte.length) {
+         //     while (i <= table.rows.length) {
+         //         if (i+1 == tte[l]['row']) {
+
+         //                 row = table.rows[i];
+         //                 var cell = row.insertCell(9);
+         //                 cell.setAttribute('contentEditable', 'true');
+         //                 cell.innerHTML = tte[l]['TTE'];
+         //                 var cell2 = row.insertCell(10);
+         //                 cell2.setAttribute('contentEditable', 'true');
+         //                 cell2.innerHTML = crl[l]['CRL'];
+         //                 console.log("row number: " + i + " tte number " + l);
+         //                var cell = row.insertCell(11);
+         //                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
+         //                cell.className ='recipe-table__cell';
+         //                cell.style.width = "5%";
+
+         //                 l++;
+         //                 i++;
+
+         //             }
+
+         //          else {
+         //                 row = table.rows[i];
+         //                 var cell = row.insertCell(9);
+         //                 cell.setAttribute('contentEditable', 'true');
+         //                 cell.innerHTML = "&nbsp";
+         //                 var cell2 = row.insertCell(10);
+         //                 cell2.setAttribute('contentEditable', 'true');
+         //                 cell2.innerHTML = "&nbsp";
+         //                 console.log("row number: " + i + " tte number " + l);
+         //                var cell = row.insertCell(11);
+         //                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
+         //                cell.className ='recipe-table__cell';
+         //                cell.style.width = "5%";
+         //                 i++;
+         //         }
+         //     }
+
+         // }
+
+
+     for (var i = 0; i < rowsToDelete.length; i++) {
+        console.log(rowsToDelete);
+        var row = rowsToDelete[i].rowToDelete;
+        console.log(row);
+        row.parentNode.removeChild(row);
 
      }
 
-     //var table = document.getElementById("tableresults");
+     }
+ }
 
-
-
-     // var table = document.getElementById("testBody");
-
-  
-     // var l = 0;
-     // var i = 0;
-     // while (l <= tte.length) {
-     //     while (i <= table.rows.length) {
-     //         if (i+1 == tte[l]['row']) {
-  
-     //                 row = table.rows[i];
-     //                 var cell = row.insertCell(9);
-     //                 cell.setAttribute('contentEditable', 'true');
-     //                 cell.innerHTML = tte[l]['TTE'];
-     //                 var cell2 = row.insertCell(10);
-     //                 cell2.setAttribute('contentEditable', 'true');
-     //                 cell2.innerHTML = crl[l]['CRL'];
-     //                 console.log("row number: " + i + " tte number " + l);
-     //                var cell = row.insertCell(11);
-     //                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
-     //                cell.className ='recipe-table__cell';
-     //                cell.style.width = "5%";
-
-     //                 l++;
-     //                 i++;
-
-     //             }
-
-     //          else {
-     //                 row = table.rows[i];
-     //                 var cell = row.insertCell(9);
-     //                 cell.setAttribute('contentEditable', 'true');
-     //                 cell.innerHTML = "&nbsp";
-     //                 var cell2 = row.insertCell(10);
-     //                 cell2.setAttribute('contentEditable', 'true');
-     //                 cell2.innerHTML = "&nbsp";
-     //                 console.log("row number: " + i + " tte number " + l);
-     //                var cell = row.insertCell(11);
-     //                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
-     //                cell.className ='recipe-table__cell';
-     //                cell.style.width = "5%";
-     //                 i++;
-     //         }
-     //     }
-
-     // }
-
-
-
-
-
-
-}
-}
-
-     /*    for (var j = 0; j < sexualBehavior.length; j++) {
-             for (var i = 0; i <= columns.length; i++) {
-                 console.log(columns.length);
-                 console.log(i);
-                 if (i == 8 || numberRows == 0) {
-                     numberRows++;
-                     row = resultTable.insertRow(numberRows);
-                 }
-                 if (columns[i] == sexualBehavior[j]['stim']) {
-                     var cell = row.insertCell(i);
-                     cell.innerHTML = sexualBehavior[j]["hi"];
-                     if(sexualBehavior[j]['stim']=="lq"){
-                         cell.innerHTML = sexualBehavior[j]["lq"];
-                     }
-                     else{
-                         cell.innerHTML = sexualBehavior[j]["time"];
-                 }
+ /*    for (var j = 0; j < sexualBehavior.length; j++) {
+         for (var i = 0; i <= columns.length; i++) {
+             console.log(columns.length);
+             console.log(i);
+             if (i == 8 || numberRows == 0) {
+                 numberRows++;
+                 row = resultTable.insertRow(numberRows);
              }
-                 else {
-                     console.log("i is "+i+"number rows "+numberRows);
-                      var cell = row.insertCell(i);
-                       cell.innerHTML = "row "+numberRows+"col "+i;
-                     // csvData.push(",");
-                     //document.write(csvData);
+             if (columns[i] == sexualBehavior[j]['stim']) {
+                 var cell = row.insertCell(i);
+                 cell.innerHTML = sexualBehavior[j]["hi"];
+                 if(sexualBehavior[j]['stim']=="lq"){
+                     cell.innerHTML = sexualBehavior[j]["lq"];
                  }
+                 else{
+                     cell.innerHTML = sexualBehavior[j]["time"];
              }
-         } */
- 
+         }
+             else {
+                 console.log("i is "+i+"number rows "+numberRows);
+                  var cell = row.insertCell(i);
+                   cell.innerHTML = "row "+numberRows+"col "+i;
+                 // csvData.push(",");
+                 //document.write(csvData);
+             }
+         }
+     } */
+
  //iterate through sexual behavior
  //fill out a table, for each column, if the next key has that type put it there, 
  //otherwise go to the next column (Add a comma and move on)
@@ -737,7 +779,7 @@ $('#finish-test').addClass('ui-disabled');
  //set newStim false when in is clicked, and true when stim
  //push crl and tte only on last stim - use stim id
 
-            
+
 
  function downloadCSV() {
      var date = document.getElementById("date").value;
@@ -810,84 +852,84 @@ $('#finish-test').addClass('ui-disabled');
      ];
 
 
-//                var $headers = $('#resultstable').find('tr:has(th)')
-//                     ,$rows = $('#resultstable').find('tr:has(td input[value!=""])');
+     //                var $headers = $('#resultstable').find('tr:has(th)')
+     //                     ,$rows = $('#resultstable').find('tr:has(td input[value!=""])');
 
-//                     // Temporary delimiter characters unlikely to be typed by keyboard
-//                     // This is to avoid accidentally splitting the actual contents
-//                     csv += formatRows($headers.map(grabRow));
-//                     csv += rowDelim;
-//                     csv += formatRows($rows.map(grabRow)) + '"';
+     //                     // Temporary delimiter characters unlikely to be typed by keyboard
+     //                     // This is to avoid accidentally splitting the actual contents
+     //                     csv += formatRows($headers.map(grabRow));
+     //                     csv += rowDelim;
+     //                     csv += formatRows($rows.map(grabRow)) + '"';
 
-// console.log(csv);
+     // console.log(csv);
 
-        // Data URI
+     // Data URI
 
-    //var table = $("#tableresults").html();
-    
+     //var table = $("#tableresults").html();
+
      var csvContent = "data:text/csv;charset=utf-8,";
      data.forEach(function(infoArray, index) {
          dataString = infoArray.join(",");
          csvContent += index < data.length ? dataString + "\n" : dataString;
      });
-// console.log(csvContent);
-//     console.log(csv);
+     // console.log(csvContent);
+     //     console.log(csv);
 
-  //  csvContent = csvContent +csv;
-    //csvContent = csvContent.concat(table.innerHTML);
-    //csvContent = csvContent.concat(csv);
+     //  csvContent = csvContent +csv;
+     //csvContent = csvContent.concat(table.innerHTML);
+     //csvContent = csvContent.concat(csv);
      //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
      // csvContent+=",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,TTE,CRL \n"
-       csvContent+=",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ \n"
-    var rows = $("#testBody > tr");
-    for (var i = 0; i < rows.length; ++i) {
-        var cells = $(rows[i]).find("> td");
-        console.log(cells.length);
-        for (var j = 0; j < cells.length; ++j) {
-            if (j != 0) csvContent += ",";
-            var str = cells[j].innerHTML;
+     csvContent += ",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ \n"
+     var rows = $("#testBody > tr");
+     for (var i = 0; i < rows.length; ++i) {
+         var cells = $(rows[i]).find("> td");
+         console.log(cells.length);
+         for (var j = 0; j < cells.length; ++j) {
+             if (j != 0) csvContent += ",";
+             var str = cells[j].innerHTML;
 
 
 
-            if(str.charAt(0)=="<"){
-                str = str.substr(str.indexOf("</b>")+4);
-                if (str.charAt(0) == "t"){
-                    str = "";
-                    }
-                if (str.charAt(0) == "&"){
-                    str = str.substr(6);
-                    }
-                str=str.replace(/\&nbsp;/g, '');
-                }
-            if (str.includes("del")){
-                str = "";
-                }
-            csvContent += str;
-        }
-        csvContent += "\n";
+             if (str.charAt(0) == "<") {
+                 str = str.substr(str.indexOf("</b>") + 4);
+                 if (str.charAt(0) == "t") {
+                     str = "";
+                 }
+                 if (str.charAt(0) == "&") {
+                     str = str.substr(6);
+                 }
+                 str = str.replace(/\&nbsp;/g, '');
+             }
+             if (str.includes("del")) {
+                 str = "";
+             }
+             csvContent += str;
+         }
+         csvContent += "\n";
 
 
-    }
+     }
 
 
 
-    //         if(str.charAt(0)=="<"){
+     //         if(str.charAt(0)=="<"){
 
-    //         str = str.substr(str.indexOf("</b>")+4);
-    //         console.log("STR not number"+str);
+     //         str = str.substr(str.indexOf("</b>")+4);
+     //         console.log("STR not number"+str);
 
-    //             if (str.charAt(0) == "&"){
-    //                 str = str.substr(6);
-    //                 console.log("STR 6: "+(str));
+     //             if (str.charAt(0) == "&"){
+     //                 str = str.substr(6);
+     //                 console.log("STR 6: "+(str));
 
-    //                     }
-    //                     str=str.replace(/\&nbsp;/g, '');
-    //         }
-    //         csvContent += str;
-    //     }
-    //     csvContent += "\n";
-    // }
+     //                     }
+     //                     str=str.replace(/\&nbsp;/g, '');
+     //         }
+     //         csvContent += str;
+     //     }
+     //     csvContent += "\n";
+     // }
 
 
      var encodedUri = encodeURI(csvContent);
@@ -906,35 +948,31 @@ $('#finish-test').addClass('ui-disabled');
      //     },
      //     focusInvalid: false
      // });
-//debug TTE and CRL
-//
+     //debug TTE and CRL
+     //
  }
 
 
-$(document).ready(function () {
-    $(document).on('click', '.pacing-table__add-row-btn', function (e) {
-        var $el = $(e.currentTarget);
-        var $tableBody = $('#testBody');
-        var htmlString = $('#pacingRowTemplate').html();
-        $tableBody.append(htmlString);
-        return false;
-    });
+ $(document).ready(function() {
+     $(document).on('click', '.pacing-table__add-row-btn', function(e) {
+         var $el = $(e.currentTarget);
+         var $tableBody = $('#testBody');
+         var htmlString = $('#pacingRowTemplate').html();
+         $tableBody.append(htmlString);
+         return false;
+     });
 
-    $(document).on('click', '.recipe-table__del-row-btn', function (e) {
-        var $el = $(e.currentTarget);
-        var $row = $el.closest('tr');
-        $row.remove();
-        return false;
-    });
-  Sortable.create(
-        $('#testBody')[0],
-        {
-            animation: 150,
-            scroll: true,
-            handle: '.drag-handler'
-        }
-    );
-}); 
-
-
-
+     $(document).on('click', '.recipe-table__del-row-btn', function(e) {
+         var $el = $(e.currentTarget);
+         var $row = $el.closest('tr');
+         $row.remove();
+         return false;
+     });
+     Sortable.create(
+         $('#testBody')[0], {
+             animation: 150,
+             scroll: true,
+             handle: '.drag-handler'
+         }
+     );
+ });
