@@ -118,7 +118,6 @@ function clockRunningCop() {
      copTimeStopped = new Date();
      clearInterval(copStarted);
     $('#finish-test-cop').removeClass('ui-disabled');
-      document.getElementById("download-csv-cop").disabled = false;
      document.getElementById("startCop").disabled = false;
 
  }
@@ -174,6 +173,8 @@ document.getElementById('in_2').disabled = true;
  function finishTestCop() {
     if(!executed){
         executed = true;
+              document.getElementById("download-csv-cop").disabled = false;
+
     document.getElementById("copParagraphFlags").innerHTML = flagscop;
     document.getElementById("copResultsHeader").innerHTML=document.getElementById("experiment_title").value+" Results";
     document.getElementById("inOne").innerHTML=objectOne;

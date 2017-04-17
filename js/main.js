@@ -59,7 +59,7 @@
 
  // Grab text from table into CSV formatted string
  var csv = '"';
-    document.getElementById("in_enter").disabled = true;
+document.getElementById("in_enter").disabled = true;
 
  function maleStart() {
      if (maleTimeBegan === null) {
