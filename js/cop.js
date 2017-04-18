@@ -243,9 +243,6 @@ document.getElementById('in_2').disabled = true;
                  i++;
              }
 
-             console.log("j is" + j + " copBehavior length is " + copBehavior.length);
-             console.log("I am working on "+ copBehavior[j]['stim'] + "Which happened at "+copBehavior[j]['time']);
-
              if (j == copBehavior.length) {
                  break;
              }

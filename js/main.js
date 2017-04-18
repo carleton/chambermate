@@ -583,8 +583,7 @@ document.getElementById("in_enter").disabled = true;
                   //   }
                 // }
                  }
-console.log("I is:", i);
-console.log("J is:", j);
+
 
                  // if(sexualBehavior[j] != undefined){
                  if (columns[i] == sexualBehavior[j]['stim']) {
@@ -758,7 +757,6 @@ console.log("J is:", j);
  //don't forget she wants this for each stim to see over time
  //Contact Return Latency = time of return - time of stim
  //Time to exit = time of exit - time of stimulation
- //Todo^ figure out how to subtract time as string
  //% exit = #exits/# of that stim
  //pacing LQ = #stim>=2/total#stim
  //LR = avg lq or is it most common lq???
