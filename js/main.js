@@ -60,6 +60,7 @@
  // Grab text from table into CSV formatted string
  var csv = '"';
 document.getElementById("in_enter").disabled = true;
+$('#toggle-button').addClass('ui-disabled');
 
  function maleStart() {
      if (maleTimeBegan === null) {
@@ -101,6 +102,7 @@ document.getElementById("in_enter").disabled = true;
 
  function start() {
      console.log("Start Called");
+$('#toggle-button').removeClass('ui-disabled');
      $('#finish-test').addClass('ui-disabled');
     document.getElementById("in_enter").disabled = false;
 
@@ -137,6 +139,13 @@ document.getElementById("in_enter").disabled = true;
      }
      started = setInterval(clockRunning, 10);
      document.getElementById("start").disabled = true;
+
+     if(withMale){
+             var x = document.getElementsByClassName('withMale');
+     for (var i = 0; i < x.length; i++) {
+         x[i].disabled = false;
+     }
+     }
  }
 
  function stop() {
@@ -145,6 +154,11 @@ document.getElementById("in_enter").disabled = true;
      clearInterval(started);
      $('#finish-test').removeClass('ui-disabled');
      document.getElementById("start").disabled = false;
+$('#toggle-button').addClass('ui-disabled');
+     var x = document.getElementsByClassName('withMale');
+     for (var i = 0; i < x.length; i++) {
+         x[i].disabled = true;
+     }
  }
 
  function reset() {
@@ -489,6 +503,11 @@ document.getElementById("in_enter").disabled = true;
      track_beh("squeak", {});
  }
 
+ function roll() {
+     rejectionBeh++;
+     track_beh("roll", {});
+ }
+
  function in_enter() {
      maleIns++;
      withMale = true;
@@ -575,7 +594,6 @@ document.getElementById("in_enter").disabled = true;
                  if (i == 10 || numberRows == 0) {
                   //  if(j>1){
                     //    if ((sexualBehavior[j-1]['stim']!='lq')&&(sexualBehavior[j+1]['stim']!='out')){
-
                          row = resultTable.insertRow(numberRows);
                          row.id = numberRows;
                          numberRows++;
@@ -583,8 +601,6 @@ document.getElementById("in_enter").disabled = true;
                   //   }
                 // }
                  }
-
-
                  // if(sexualBehavior[j] != undefined){
                  if (columns[i] == sexualBehavior[j]['stim']) {
                     console.log("stim:", sexualBehavior[j]['stim']);
@@ -616,16 +632,6 @@ document.getElementById("in_enter").disabled = true;
                          j++;
                      }
 
-                     // else if (sexualBehavior[j]['stim'] != ("out" || "drag" || "delete" )) {
-                     //    var mostRecentStim_row = numberRows;
-                     //     cell_out.innerHTML = "Sex";
-                     //     //cell_out.innerHTML = sexualBehavior[j]['time'];
-                     //    // cell.innerHTML = "cell";
-                     //     i++;
-                     //     j++;
-                     // }  
-
-                     //  && (sexualBehavior[j]['stim'] != "out")
                      else {
                          cell.innerHTML = sexualBehavior[j]['time'];
                          i++;
