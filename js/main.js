@@ -33,6 +33,9 @@
  var earsIn = 0;
  var earsOut = 0;
  var rejectionBeh = 0;
+ var rolls = 0;
+ var kicks = 0;
+ var squeaks = 0;
  var stimNumber = 0;
  var mostRecentStim = null;
  var mostRecentStimType = null;
@@ -495,16 +498,19 @@ $('#toggle-button').addClass('ui-disabled');
 
  function kick() {
      rejectionBeh++;
+     kicks++;
      track_beh("kick", {});
  }
 
  function squeak() {
      rejectionBeh++;
+     squeaks++;
      track_beh("squeak", {});
  }
 
  function roll() {
      rejectionBeh++;
+     rolls++;
      track_beh("roll", {});
  }
 
@@ -789,6 +795,7 @@ $('#toggle-button').addClass('ui-disabled');
      var date = document.getElementById("date").value;
      var female = document.getElementById("female").value;
      var stud = document.getElementById("stud").value;
+     var experimenter_name = document.getElementById("experimenter_name").value;
      var filename = document.getElementById("experiment_title").value;
      var time = document.getElementById("display-area").innerHTML;
      var timeWithMale = document.getElementById("time_with_male").innerHTML;
@@ -836,6 +843,9 @@ $('#toggle-button').addClass('ui-disabled');
          ["Ears IN", " ", earsIn],
          ["Hops ALONE", " ", hopsOut],
          ["Ears ALONE", " ", earsOut],
+         ["Kicks", " ", kicks],
+         ["Squeaks", " ", squeaks],
+         ["Rolls", " ", rolls],
          ["Rejection Beh", " ", rejectionBeh],
          ["time with male", " ", timeWithMale],
          ["# mounts", " ", mountCount],
@@ -884,7 +894,12 @@ $('#toggle-button').addClass('ui-disabled');
 
 
 
-     csvContent += ',Do Not Type On Anything Red!!!!,,,,,,,It will print normally,,,,,,,,,,,,,,,,,,\n,\"When done inputting the data for a rat, SAVE AS whatever you want, and then OPEN this template file again to start over\",,,,,,,,,,,,,,,,,,,,,,,,,\nDate,,,,,Entered by:,,,,,,,,,,,,,,,,,,,,,\nFemale,,1,,,,,,,,,,,,,,,,,,,,,,,,\nStud,,,,,,,,,,,Contact return,,,,,,,,,,,,,,TIME TO EXIT,\n,hops,IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
+    csvContent += ',Do Not Type On Anything Red!!!!,,,,,,,It will print normally,,,,,,,,,,,,,,,,,,\n,\"When done inputting the data for a rat, SAVE AS whatever you want, and then OPEN this template file again to start over\",,,,,,,,,,,,,,,,,,,,,,,,';
+    csvContent += ',\nDate,,'+date+',,,';
+    csvContent += 'Entered by:,,'+experimenter_name+',,,,,,,,,,,,,,,,,,,\n';
+    csvContent += 'Female,,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
+    csvContent += 'Stud,,'+stud+',,,,,,,,,Contact return,,,,,,,,,,,,,,TIME TO EXIT,\n';
+    csvContent += ',hops,IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
 
 
 
@@ -928,21 +943,22 @@ $('#toggle-button').addClass('ui-disabled');
 
 
 
+
         csvContent += ",";
         csvContent +='"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,S'+m+'>0),S'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),F'+l+',"""")","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,S'+m+'>0),S'+m+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),H'+l+',"""")","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,S'+m+'>0),S'+m+'-W'+l+',IF(W'+l+'>0,""---"","""")))","=IF(ISNUMBER(P'+l+'),J'+l+',"""")",,,,,,,,"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,T'+l+'>0),T'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,T'+l+'>0),T'+l+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,T'+l+'>0),T'+l+'-W'+l+',IF(W'+l+'>0,""---"","""")))"';
         csvContent += "\n";
      }
         csvContent += "\n";
-        csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+k+')/COUNT(E7:E'+k+')*100,,=COUNT(N7:N'+k+')/COUNT(G7:G'+k+')*100,,=COUNT(P7:P'+k+')/COUNT(I7:I'+k+')*100,,,,,,,,,,,';
-        csvContent += ',,,,,,,,,,mean contact return,=AVERAGE(L7:L'+k+'),,=AVERAGE(N7:N'+k+'),,=AVERAGE(P7:P'+k+'),,,,,,,,,,,\n';
-csvContent += ',,,,,,,,,,mean time to exit,=AVERAGE(Y7:Y'+k+'),,=AVERAGE(Z7:Z'+k+'),,=AVERAGE(AA7:AA'+k+'),,,,,,,,,,,\n';
-csvContent += ',,,,,,,,,,pacing lq,"=(COUNTIF(F7:F'+k+',"">=2"")+COUNTIF(H7:H'+k+',"">=2"")+COUNTIF(J7:J'+k+',"">=2""))/(COUNT(E7:J'+k+')/2)*100",,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,,,pacing lr,=(SUM(F7:F'+k+')+SUM(H7:H'+k+')+SUM(J7:J'+k+'))/(COUNT(F7:F'+k+')+COUNT(H7:H'+k+')+COUNT(J7:J'+k+')),,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,time with male,,,=SUM(X7:X'+k+'),,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,# mounts,,,=COUNT(E7:E'+k+'),,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,# intros,,,=COUNT(G7:G'+k+'),,,,,,,,,,,,,,,\n';
-csvContent += ',,Enter by hand,,,,,,# ejacs,,,=COUNT(I7:I'+k+'),,,,,,,,,,,,,,,\n';
-csvContent += ',Male Ins,,"=COUNTIF(C7:C'+k+',"">0"")",,,,,,,,,,,,,,,,,,,,,,,\n';
+        csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+l+')/COUNT(E7:E'+l+')*100,,=COUNT(N7:N'+l+')/COUNT(G7:G'+l+')*100,,=COUNT(P7:P'+l+')/COUNT(I7:I'+l+')*100,,,,,,,,,,,';
+        csvContent += ',,,,,,,,,,mean contact return,=AVERAGE(L7:L'+l+'),,=AVERAGE(N7:N'+l+'),,=AVERAGE(P7:P'+l+'),,,,,,,,,,,\n';
+csvContent += ',,,,,,,,,,mean time to exit,=AVERAGE(Y7:Y'+l+'),,=AVERAGE(Z7:Z'+l+'),,=AVERAGE(AA7:AA'+l+'),,,,,,,,,,,\n';
+csvContent += ',,,,,,,,,,pacing lq,"=(COUNTIF(F7:F'+l+',"">=2"")+COUNTIF(H7:H'+l+',"">=2"")+COUNTIF(J7:J'+l+',"">=2""))/(COUNT(E7:J'+l+')/2)*100",,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,,,pacing lr,=(SUM(F7:F'+l+')+SUM(H7:H'+l+')+SUM(J7:J'+l+'))/(COUNT(F7:F'+l+')+COUNT(H7:H'+l+')+COUNT(J7:J'+l+')),,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,time with male,,,=SUM(X7:X'+l+'),,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,# mounts,,,=COUNT(E7:E'+l+'),,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,# intros,,,=COUNT(G7:G'+l+'),,,,,,,,,,,,,,,\n';
+csvContent += ',,Enter by hand,,,,,,# ejacs,,,=COUNT(I7:I'+l+'),,,,,,,,,,,,,,,\n';
+csvContent += ',Male Ins,,"=COUNTIF(C7:C'+l+',"">0"")",,,,,,,,,,,,,,,,,,,,,,,\n';
 csvContent += ',Male Outs,,,,,,,,,,,,,,,,,,,,,,,,,\n';
 csvContent += ',Minutes,,,,,,,,,,,,,,,,,,,,,,,,,\n';
 csvContent += ',Seconds,,,,,,,,,,,,,,,,,,,,,,,,,\n';

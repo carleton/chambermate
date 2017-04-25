@@ -181,6 +181,15 @@ body {
    
 }
 
+#meertslogo {
+    margin: auto;
+    display: block;
+    width: 10%;
+    /*float: left;*/
+    /*border: 5px solid white;*/
+    padding: 10px;
+}
+
 /* ==========================================================================
    From Banana Muffin Recipe CodePen
    http://codepen.io/asakasinsky/pen/zqpawR
