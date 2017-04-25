@@ -872,10 +872,7 @@ $('#toggle-button').addClass('ui-disabled');
      //var table = $("#tableresults").html();
 
      var csvContent = "data:text/csv;charset=utf-8,";
-     data.forEach(function(infoArray, index) {
-         dataString = infoArray.join(",");
-         csvContent += index < data.length ? dataString + "\n" : dataString;
-     });
+  
      // console.log(csvContent);
      //     console.log(csv);
 
@@ -884,18 +881,26 @@ $('#toggle-button').addClass('ui-disabled');
      //csvContent = csvContent.concat(csv);
      //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
 
-     // csvContent+=",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,TTE,CRL \n"
-     csvContent += ",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ \n"
+
+
+
+     csvContent += ',Do Not Type On Anything Red!!!!,,,,,,,It will print normally,,,,,,,,,,,,,,,,,,\n,\"When done inputting the data for a rat, SAVE AS whatever you want, and then OPEN this template file again to start over\",,,,,,,,,,,,,,,,,,,,,,,,,\nDate,,,,,Entered by:,,,,,,,,,,,,,,,,,,,,,\nFemale,,1,,,,,,,,,,,,,,,,,,,,,,,,\nStud,,,,,,,,,,,Contact return,,,,,,,,,,,,,,TIME TO EXIT,\n,hops,IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
+
+
+
+     // csvContent += ",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ \n"
+
+    var k = 0;
      var rows = $("#testBody > tr");
      for (var i = 0; i < rows.length; ++i) {
+        k=i+1;;
+        csvContent+=k;
+        csvContent+=',';
          var cells = $(rows[i]).find("> td");
-         console.log(cells.length);
          for (var j = 0; j < cells.length; ++j) {
+            console.log("length",cells.length);
              if (j != 0) csvContent += ",";
              var str = cells[j].innerHTML;
-
-
-
              if (str.charAt(0) == "<") {
                  str = str.substr(str.indexOf("</b>") + 4);
                  if (str.charAt(0) == "t") {
@@ -910,13 +915,49 @@ $('#toggle-button').addClass('ui-disabled');
                  str = "";
              }
              csvContent += str;
+
+            if(j == cells.length-1 && cells.length<10){
+                for(var u = cells.length; u<10; ++u){
+                    csvContent += ",";
+                }
+             }
          }
-         csvContent += "\n";
+
+         var l = k+6;
+         var m = k+7;
 
 
+
+        csvContent += ",";
+        csvContent +='"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,S'+m+'>0),S'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),F'+l+',"""")","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,S'+m+'>0),S'+m+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),H'+l+',"""")","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,S'+m+'>0),S'+m+'-W'+l+',IF(W'+l+'>0,""---"","""")))","=IF(ISNUMBER(P'+l+'),J'+l+',"""")",,,,,,,,"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,T'+l+'>0),T'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,T'+l+'>0),T'+l+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,T'+l+'>0),T'+l+'-W'+l+',IF(W'+l+'>0,""---"","""")))"';
+        csvContent += "\n";
      }
+        csvContent += "\n";
+        csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+k+')/COUNT(E7:E'+k+')*100,,=COUNT(N7:N'+k+')/COUNT(G7:G'+k+')*100,,=COUNT(P7:P'+k+')/COUNT(I7:I'+k+')*100,,,,,,,,,,,';
+        csvContent += ',,,,,,,,,,mean contact return,=AVERAGE(L7:L'+k+'),,=AVERAGE(N7:N'+k+'),,=AVERAGE(P7:P'+k+'),,,,,,,,,,,\n';
+csvContent += ',,,,,,,,,,mean time to exit,=AVERAGE(Y7:Y'+k+'),,=AVERAGE(Z7:Z'+k+'),,=AVERAGE(AA7:AA'+k+'),,,,,,,,,,,\n';
+csvContent += ',,,,,,,,,,pacing lq,"=(COUNTIF(F7:F'+k+',"">=2"")+COUNTIF(H7:H'+k+',"">=2"")+COUNTIF(J7:J'+k+',"">=2""))/(COUNT(E7:J'+k+')/2)*100",,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,,,pacing lr,=(SUM(F7:F'+k+')+SUM(H7:H'+k+')+SUM(J7:J'+k+'))/(COUNT(F7:F'+k+')+COUNT(H7:H'+k+')+COUNT(J7:J'+k+')),,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,time with male,,,=SUM(X7:X'+k+'),,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,# mounts,,,=COUNT(E7:E'+k+'),,,,,,,,,,,,,,,\n';
+csvContent += ',,,,,,,,# intros,,,=COUNT(G7:G'+k+'),,,,,,,,,,,,,,,\n';
+csvContent += ',,Enter by hand,,,,,,# ejacs,,,=COUNT(I7:I'+k+'),,,,,,,,,,,,,,,\n';
+csvContent += ',Male Ins,,"=COUNTIF(C7:C'+k+',"">0"")",,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Male Outs,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Minutes,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Seconds,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Hops IN,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Ears IN,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Hops ALONE,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Ears ALONE,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Rejection Beh,,,,,,,,,,,,,,,,,,,,,,,,,\n';
+csvContent += ',Experiment ,,1,,,,,,,,,,,,,,,,,,,,,,,';
 
 
+   data.forEach(function(infoArray, index) {
+         dataString = infoArray.join(",");
+         csvContent += index < data.length ? dataString + "\n" : dataString;
+     });
 
      //         if(str.charAt(0)=="<"){
 

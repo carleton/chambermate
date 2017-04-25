@@ -202,7 +202,7 @@
          var resultTable = document.getElementById("copTestBody");
          var numberRows = 0;
          var mostRecentIn_row = 0
-         var rowsToDelete = [];
+         var rowsToDelete_cop = [];
          var row;
          var i = 0;
          var j = 0;
@@ -216,25 +216,19 @@
                      twoPerLine = 0;
                  }
                  if (columns[i] == copBehavior[j]['stim']) {
-                     if (copBehavior[j]['stim'] == "inTwo"){
-                        mostRecentIn_row = numberRows;
+                     if (copBehavior[j]['stim'] == "inTwo") {
+                         mostRecentIn_row = numberRows;
                      }
-                 
-                     if (copBehavior[j]['stim'] == "center" &&  copBehavior[j - 1]['stim'] == "inTwo") {
-                             var cell_out = resultTable.rows[mostRecentIn_row - 1].cells[2];
-                             cell_out.innerHTML = copBehavior[j]['time'];
-                             cell_out.setAttribute('contentEditable', 'true');
-                             cell_out.className = 'recipe-table__cell';
-                             i=2;
-                             twoPerLine++;
-                             console.log(i);
-                             j++;
-                         //    rowsToDelete.push({
-                         //     "rowToDelete": row
-                         // });
-                            }
-                          
-                      else {
+                     if (copBehavior[j]['stim'] == "center" && copBehavior[j - 1]['stim'] == "inTwo") {
+                         var cell_out = resultTable.rows[mostRecentIn_row - 1].cells[2];
+                         cell_out.innerHTML = copBehavior[j]['time'];
+                         cell_out.setAttribute('contentEditable', 'true');
+                         cell_out.className = 'recipe-table__cell';
+                         console.log(i);
+                         i = 2;
+                         j++;
+
+                     } else {
                          var cell = row.insertCell(i);
                          cell.setAttribute('contentEditable', 'true');
                          cell.innerHTML = copBehavior[j]['time'];
@@ -242,9 +236,9 @@
                          if (copBehavior[j]['stim'] == 'inOne' || copBehavior[j]['stim'] == 'center') {
                              twoPerLine++;
                          }
-                        i++;
-                        console.log("i",i);
-                        j++;
+                         i++;
+                         console.log("i", i);
+                         j++;
 
                          if (twoPerLine == 2) {
                              var cell = row.insertCell(i);
@@ -276,6 +270,7 @@
                      i++;
                  }
 
+
                  if (j == copBehavior.length) {
                      break;
                  }
@@ -285,20 +280,31 @@
              }
 
          }
-    for (var i = 0; i < rowsToDelete.length; i++) {
-        console.log(rowsToDelete);
-        var row = rowsToDelete[i].rowToDelete;
-        console.log(row);
-        row.parentNode.removeChild(row);
 
-     }
+         var rows = $(resultTable).find(' > tr');
+         for (var i = 0; i < rows.length; i++) {
+             if (emptyCellsOnly(rows[i])) {
+                console.log(rows[i].parentNode);
+                rows[i].parentNode.removeChild(rows[i]);
+
+             }
+         }
      }
 
  }
 
- // function resetTable(){
- //    $("#copTestBody > tr").remove();
- // }
+function emptyCellsOnly(row) {
+     var cells = row.cells;
+     for (var j = 1; j < 4; j++) {
+        console.log("innerHTML",cells[j].innerHTML);
+         if (cells[j].innerHTML !== '&nbsp;') {
+             return false;
+         }
+     }
+     return true;
+ }
+
+
 
  function copDownloadCSV() {
      var date = document.getElementById("date").value;
