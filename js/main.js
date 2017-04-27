@@ -949,7 +949,7 @@ $('#toggle-button').addClass('ui-disabled');
         csvContent += "\n";
      }
         csvContent += "\n";
-        csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+l+')/COUNT(E7:E'+l+')*100,,=COUNT(N7:N'+l+')/COUNT(G7:G'+l+')*100,,=COUNT(P7:P'+l+')/COUNT(I7:I'+l+')*100,,,,,,,,,,,';
+        csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+l+')/COUNT(E7:E'+l+')*100,,=COUNT(N7:N'+l+')/COUNT(G7:G'+l+')*100,,=COUNT(P7:P'+l+')/COUNT(I7:I'+l+')*100,,,,,,,,,,,\n';
         csvContent += ',,,,,,,,,,mean contact return,=AVERAGE(L7:L'+l+'),,=AVERAGE(N7:N'+l+'),,=AVERAGE(P7:P'+l+'),,,,,,,,,,,\n';
 csvContent += ',,,,,,,,,,mean time to exit,=AVERAGE(Y7:Y'+l+'),,=AVERAGE(Z7:Z'+l+'),,=AVERAGE(AA7:AA'+l+'),,,,,,,,,,,\n';
 csvContent += ',,,,,,,,,,pacing lq,"=(COUNTIF(F7:F'+l+',"">=2"")+COUNTIF(H7:H'+l+',"">=2"")+COUNTIF(J7:J'+l+',"">=2""))/(COUNT(E7:J'+l+')/2)*100",,,,,,,,,,,,,,,\n';
