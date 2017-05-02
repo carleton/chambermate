@@ -112,17 +112,17 @@
                             <th></th>
                             <th id = "in_obj_1" style="font-size: 30px;text-align: center">  </th>
                             <th></th>
-                            <th></th>
+                            <th id = "center_purple" style="font-size: 30px;text-align: center" > Center</th>
                             <th></th>
                             <th id = "in_obj_2" style="font-size: 30px;text-align: center" >  </th>
                             <th></th>
                         </tr>
                         <tr>
                             <td></td>
-                            <td ><button id = "in_1" onClick="in_Object_One()" style="font-size: 50px" type="Button">In</button></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td  ><button id = "in_1" onClick="in_Object_One()" style="font-size: 50px" type="Button">In</button></td>
+                            <td style="padding-right: 40px"> </td>
+                            <td style="padding-top: 40px"><button  id="chewCop" onClick="chew()" style="font-size: 20px" type="Button">Chew</button></td>
+                            <td style="padding-right: 40px"> </td>
                             <td ><button id = "in_2" onClick="in_Object_Two()" style="font-size: 50px" type="Button"  >In</button></td>
                             <td></td>
                         </tr>
@@ -130,26 +130,36 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
+                            <td align="center"><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
                             <td></td>
                             <td></td>
-                            <td><button  id="chewCop" onClick="chew()">Chew</button></td>
+                            <td></td>
                             
                         </tr>
                         <tr>
                             
                             <td align="center"><button id="startCop" onClick="startCop()">Start</button></td>
-                            <td align="center"><button id="toggle-cop-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stopCop()">Stop</button></td>
+                            <td align="center"></td>
                             <td></td>
-                            <td><button  id="flagCop" onClick="flagCop()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
+                            <td></td>
                             <td></td>
                             
                             
-                            
+                            <td align="center"></td>
                             <td align="center" > <a href="#copResults" data-transition="slide" class="ui-btn" id="finish-test-cop" onClick="return finishTestCop()">
                             Finish </a></td>
                             
+                            
+                        </tr>
+                        <tr>
+                            <td align="center"><button id="toggle-cop-button" class="ui-btn ui-icon-delete ui-btn-icon-right"  onClick="stopCop()">Stop</button></td>
+                            <td></td>
+                            <td></td>
+                            <td ><button  id="flagCop" onClick="flagCop()" class="ui-btn ui-icon-tag ui-btn-icon-right" type="Button">Flag</button></td>
+                            <td></td>
+                            <td></td>
                             <td align="center"><button id="download-csv-cop" class="ui-btn ui-icon-action ui-btn-icon-right" onClick="copDownloadCSV()"> CSV</button></td>
+                            
                         </tr>
                     </tbody>
                 </table>

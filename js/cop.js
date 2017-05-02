@@ -16,6 +16,10 @@
  $('#toggle-cop-button').addClass('ui-disabled');
 
  function setUpCop() {
+    if((document.getElementById("obj_one").value=='') || (document.getElementById("obj_two").value=='')){
+            alert("Reload and make sure to enter objects!");
+            window.location.href = "http://joshpitkofsky.com/Beh_Neuro/";
+    }
      objectOne = document.getElementById("obj_one").value;
      objectTwo = document.getElementById("obj_two").value;
      title = document.getElementById("experiment_title").value;
@@ -146,6 +150,7 @@
      document.getElementById('in_2').disabled = true;
      document.getElementById('btncenter').disabled = false;
      document.getElementById('in_obj_1').style.color = "magenta";
+     document.getElementById('center_purple').style.color = "white";
      withOne = true;
  }
 
@@ -155,6 +160,7 @@
      document.getElementById('in_2').disabled = true;
      document.getElementById('btncenter').disabled = false;
      document.getElementById('in_obj_2').style.color = "magenta";
+     document.getElementById('center_purple').style.color = "white";
      withTwo = true;
  }
 
@@ -165,6 +171,8 @@
      document.getElementById('in_1').disabled = false;
      document.getElementById('in_obj_2').style.color = "white";
      document.getElementById('in_obj_1').style.color = "white";
+    document.getElementById('center_purple').style.color = "magenta";
+
 
      withOne = false;
      withTwo = false;
@@ -179,7 +187,7 @@
  }
 
  function flagCop() {
-     flagscop.push(time = " " + document.getElementById("display-area").innerHTML);
+     flagscop.push(time = " " + document.getElementById("clock-area").innerHTML);
  }
 
 
