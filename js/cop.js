@@ -3,6 +3,14 @@
      copStoppedDuration = 0,
      copStarted = null,
      copBehavior = [],
+     obj_one_TimeBegan = null,
+     obj_one_TimeStopped = null,
+     obj_one_StoppedDuration = 0,
+     obj_one_TimeStarted = null,
+     obj_two_TimeBegan = null,
+     obj_two_TimeStopped = null,
+     obj_two_StoppedDuration = 0,
+     obj_two_TimeStarted = null,
      copBehavior_two = [];
  var objectOne = "";
  var objectTwo = "";
@@ -64,7 +72,81 @@
      }
  }
 
+ function obj_one_Start() {
+     if (obj_one_TimeBegan === null) {
+         obj_one_TimeBegan = new Date();
+     }
+     if (obj_one_TimeStopped !== null) {
+         obj_one_StoppedDuration += (new Date() - obj_one_TimeStopped);
+     }
+     obj_one_TimeStarted = setInterval(obj_one_ClockRunning, 10);
+ }
 
+ function obj_one_Stop() {
+     obj_one_TimeStopped = new Date();
+     clearInterval(obj_one_TimeStarted);
+ }
+
+ function obj_one_Reset() {
+     clearInterval(obj_one_TimeStarted);
+     obj_one_StoppedDuration = 0;
+     obj_one_TimeBegan = null;
+     obj_one_TimeStopped = null;
+     document.getElementById("time_with_obj_one").innerHTML = "00:00:00.000";
+ }
+
+ function obj_one_ClockRunning() {
+     var currentTime = new Date(),
+         timeElapsed = new Date(currentTime - obj_one_TimeBegan - obj_one_StoppedDuration),
+         hour = timeElapsed.getUTCHours(),
+         min = timeElapsed.getUTCMinutes(),
+         sec = timeElapsed.getUTCSeconds(),
+         ms = timeElapsed.getUTCMilliseconds();
+     // document.getElementById("time_with_obj_one").innerHTML =
+     //     (hour > 9 ? hour : "0" + hour) + ":" +
+     //     (min > 9 ? min : "0" + min) + ":" +
+     //     (sec > 9 ? sec : "0" + sec) + "." +
+     //     (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+     document.getElementById("time_with_obj_one").innerHTML = (min > 9 ? min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
+ }
+
+ function obj_two_Start() {
+     if (obj_two_TimeBegan === null) {
+         obj_two_TimeBegan = new Date();
+     }
+     if (obj_two_TimeStopped !== null) {
+         obj_two_StoppedDuration += (new Date() - obj_two_TimeStopped);
+     }
+     obj_two_TimeStarted = setInterval(obj_two_ClockRunning, 10);
+ }
+
+ function obj_two_Stop() {
+     obj_two_TimeStopped = new Date();
+     clearInterval(obj_two_TimeStarted);
+ }
+
+ function obj_two_Reset() {
+     clearInterval(obj_two_TimeStarted);
+     obj_two_StoppedDuration = 0;
+     obj_two_TimeBegan = null;
+     obj_two_TimeStopped = null;
+     document.getElementById("time_with_obj_two").innerHTML = "00:00:00.000";
+ }
+
+ function obj_two_ClockRunning() {
+     var currentTime = new Date(),
+         timeElapsed = new Date(currentTime - obj_two_TimeBegan - obj_two_StoppedDuration),
+         hour = timeElapsed.getUTCHours(),
+         min = timeElapsed.getUTCMinutes(),
+         sec = timeElapsed.getUTCSeconds(),
+         ms = timeElapsed.getUTCMilliseconds();
+     // document.getElementById("time_with_obj_two").innerHTML =
+     //     (hour > 9 ? hour : "0" + hour) + ":" +
+     //     (min > 9 ? min : "0" + min) + ":" +
+     //     (sec > 9 ? sec : "0" + sec) + "." +
+     //     (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+     document.getElementById("time_with_obj_two").innerHTML = (min > 9 ? min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
+ }
 
  function startCop() {
      $('#toggle-cop-button').removeClass('ui-disabled');
@@ -145,6 +227,7 @@
  document.getElementById('in_2').disabled = true;
 
  function in_Object_One() {
+    obj_one_Start();
      track_beh_cop("inOne");
      document.getElementById('in_1').disabled = true;
      document.getElementById('in_2').disabled = true;
@@ -155,6 +238,7 @@
  }
 
  function in_Object_Two() {
+    obj_two_Start();
      track_beh_cop("inTwo");
      document.getElementById('in_1').disabled = true;
      document.getElementById('in_2').disabled = true;
@@ -165,6 +249,12 @@
  }
 
  function centerOne() {
+    if(withOne){
+        obj_one_Stop();
+    }
+    else if(withTwo){
+    obj_two_Stop();
+    }
      track_beh_cop("center");
      document.getElementById('in_2').disabled = false;
      document.getElementById('btncenter').disabled = true;
@@ -316,6 +406,9 @@ function emptyCellsOnly(row) {
 
  function copDownloadCSV() {
      var date = document.getElementById("date").value;
+    var timeWithOne = document.getElementById("time_with_obj_one").innerHTML;
+     var timeWithTwo = document.getElementById("time_with_obj_two").innerHTML;
+
      var female = document.getElementById("female").value;
      var filename = document.getElementById("experiment_title").value;
      var notes = document.getElementById("copnotes").value;
@@ -328,6 +421,8 @@ function emptyCellsOnly(row) {
          ["Date", " ", date],
          ["Name", " ", name],
          ["Notes", " ", notes],
+         ["Time with " + objectOne, " ", timeToSeconds(timeWithOne)],
+         ["Time with " + objectTwo, " ", timeToSeconds(timeWithTwo)],
          [objectOne + " Chews", " ", chewOne],
          [objectTwo + " Chews", " ", chewTwo],
          []
