@@ -211,7 +211,9 @@
 
 
  function stopCop() {
-     copTimeStopped = new Date();
+    obj_one_Stop();
+    obj_two_Stop();
+    copTimeStopped = new Date();
      clearInterval(copStarted);
      $('#finish-test-cop').removeClass('ui-disabled');
      $('#toggle-cop-button').addClass('ui-disabled');

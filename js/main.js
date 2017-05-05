@@ -243,7 +243,6 @@ $('#toggle-button').addClass('ui-disabled');
          lqAvg = lqSum / stimNumber;
          pacingLq = stimLQOverTwo / stimNumber;
 
-
          sexualBehavior.push({
              "stim": stim,
              "lq": lq,
@@ -808,29 +807,6 @@ $('#toggle-button').addClass('ui-disabled');
      var table = document.getElementById("tableresults");
 
 
-     /*
-     Male Ins
-     Male Outs
-     Minutes
-     Seconds
-     Hops IN
-     Ears IN
-     Hops ALONE
-     Ears ALONE
-     Rejection Beh
-
-     time with male
-     # mounts
-     # intros
-     # ejacs
-
-     % exit
-     mean contact return
-     mean time to exit
-     pacing lq
-     pacing lr
-
-     */
      var data = [
          [],
          ["Date", " ", date],
