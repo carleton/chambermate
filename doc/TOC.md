@@ -1,29 +1,15 @@
-[HTML5 Boilerplate homepage](https://html5boilerplate.com/)
+[Chambermate homepage](https://carleton.github.io/chambermate/)
 
 ## Getting started
 
 * [Usage](usage.md) — Overview of the project contents.
 * [FAQ](faq.md) — Frequently asked questions along with their answers.
 
-## HTML5 Boilerplate core
-
-* [HTML](html.md) — Guide to the default HTML.
-* [CSS](css.md) — Guide to the default CSS.
-* [JavaScript](js.md) — Guide to the default JavaScript.
-* [Everything else](misc.md).
-
-## Development
-
-* [Extending and customizing HTML5 Boilerplate](extend.md) — Going further
-  with the boilerplate.
-
 ## Related projects
 
-The [H5BP organization](https://github.com/h5bp) maintains several projects
-that complement HTML5 Boilerplate, projects that can help you improve different
-aspects of your website/web app (e.g.: the performance, security, etc.).
+The [Meerts Lab](https://apps.carleton.edu/curricular/psyc/meertslab/) Our laboratory investigates the neural and hormonal factors involved in the expression and development of motivated behaviors. Specifically, we are working to better understand the role of the brain, hormones and sensory inputs that contribute to the rewarding nature of mating behavior in female rats.
 
-* [Server Configs](https://github.com/h5bp/server-configs) — Fast and
-  smart configurations for web servers such as Apache and Nginx.
-* [Ant Build Script](https://github.com/h5bp/ant-build-script) — Apache
-  Ant based build script.
+Hormones shape the brain during development to enable the expression of mature social behaviors in adulthood. We are investigating the interactions between hormones and the brain that occur during puberty in female rats that are necessary for adult social interactions. To examine these questions, we combine behavioral observation and classical conditioning procedures with pharmacological and neuroanatomical techniques.
+
+* [Publications & Posters](https://apps.carleton.edu/curricular/psyc/meertslab/publications/) — Some select publications out of the lab.
+
