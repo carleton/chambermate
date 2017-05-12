@@ -925,7 +925,14 @@ $('#toggle-button').addClass('ui-disabled');
 
         //csvContent +='"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,S'+m+'>0),S'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),F'+l+',"""")","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,S'+m+'>0),S'+m+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),H'+l+',"""")","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,S'+m+'>0),S'+m+'-W'+l+',IF(W'+l+'>0,""---"","""")))","=IF(ISNUMBER(P'+l+'),J'+l+',"""")",,,,,,,,"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,T'+l+'>0),T'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,T'+l+'>0),T'+l+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,T'+l+'>0),T'+l+'-W'+l+',IF(W'+l+'>0,""---"","""")))"';
         csvContent += "\n";
+
+
+
      }
+             while (k<100){
+            csvContent += "\n";
+            k++;
+        }
         csvContent += "\n";
         csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+l+')/COUNT(E7:E'+l+')*100,,=COUNT(N7:N'+l+')/COUNT(G7:G'+l+')*100,,=COUNT(P7:P'+l+')/COUNT(I7:I'+l+')*100,,,,,,,,,,,\n';
         csvContent += ',,,,,,,,,,mean contact return,=AVERAGE(L7:L'+l+'),,=AVERAGE(N7:N'+l+'),,=AVERAGE(P7:P'+l+'),,,,,,,,,,,\n';
