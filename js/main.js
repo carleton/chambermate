@@ -1,6 +1,7 @@
  /*
   * Pacing Data Collection App 
   * @author  Joshua Pitkofsky
+  * @maintained by 
   * @version 1.0, 12/17/16
   */
  //timer code from Andrew Whitaker on http://stackoverflow.com/questions/26329900/how-do-i-display-millisecond-in-my-stopwatch
