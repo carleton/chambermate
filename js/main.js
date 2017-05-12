@@ -156,6 +156,8 @@ $('#toggle-button').removeClass('ui-disabled');
      maleStop();
      clearInterval(started);
      $('#finish-test').removeClass('ui-disabled');
+    document.getElementById('in_enter').disabled = true;
+
      document.getElementById("start").disabled = false;
 $('#toggle-button').addClass('ui-disabled');
      var x = document.getElementsByClassName('withMale');
