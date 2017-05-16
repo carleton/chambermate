@@ -423,8 +423,8 @@ function emptyCellsOnly(row) {
          ["Date", " ", date],
          ["Name", " ", name],
          ["Notes", " ", notes],
-         ["Time with " + objectOne, " ", timeToSeconds(timeWithOne)],
-         ["Time with " + objectTwo, " ", timeToSeconds(timeWithTwo)],
+         ["Time with " + objectOne, " ", stringToIntTime(timeWithOne)],
+         ["Time with " + objectTwo, " ", stringToIntTime(timeWithTwo)],
          [objectOne + " Chews", " ", chewOne],
          [objectTwo + " Chews", " ", chewTwo],
          []
