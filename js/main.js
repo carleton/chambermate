@@ -592,8 +592,7 @@ $('#toggle-button').addClass('ui-disabled');
  function finishTest() {
          document.getElementById("download-csv").disabled = false;
 
-     if (!pacingexecuted) {
-         pacingexecuted = true;
+         $("#testBody tr").remove();
          document.getElementById("paragraphFlags").innerHTML = flags;
          document.getElementById("resultsHeader").innerHTML = document.getElementById("experiment_title").value + " Results";
          console.log(crl);
@@ -751,7 +750,6 @@ $('#toggle-button').addClass('ui-disabled');
 
      }
 
-     }
  }
 
  /*    for (var j = 0; j < sexualBehavior.length; j++) {
