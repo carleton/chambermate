@@ -267,6 +267,23 @@ $('#toggle-button').addClass('ui-disabled');
          document.getElementById("intro_count").innerHTML = introCount;
          document.getElementById("mount_count").innerHTML = mountCount;
          document.getElementById("ejac_count").innerHTML = ejacCount;
+         switch (mostRecentStimType) {
+             case "mount":
+                 document.getElementById("mostRecentMount").innerHTML = mostRecentStim;
+                 document.getElementById("mostRecentIntro").innerHTML = "";
+                 document.getElementById("mostRecentEjac").innerHTML = "";
+                 break;
+             case "intro":
+                 document.getElementById("mostRecentMount").innerHTML = "";
+                 document.getElementById("mostRecentIntro").innerHTML = mostRecentStim;
+                 document.getElementById("mostRecentEjac").innerHTML = "";
+                 break;
+             case "ejac":
+                 document.getElementById("mostRecentMount").innerHTML = "";
+                 document.getElementById("mostRecentIntro").innerHTML = "";
+                 document.getElementById("mostRecentEjac").innerHTML = mostRecentStim;
+                 break;
+         }
      } else {
          time = document.getElementById("display-area").innerHTML;
          //secondsTime = document.getElementById("display-area").innerHTML;
@@ -575,8 +592,7 @@ $('#toggle-button').addClass('ui-disabled');
  function finishTest() {
          document.getElementById("download-csv").disabled = false;
 
-     if (!pacingexecuted) {
-         pacingexecuted = true;
+         $("#testBody tr").remove();
          document.getElementById("paragraphFlags").innerHTML = flags;
          document.getElementById("resultsHeader").innerHTML = document.getElementById("experiment_title").value + " Results";
          console.log(crl);
@@ -734,7 +750,6 @@ $('#toggle-button').addClass('ui-disabled');
 
      }
 
-     }
  }
 
  /*    for (var j = 0; j < sexualBehavior.length; j++) {
