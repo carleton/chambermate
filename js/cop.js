@@ -284,9 +284,8 @@
 
 
  function finishTestCop() {
-     if (!executed) {
-         executed = true;
          document.getElementById("download-csv-cop").disabled = false;
+         $("#copTestBody tr").remove();
 
          document.getElementById("copParagraphFlags").innerHTML = flagscop;
          document.getElementById("copResultsHeader").innerHTML = document.getElementById("experiment_title").value + " Results";
@@ -389,7 +388,6 @@
 
              }
          }
-     }
 
  }
 

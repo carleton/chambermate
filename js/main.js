@@ -283,6 +283,8 @@ $('#toggle-button').addClass('ui-disabled');
                  document.getElementById("mostRecentIntro").innerHTML = "";
                  document.getElementById("mostRecentEjac").innerHTML = mostRecentStim;
                  break;
+             default: 
+                 break;
          }
      } else {
          time = document.getElementById("display-area").innerHTML;
