@@ -66,6 +66,17 @@
 document.getElementById("in_enter").disabled = true;
 $('#toggle-button').addClass('ui-disabled');
 
+ function validate() {
+     var input = document.getElementById("experiment_title").value;
+     if (input.indexOf('#') > -1) {
+        alert('Experiment Title contains #');
+     }
+     else {
+         document.getElementById("experimentHeader").innerHTML = document.getElementById("experiment_title").value;
+         $(location).attr('href', '#pagetwo');
+     }
+ }
+
  function maleStart() {
      if (maleTimeBegan === null) {
          maleTimeBegan = new Date();
@@ -220,7 +231,7 @@ $('#toggle-button').addClass('ui-disabled');
          min = timeElapsed.getUTCMinutes(),
          sec = timeElapsed.getUTCSeconds(),
          ms = timeElapsed.getUTCMilliseconds();
-     document.getElementById("display-area").innerHTML = (min > 9 ? min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
+     document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
      // document.getElementById("display-area").innerHTML =
      //     (hour > 9 ? hour : "0" + hour) + ":" +
      //     (min > 9 ? min : "0" + min) + ":" +
@@ -816,6 +827,7 @@ $('#toggle-button').addClass('ui-disabled');
      var stud = document.getElementById("stud").value;
      var experimenter_name = document.getElementById("experimenter_name").value;
      var filename = document.getElementById("experiment_title").value;
+     var seconds = (parseInt(document.getElementById("display-area").innerHTML.split(':')[0])*60 + parseInt(document.getElementById("display-area").innerHTML.split(':')[1])).toString();
      var time = document.getElementById("display-area").innerHTML;
      var timeWithMale = document.getElementById("time_with_male").innerHTML;
      var crlMountAvg = crlMountTotal / crlTotal;
@@ -843,21 +855,21 @@ $('#toggle-button').addClass('ui-disabled');
          ["Squeaks", " ", squeaks],
          ["Rolls", " ", rolls],
          ["Rejection Beh", " ", rejectionBeh],
-         ["time with male", " ", timeWithMale],
-         ["# mounts", " ", mountCount],
-         ["# intros", " ", introCount_exit_var],
-         ["# ejacs", " ", ejacCount],
-         ["% exit mount", " ", percentExitMount],
-         ["% exit intro", " ", percentExitIntro],
-         ["% exit ejac", " ", percentExitEjac],
-         ["pacing lq", " ", pacingLq],
-         ["pacing lr", " ", lqAvg],
-         ["Mean Contact Return Mount", " ", crlMountAvg],
-         ["Mean Contact Return Intro", " ", crlIntroAvg],
-         ["Mean Contact Return Ejac", " ", crlEjacAvg],
-         ["Mean Time To Exit Mount", " ", tteMountAvg],
-         ["Mean Time To Exit Intro", " ", tteIntroAvg],
-         ["Mean Time To Exit Ejac", " ", tteEjacAvg],
+         // ["time with male", " ", timeWithMale],
+         // ["# mounts", " ", mountCount],
+         // ["# intros", " ", introCount_exit_var],
+         // ["# ejacs", " ", ejacCount],
+         // ["% exit mount", " ", percentExitMount],
+         // ["% exit intro", " ", percentExitIntro],
+         // ["% exit ejac", " ", percentExitEjac],
+         // ["pacing lq", " ", pacingLq],
+         // ["pacing lr", " ", lqAvg],
+         // ["Mean Contact Return Mount", " ", crlMountAvg],
+         // ["Mean Contact Return Intro", " ", crlIntroAvg],
+         // ["Mean Contact Return Ejac", " ", crlEjacAvg],
+         // ["Mean Time To Exit Mount", " ", tteMountAvg],
+         // ["Mean Time To Exit Intro", " ", tteIntroAvg],
+         // ["Mean Time To Exit Ejac", " ", tteEjacAvg],
          []
      ];
 
@@ -886,23 +898,42 @@ $('#toggle-button').addClass('ui-disabled');
      //csvContent = csvContent.concat(table.innerHTML);
      //csvContent = csvContent.concat(csv);
      //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+     var rows = $("#testBody > tr");
+     var r = rows.length +19;
+     
+     csvContent += ',Date,,'+date+',,,';
+     csvContent += 'Entered by:,,'+experimenter_name+',,,,,,,,,,,,,,,,,,,\n';
+     csvContent += 'Female,,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
+     csvContent += 'Stud,,'+stud+'\n';
+
+     csvContent +=',,Enter by hand,,,,,,,,,Mount,,Intro,,Ejac\n'
+     csvContent +=',Male Ins,,'+maleIns+',,,,,,,% exit,"=ROUND(COUNT(L19:L'+r+')/COUNT(E19:E'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(G19:G'+r+')*100,2)",,"=ROUND(COUNT(P19:P'+r+')/COUNT(I19:I'+r+')*100,2)",,,,,,,,,,,\n';
+     csvContent += ',Male Outs,,'+maleOuts+',,,,,,,mean contact return,"=ROUND(AVERAGE(L19:L'+r+'),2)",,"=ROUND(AVERAGE(N19:N'+r+'),2)",,"=ROUND(AVERAGE(P19:P'+r+'),2)",,,,,,,,,,,\n';
+     csvContent += ',Seconds,,'+seconds+',,,,,,,mean time to exit,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,"=ROUND(AVERAGE(Z19:Z'+r+'),2)",,"=ROUND(AVERAGE(AA19:AA'+r+'),2)",,,,,,,,,,,\n';
+     csvContent += ',Hops IN,,'+hopsIn+',,,,,,,pacing lq,"=ROUND((COUNTIF(F19:F'+r+',"">=2"")+COUNTIF(H19:H'+r+',"">=2"")+COUNTIF(J19:J'+r+',"">=2""))/(COUNT(E19:J'+r+')/2)*100,2)",,,,,,,,,,,,,,,\n';
+     csvContent += ',Ears IN,,'+earsIn+',,,,,,,pacing lr,"=ROUND((SUM(F19:F'+r+')+SUM(H19:H'+r+')+SUM(J19:J'+r+'))/(COUNT(F19:F'+r+')+COUNT(H19:H'+r+')+COUNT(J19:J'+r+')),2)",,,,,,,,,,,,,,,\n';
+     csvContent += ',Hops ALONE,,'+hopsOut+',,,,,time with male,,,=SUM(X19:X'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Ears ALONE,,'+earsOut+',,,,,# mounts,,,=COUNT(E19:E'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Kicks,,'+kicks+',,,,,# intros,,,=COUNT(G19:G'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Squeeks,,'+squeaks+',,,,,# ejacs,,,=COUNT(I19:I'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Rolls,,'+rolls+'\n';
+     csvContent += ',Rejection Beh,,'+rejectionBeh+'\n';
+     csvContent += ',Experiment,,1,\n';
+     
 
 
-
-
-    csvContent += ',Do Not Type On Anything Red!!!!,,,,,,,It will print normally,,,,,,,,,,,,,,,,,,\n,\"When done inputting the data for a rat, SAVE AS whatever you want, and then OPEN this template file again to start over\",,,,,,,,,,,,,,,,,,,,,,,,';
-    csvContent += ',\nDate,,'+date+',,,';
-    csvContent += 'Entered by:,,'+experimenter_name+',,,,,,,,,,,,,,,,,,,\n';
-    csvContent += 'Female,,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
-    csvContent += 'Stud,,'+stud+',,,,,,,,,Contact return,,,,,,,,,,,,,,TIME TO EXIT,\n';
+    // data.forEach(function(infoArray, index) {
+    //      dataString = infoArray.join(",");
+    //     csvContent += index < data.length ? dataString + "\n" : dataString;
+    // });
+    csvContent += ',,,,,,,,,,,Contact return,,,,,,,,,,,,,,TIME TO EXIT,\n';
     csvContent += ',hops,IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
-
+     
 
 
      // csvContent += ",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ \n"
 
     var k = 0;
-     var rows = $("#testBody > tr");
      for (var i = 0; i < rows.length; ++i) {
         k=i+1;;
         csvContent+=k;
@@ -934,8 +965,8 @@ $('#toggle-button').addClass('ui-disabled');
              }
          }
 
-         var l = k+6;
-         var m = k+7;
+         var l = k+18;
+         var m = k+19;
 
 
 
@@ -949,36 +980,9 @@ $('#toggle-button').addClass('ui-disabled');
 
 
      }
-             while (k<150){
-            csvContent += "\n";
-            k++;
-        }
         csvContent += "\n";
-        csvContent +=',,,,,,,,,,% exit,=COUNT(L7:L'+l+')/COUNT(E7:E'+l+')*100,,=COUNT(N7:N'+l+')/COUNT(G7:G'+l+')*100,,=COUNT(P7:P'+l+')/COUNT(I7:I'+l+')*100,,,,,,,,,,,\n';
-        csvContent += ',,,,,,,,,,mean contact return,=AVERAGE(L7:L'+l+'),,=AVERAGE(N7:N'+l+'),,=AVERAGE(P7:P'+l+'),,,,,,,,,,,\n';
-csvContent += ',,,,,,,,,,mean time to exit,=AVERAGE(Y7:Y'+l+'),,=AVERAGE(Z7:Z'+l+'),,=AVERAGE(AA7:AA'+l+'),,,,,,,,,,,\n';
-csvContent += ',,,,,,,,,,pacing lq,"=(COUNTIF(F7:F'+l+',"">=2"")+COUNTIF(H7:H'+l+',"">=2"")+COUNTIF(J7:J'+l+',"">=2""))/(COUNT(E7:J'+l+')/2)*100",,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,,,pacing lr,=(SUM(F7:F'+l+')+SUM(H7:H'+l+')+SUM(J7:J'+l+'))/(COUNT(F7:F'+l+')+COUNT(H7:H'+l+')+COUNT(J7:J'+l+')),,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,time with male,,,=SUM(X7:X'+l+'),,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,# mounts,,,=COUNT(E7:E'+l+'),,,,,,,,,,,,,,,\n';
-csvContent += ',,,,,,,,# intros,,,=COUNT(G7:G'+l+'),,,,,,,,,,,,,,,\n';
-csvContent += ',,Enter by hand,,,,,,# ejacs,,,=COUNT(I7:I'+l+'),,,,,,,,,,,,,,,\n';
-csvContent += ',Male Ins,,"=COUNTIF(C7:C'+l+',"">0"")",,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Male Outs,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Minutes,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Seconds,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Hops IN,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Ears IN,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Hops ALONE,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Ears ALONE,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Rejection Beh,,,,,,,,,,,,,,,,,,,,,,,,,\n';
-csvContent += ',Experiment ,,1,,,,,,,,,,,,,,,,,,,,,,,';
 
-
-   data.forEach(function(infoArray, index) {
-         dataString = infoArray.join(",");
-         csvContent += index < data.length ? dataString + "\n" : dataString;
-     });
+        
 
      //         if(str.charAt(0)=="<"){
 
