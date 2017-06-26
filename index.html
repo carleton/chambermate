@@ -58,10 +58,10 @@
                     <input type="text" name="obj_two" id="obj_two" placeholder="Object Two">
                     <div class="ui-grid-a ui-responsive">
                         <div class="ui-block-a">
-                            <a href="#cop" class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="return setUpCop()" data-transition="slide">COP</a>
+                            <a class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="copValidate(); return setUpCop()" data-transition="slide">COP</a>
                         </div>
                         <div class="ui-block-b">
-                            <a href="#pagetwo" class="ui-btn ui-icon-heart ui-btn-icon-right" data-transition="slide">Pacing</a>
+                            <a class="ui-btn ui-icon-heart ui-btn-icon-right" onClick="validate(); setUp()" data-transition="slide">Pacing</a>
                         </div>
                     </div>
                     
@@ -175,7 +175,7 @@
         
         <div data-role="page" id="pagetwo" data-theme="b">
             <div data-role="header">
-                <h1>Experiment</h1>
+                <h1 id="experimentHeader">Experiment</h1>
             </div>
             <div data-role="main" class="ui-content">
                 <a href="#pageone" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>

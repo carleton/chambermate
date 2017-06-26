@@ -23,6 +23,15 @@
 
  $('#toggle-cop-button').addClass('ui-disabled');
 
+ function copValidate() {
+     var input = document.getElementById("experiment_title").value;
+     if (input.indexOf('#') > -1) {
+        alert('Experiment Title contains #');
+     }
+     else {
+         $(location).attr('href', '#cop');
+     }
+ }
  function setUpCop() {
     if((document.getElementById("obj_one").value=='') || (document.getElementById("obj_two").value=='')){
             alert("Reload and make sure to enter objects!");
@@ -284,9 +293,8 @@
 
 
  function finishTestCop() {
-     if (!executed) {
-         executed = true;
          document.getElementById("download-csv-cop").disabled = false;
+         $("#copTestBody tr").remove();
 
          document.getElementById("copParagraphFlags").innerHTML = flagscop;
          document.getElementById("copResultsHeader").innerHTML = document.getElementById("experiment_title").value + " Results";
@@ -389,7 +397,6 @@
 
              }
          }
-     }
 
  }
 
