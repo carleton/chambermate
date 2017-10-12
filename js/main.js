@@ -1,7 +1,7 @@
  /*
   * Pacing Data Collection App 
   * @author  Joshua Pitkofsky
-  * @maintained by 
+  * @maintained by Malcolm Mitchell
   * @version 1.0, 12/17/16
   */
  //timer code from Andrew Whitaker on http://stackoverflow.com/questions/26329900/how-do-i-display-millisecond-in-my-stopwatch
@@ -178,7 +178,7 @@ $('#toggle-button').addClass('ui-disabled');
      }
  }
 
- function reset() {
+ /* function reset() {
      clearInterval(started);
      maleReset();
      stoppedDuration = 0;
@@ -222,7 +222,7 @@ $('#toggle-button').addClass('ui-disabled');
      document.getElementById("ears_in").innerHTML = "Ears In: " + earsIn;
      document.getElementById("ears_out").innerHTML = "Ears Out: " + earsOut;
      document.getElementById("rejection_beh").innerHTML = "Rejections Beh: " + rejectionBeh;
- }
+ } */
 
  function clockRunning() {
      var currentTime = new Date(),
@@ -232,11 +232,6 @@ $('#toggle-button').addClass('ui-disabled');
          sec = timeElapsed.getUTCSeconds(),
          ms = timeElapsed.getUTCMilliseconds();
      document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
-     // document.getElementById("display-area").innerHTML =
-     //     (hour > 9 ? hour : "0" + hour) + ":" +
-     //     (min > 9 ? min : "0" + min) + ":" +
-     //     (sec > 9 ? sec : "0" + sec) + "." +
-     //     (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
  }
 
 
@@ -906,16 +901,16 @@ $('#toggle-button').addClass('ui-disabled');
      csvContent += 'Female,,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
      csvContent += 'Stud,,'+stud+'\n';
 
-     csvContent +=',,Enter by hand,,,,,,,,,Mount,,Intro,,Ejac\n'
-     csvContent +=',Male Ins,,'+maleIns+',,,,,,,% exit,"=ROUND(COUNT(L19:L'+r+')/COUNT(E19:E'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(G19:G'+r+')*100,2)",,"=ROUND(COUNT(P19:P'+r+')/COUNT(I19:I'+r+')*100,2)",,,,,,,,,,,\n';
-     csvContent += ',Male Outs,,'+maleOuts+',,,,,,,mean contact return,"=ROUND(AVERAGE(L19:L'+r+'),2)",,"=ROUND(AVERAGE(N19:N'+r+'),2)",,"=ROUND(AVERAGE(P19:P'+r+'),2)",,,,,,,,,,,\n';
-     csvContent += ',Seconds,,'+seconds+',,,,,,,mean time to exit,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,"=ROUND(AVERAGE(Z19:Z'+r+'),2)",,"=ROUND(AVERAGE(AA19:AA'+r+'),2)",,,,,,,,,,,\n';
-     csvContent += ',Hops IN,,'+hopsIn+',,,,,,,pacing lq,"=ROUND((COUNTIF(F19:F'+r+',"">=2"")+COUNTIF(H19:H'+r+',"">=2"")+COUNTIF(J19:J'+r+',"">=2""))/(COUNT(E19:J'+r+')/2)*100,2)",,,,,,,,,,,,,,,\n';
-     csvContent += ',Ears IN,,'+earsIn+',,,,,,,pacing lr,"=ROUND((SUM(F19:F'+r+')+SUM(H19:H'+r+')+SUM(J19:J'+r+'))/(COUNT(F19:F'+r+')+COUNT(H19:H'+r+')+COUNT(J19:J'+r+')),2)",,,,,,,,,,,,,,,\n';
-     csvContent += ',Hops ALONE,,'+hopsOut+',,,,,time with male,,,=SUM(X19:X'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Ears ALONE,,'+earsOut+',,,,,# mounts,,,=COUNT(E19:E'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Kicks,,'+kicks+',,,,,# intros,,,=COUNT(G19:G'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Squeeks,,'+squeaks+',,,,,# ejacs,,,=COUNT(I19:I'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent +=',,,,,,,Mount,,Intro,,Ejac\n'
+     csvContent +=',Male Ins,,'+maleIns+',,% exit,,"=ROUND(COUNT(J19:J'+r+')/COUNT(D19:D'+r+')*100,2)",,"=ROUND(COUNT(L19:L'+r+')/COUNT(F19:F'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(H19:H'+r+')*100,2)",,,,,,,,,,,\n';
+     csvContent += ',Male Outs,,'+maleOuts+',,mean contact return,,"=ROUND(AVERAGE(J19:J'+r+'),2)",,"=ROUND(AVERAGE(L19:L'+r+'),2)",,"=ROUND(AVERAGE(N19:N'+r+'),2)",,,,,,,,,,,\n';
+     csvContent += ',Seconds,,'+seconds+',,mean time to exit,,"=ROUND(AVERAGE(W19:W'+r+'),2)",,"=ROUND(AVERAGE(X19:X'+r+'),2)",,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,,,,,,,,,,\n';
+     csvContent += ',Hops IN,,'+hopsIn+',,pacing lq,,"=ROUND((COUNTIF(E19:E'+r+',"">=2"")+COUNTIF(G19:G'+r+',"">=2"")+COUNTIF(I19:I'+r+',"">=2""))/(COUNT(D19:I'+r+')/2)*100,2)",,,,,,,,,,,,,,,\n';
+     csvContent += ',Ears IN,,'+earsIn+',,pacing lr,,"=ROUND((SUM(E19:E'+r+')+SUM(G19:G'+r+')+SUM(I19:I'+r+'))/(COUNT(E19:E'+r+')+COUNT(G19:G'+r+')+COUNT(I19:I'+r+')),2)",,,,,,,,,,,,,,,\n';
+     csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Ears ALONE,,'+earsOut+',,# mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Kicks,,'+kicks+',,# intros,,=COUNT(F19:F'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Squeeks,,'+squeaks+',,# ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
      csvContent += ',Rolls,,'+rolls+'\n';
      csvContent += ',Rejection Beh,,'+rejectionBeh+'\n';
      csvContent += ',Experiment,,1,\n';
@@ -926,8 +921,8 @@ $('#toggle-button').addClass('ui-disabled');
     //      dataString = infoArray.join(",");
     //     csvContent += index < data.length ? dataString + "\n" : dataString;
     // });
-    csvContent += ',,,,,,,,,,,Contact return,,,,,,,,,,,,,,TIME TO EXIT,\n';
-    csvContent += ',hops,IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
+    csvContent += ',,,,,,,,,Contact return,,,,,,,,,,,,,TIME TO EXIT,\n';
+    csvContent += ',IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
      
 
 
@@ -937,7 +932,6 @@ $('#toggle-button').addClass('ui-disabled');
      for (var i = 0; i < rows.length; ++i) {
         k=i+1;;
         csvContent+=k;
-        csvContent+=',';
          var cells = $(rows[i]).find("> td");
          for (var j = 0; j < cells.length; ++j) {
             console.log("length",cells.length);
@@ -971,8 +965,8 @@ $('#toggle-button').addClass('ui-disabled');
 
 
 
-        csvContent += ",";
-        csvContent += '"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,S'+m+'>0),S'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),F'+l+',"""")","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,S'+m+'>0),S'+m+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),H'+l+',"""")","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,S'+m+'>0),S'+m+'-W'+l+',IF(W'+l+'>0,""---"","""")))","=IF(ISNUMBER(P'+l+'),J'+l+',"""")",,"=ROUNDDOWN(C'+l+',-2)/100*60+C'+l+'-ROUNDDOWN(C'+l+',-2)","=ROUNDDOWN(D'+l+',-2)/100*60+D'+l+'-ROUNDDOWN(D'+l+',-2)","=ROUNDDOWN(E'+l+',-2)/100*60+E'+l+'-ROUNDDOWN(E'+l+',-2)","=ROUNDDOWN(G'+l+',-2)/100*60+G'+l+'-ROUNDDOWN(G'+l+',-2)","=ROUNDDOWN(I'+l+',-2)/100*60+I'+l+'-ROUNDDOWN(I'+l+',-2)",=(T'+l+'-S'+l+'),"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,T'+l+'>0),T'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,T'+l+'>0),T'+l+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,T'+l+'>0),T'+l+'-W'+l+',IF(W'+l+'>0,""---"","""")))"';
+        //csvContent += ",";
+        csvContent += '"=IF(AND(S'+l+'>0,(OR(T'+l+'>S'+l+',U'+l+'>S'+l+'))),""---"",IF(AND(S'+l+'>0,Q'+m+'>0),Q'+m+'-S'+l+',IF(S'+l+'>0,""---"","""")))","=IF(ISNUMBER(J'+l+'),E'+l+',"""")","=IF(AND(T'+l+'>0,(OR(S'+l+'>T'+l+',U'+l+'>T'+l+'))),""---"",IF(AND(T'+l+'>0,Q'+m+'>0),Q'+m+'-T'+l+',IF(T'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),G'+l+',"""")","=IF(AND(U'+l+'>0,(OR(S'+l+'>U'+l+',T'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,Q'+m+'>0),Q'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),I'+l+',"""")",,"=ROUNDDOWN(B'+l+',-2)/100*60+B'+l+'-ROUNDDOWN(B'+l+',-2)","=ROUNDDOWN(C'+l+',-2)/100*60+C'+l+'-ROUNDDOWN(C'+l+',-2)","=ROUNDDOWN(D'+l+',-2)/100*60+D'+l+'-ROUNDDOWN(D'+l+',-2)","=ROUNDDOWN(F'+l+',-2)/100*60+F'+l+'-ROUNDDOWN(F'+l+',-2)","=ROUNDDOWN(H'+l+',-2)/100*60+H'+l+'-ROUNDDOWN(H'+l+',-2)",=(R'+l+'-Q'+l+'),"=IF(AND(S'+l+'>0,(OR(T'+l+'>S'+l+',U'+l+'>S'+l+'))),""---"",IF(AND(S'+l+'>0,R'+l+'>0),R'+l+'-S'+l+',IF(S'+l+'>0,""---"","""")))","=IF(AND(T'+l+'>0,(OR(S'+l+'>T'+l+',U'+l+'>T'+l+'))),""---"",IF(AND(T'+l+'>0,R'+l+'>0),R'+l+'-T'+l+',IF(T'+l+'>0,""---"","""")))","=IF(AND(U'+l+'>0,(OR(S'+l+'>U'+l+',T'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,R'+l+'>0),R'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))"';
 
         //csvContent +='"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,S'+m+'>0),S'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),F'+l+',"""")","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,S'+m+'>0),S'+m+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),H'+l+',"""")","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,S'+m+'>0),S'+m+'-W'+l+',IF(W'+l+'>0,""---"","""")))","=IF(ISNUMBER(P'+l+'),J'+l+',"""")",,,,,,,,"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,T'+l+'>0),T'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,T'+l+'>0),T'+l+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,T'+l+'>0),T'+l+'-W'+l+',IF(W'+l+'>0,""---"","""")))"';
         csvContent += "\n";

@@ -30,9 +30,6 @@
         </script>
     </head>
     <body onbeforeunload="return myFunction()">
-        <!--[if lte IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
         <div data-role="page" id="pageone" data-theme="b">
             <div data-role="header">
                 <h1>ChamberMate</h1>
@@ -186,21 +183,7 @@
                             <th style="width: 25%;">Test Time </th>
                             <th style="width: 25%;">Mount Count </th>
                             <th style="width: 25%;">Intro Count </th>
-                            <th style="width: 25%;">Ejac Count </th>
-                            <!--<th style="width: 33%;">Time with Male </th>
-                            <th>Male Ins</th>
-                            <th>Male Outs</th>
-                            <th>Hops In</th>
-                            <th>Hops Out</th>
-                            <th>Ears In</th>
-                            <th>Ears Out</th>
-                            <th>Rejection Beh</th>
-                            <th>lrAvg</th>
-                            <th>percent exit mount</th>
-                            <th>percent exit intro</th>
-                            <th>percent exit ejac</th>
-                            <th>pacing lq</th> -->
-                            
+                            <th style="width: 25%;">Ejac Count </th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -209,19 +192,6 @@
                             <td style = "text-align: center" id="mount_count"> 0</td>
                             <td style = "text-align: center" id="intro_count"> 0</td>
                             <td style = "text-align: center" id="ejac_count"> 0</td>
-                            <!--  <td style = "text-align: center" id = "time_with_male" >00:00 </td>
-                            <td id = "male_ins"></td>
-                            <td id = "male_outs"></td>
-                            <td id = "hops_in"></td>
-                            <td id = "hops_out"></td>
-                            <td id = "ears_in"></td>
-                            <td id = "ears_out"></td>
-                            <td id = "rejection_beh"></td>
-                            <td id = "lqAvg"></td>
-                            <td id = "percentExitMount"></td>
-                            <td id = "percentExitIntro"></td>
-                            <td id = "percentExitEjac"></td>
-                            <td id = "pacingLq"></td> -->
                         </tr>
                         <tr>
                             <td></td>
@@ -247,15 +217,14 @@
                             <td><button class = "withMale" type="Button" onclick="mount_zero()">0</button></td>
                             <td><button class = "withMale" type="Button" onclick="intro_zero()">0</button></td>
                             <td><button class = "withMale" type="Button"  onclick="ejac_zero()">0</button></td>
-                                                                                    <td><button type="Button" onclick="roll()">Roll</button></td>
-
+                            <td><button type="Button" onclick="roll()">Roll</button></td>
                         </tr>
                         <tr>
                             <td><button type="Button" onclick="ears()">Ears</button></td>
                             <td><button class = "withMale" type="Button" onclick="mount_one()">1</button></td>
                             <td><button class = "withMale" type="Button" onclick="intro_one()">1</button></td>
                             <td><button class = "withMale" type="Button" onclick="ejac_one()">1</button></td>
-                                                        <td><button type="Button" onclick="squeak()">Squeak</button></td>
+                            <td><button type="Button" onclick="squeak()">Squeak</button></td>
 
                         </tr>
                         <tr>
@@ -264,7 +233,7 @@
                             <td><button class = "withMale" style="font-size: 40px;" type="Button" onclick="mount_two()">2</button></td>
                             <td><button class = "withMale" style="font-size: 40px;" type="Button" onclick="intro_two()">2</button></td>
                             <td><button class = "withMale" style="font-size: 40px;" type="Button" onclick="ejac_two()">2</button></td>
-                                                         <td><button class = "withMale" type="Button" onclick="kick()">Kick</button></td>
+                            <td><button class = "withMale" type="Button" onclick="kick()">Kick</button></td>
 
                         </tr>
                         <tr>
@@ -314,8 +283,6 @@
                             <th>LQ</th>
                             <th>Ejac</th>
                             <th>LQ</th>
-<!--                             <th>TTE</th>
-                            <th>CRL</th> -->
                             <th></th>
                         </tr>
                     </thead>
