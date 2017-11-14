@@ -896,10 +896,10 @@ $('#toggle-button').addClass('ui-disabled');
      var rows = $("#testBody > tr");
      var r = rows.length +19;
      
-     csvContent += ',Date,,'+date+',,,';
+     csvContent += ',Date,'+date+',,,';
      csvContent += 'Entered by:,,'+experimenter_name+',,,,,,,,,,,,,,,,,,,\n';
-     csvContent += 'Female,,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
-     csvContent += 'Stud,,'+stud+'\n';
+     csvContent += 'Female,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
+     csvContent += 'Stud,'+stud+'\n';
 
      csvContent +=',,,,,,,Mount,,Intro,,Ejac\n'
      csvContent +=',Male Ins,,'+maleIns+',,% exit,,"=ROUND(COUNT(J19:J'+r+')/COUNT(D19:D'+r+')*100,2)",,"=ROUND(COUNT(L19:L'+r+')/COUNT(F19:F'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(H19:H'+r+')*100,2)",,,,,,,,,,,\n';
@@ -910,7 +910,7 @@ $('#toggle-button').addClass('ui-disabled');
      csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,,,,,,,,,,,,,,\n';
      csvContent += ',Ears ALONE,,'+earsOut+',,# mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,,,\n';
      csvContent += ',Kicks,,'+kicks+',,# intros,,=COUNT(F19:F'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Squeeks,,'+squeaks+',,# ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Squeaks,,'+squeaks+',,# ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
      csvContent += ',Rolls,,'+rolls+'\n';
      csvContent += ',Rejection Beh,,'+rejectionBeh+'\n';
      csvContent += ',Experiment,,1,\n';
