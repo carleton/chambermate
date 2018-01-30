@@ -233,14 +233,12 @@ $('#toggle-button').addClass('ui-disabled');
          ms = timeElapsed.getUTCMilliseconds();
      document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
  }
+ 
 
-
- function track_beh(stim, opts) {
+ function track_beh(stim, opts, time) {
      if (opts['lq'] != null) {
          lq = opts['lq'];
-         time = document.getElementById("display-area").innerHTML;
-         secondsTime = document.getElementById("display-area").innerHTML;
-         secondsTime = timeToSeconds(secondsTime);
+         secondsTime = timeToSeconds(time);
 
          mostRecentStim = time;
          mostRecentStimType = stim;
@@ -263,7 +261,6 @@ $('#toggle-button').addClass('ui-disabled');
          });
          document.getElementById("pacingLq").innerHTML = "pacing lq is " + pacingLq;
          document.getElementById("lqAvg").innerHTML = "lqAvg is " + lqAvg;
-         //document.getElementById("results").innerHTML = sexualBehavior.join().toSource();
 
 
          for (k = 0; k < sexualBehavior.length - 1; k++) {
@@ -293,8 +290,6 @@ $('#toggle-button').addClass('ui-disabled');
                  break;
          }
      } else {
-         time = document.getElementById("display-area").innerHTML;
-         //secondsTime = document.getElementById("display-area").innerHTML;
          secondsTime = timeToSeconds(time);
          proceptive_rejection.push(stim + " at " + time);
          if (stim == 'out') {
@@ -389,120 +384,127 @@ $('#toggle-button').addClass('ui-disabled');
  }
 
  function stringToIntTime(stringTime) {
-     console.log("Minute time " + stringTime)
+     console.log("Minute time " + stringTime);
      var strTime = stringTime.split(":");
      var seconds = ((+strTime[0]) * 60 + (+strTime[1]));
-     console.log("string time in seconds " + seconds)
+     console.log("string time in seconds " + seconds);
      return seconds;
  }
-
+ 
+ function secondsToTime(seconds) {
+     sec = seconds%100;
+     mins = (seconds-sec)/100;
+     sec = sec < 10 ? '0' + sec : sec;
+     mins = mins <10 ? '0' + mins : mins;
+     result = mins + ":" + sec;
+     //var date = new Date(null);
+     //date.setSeconds(seconds);
+     //var result = date.toISOString().substr(11, 8);
+     return result;
+ }
 
  function flag() {
      flags.push(time = " " + document.getElementById("display-area").innerHTML);
  }
 
- function ejac_zero() {
-     // introCount++;
+ function ejac_zero(aTime = document.getElementById("display-area").innerHTML) {
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
          "lq": 0
-     });
+     }, aTime);
  }
 
- function ejac_one() {
-     // introCount++;
+ function ejac_one(aTime = document.getElementById("display-area").innerHTML) {
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
          "lq": 1
-     });
+     }, aTime);
  }
 
- function ejac_two() {
-     // introCount++;
+ function ejac_two(aTime = document.getElementById("display-area").innerHTML) {
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
          "lq": 2
-     });
+     }, aTime);
  }
 
- function ejac_three() {
-     //  introCount++;
+ function ejac_three(aTime = document.getElementById("display-area").innerHTML) {
      ejacCount++;
      stimNumber++;
      track_beh("ejac", {
          "lq": 3
-     });
+     }, aTime);
  }
 
- function intro_zero() {
+ function intro_zero(aTime = document.getElementById("display-area").innerHTML) {
      introCount++;
      stimNumber++;
      introCount_exit_var++;
      track_beh("intro", {
          "lq": 0
-     });
+     }, aTime);
  }
 
- function intro_one() {
+ function intro_one(aTime = document.getElementById("display-area").innerHTML) {
      introCount++;
      stimNumber++;
      introCount_exit_var++;
      track_beh("intro", {
          "lq": 1
-     });
+     }, aTime);
  }
 
- function intro_two() {
+ function intro_two(aTime = document.getElementById("display-area").innerHTML) {
      introCount++;
      stimNumber++;
      introCount_exit_var++;
      track_beh("intro", {
          "lq": 2
-     });
+     }, aTime);
  }
 
- function intro_three() {
+ function intro_three(aTime = document.getElementById("display-area").innerHTML) {
      introCount++;
      stimNumber++;
      introCount_exit_var++;
      track_beh("intro", {
          "lq": 3
-     });
+     }, aTime);
  }
 
- function mount_zero() {
+ function mount_zero(aTime = document.getElementById("display-area").innerHTML) {
      stimNumber++;
      mountCount++;
      track_beh("mount", {
          "lq": 0
-     });
+     }, aTime);
  }
 
- function mount_one() {
+ function mount_one(aTime = document.getElementById("display-area").innerHTML) {
      stimNumber++;
      mountCount++;
      track_beh("mount", {
          "lq": 1
-     });
+     }, aTime);
  }
 
- function mount_two() {
+ function mount_two(aTime = document.getElementById("display-area").innerHTML) {
      stimNumber++;
      mountCount++;
      track_beh("mount", {
          "lq": 2
-     });
+     }, aTime);
  }
 
- function mount_three() {
+ function mount_three(aTime = document.getElementById("display-area").innerHTML) {
      stimNumber++;
      mountCount++;
      track_beh("mount", {
          "lq": 3
-     });
+     }, aTime);
  }
 
  function ears() {
@@ -541,11 +543,11 @@ $('#toggle-button').addClass('ui-disabled');
      track_beh("roll", {});
  }
 
- function in_enter() {
+ function in_enter(aTime = document.getElementById("display-area").innerHTML) {
      maleIns++;
      withMale = true;
      maleStart();
-     track_beh("in", {});
+     track_beh("in", {}, aTime);
      var x = document.getElementsByClassName('withMale');
      for (var i = 0; i < x.length; i++) {
          x[i].disabled = false;
@@ -553,11 +555,11 @@ $('#toggle-button').addClass('ui-disabled');
      document.getElementById('in_enter').disabled = true;
  }
 
- function out() {
+ function out(aTime = document.getElementById("display-area").innerHTML) {
      withMale = false;
      maleStop();
      maleOuts++;
-     track_beh("out", {});
+     track_beh("out", {}, aTime);
      var x = document.getElementsByClassName('withMale');
      for (var i = 0; i < x.length; i++) {
          x[i].disabled = true;
@@ -570,6 +572,7 @@ $('#toggle-button').addClass('ui-disabled');
          x[i].disabled = true;
      }
  }
+
  var testDate = new Date();
  //http://stackoverflow.com/questions/9532664/how-to-display-a-date-object-in-a-specific-format-using-javascript
  var month = new Array();
@@ -612,9 +615,7 @@ $('#toggle-button').addClass('ui-disabled');
          var female = document.getElementById("female").innerHTML;
          var stud = document.getElementById("stud").innerHTML;
          var columns = ["drag", "in", "out", "mount", "lq", "intro", "lq", "ejac", "lq", "del"];
-         //var resultTable = document.getElementById("tableresults");
          var resultTable = document.getElementById("testBody");
-         //resultTable.appendChild(document.createElement('tbody'));
          var numberRows = 0;
          var rowsToDelete = [];
          var mostRecentStim_row = 0;
@@ -624,16 +625,11 @@ $('#toggle-button').addClass('ui-disabled');
          while (j <= sexualBehavior.length) {
              while (i <= columns.length) {
                  if (i == 10 || numberRows == 0) {
-                  //  if(j>1){
-                    //    if ((sexualBehavior[j-1]['stim']!='lq')&&(sexualBehavior[j+1]['stim']!='out')){
                          row = resultTable.insertRow(numberRows);
                          row.id = numberRows;
                          numberRows++;
                          i = 0;
-                  //   }
-                // }
                  }
-                 // if(sexualBehavior[j] != undefined){
                  if (columns[i] == sexualBehavior[j]['stim']) {
                     console.log("stim:", sexualBehavior[j]['stim']);
                      var cell = row.insertCell(i);
@@ -699,56 +695,6 @@ $('#toggle-button').addClass('ui-disabled');
 
          }
 
-         //var table = document.getElementById("tableresults");
-
-
-
-         // var table = document.getElementById("testBody");
-
-
-         // var l = 0;
-         // var i = 0;
-         // while (l <= tte.length) {
-         //     while (i <= table.rows.length) {
-         //         if (i+1 == tte[l]['row']) {
-
-         //                 row = table.rows[i];
-         //                 var cell = row.insertCell(9);
-         //                 cell.setAttribute('contentEditable', 'true');
-         //                 cell.innerHTML = tte[l]['TTE'];
-         //                 var cell2 = row.insertCell(10);
-         //                 cell2.setAttribute('contentEditable', 'true');
-         //                 cell2.innerHTML = crl[l]['CRL'];
-         //                 console.log("row number: " + i + " tte number " + l);
-         //                var cell = row.insertCell(11);
-         //                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
-         //                cell.className ='recipe-table__cell';
-         //                cell.style.width = "5%";
-
-         //                 l++;
-         //                 i++;
-
-         //             }
-
-         //          else {
-         //                 row = table.rows[i];
-         //                 var cell = row.insertCell(9);
-         //                 cell.setAttribute('contentEditable', 'true');
-         //                 cell.innerHTML = "&nbsp";
-         //                 var cell2 = row.insertCell(10);
-         //                 cell2.setAttribute('contentEditable', 'true');
-         //                 cell2.innerHTML = "&nbsp";
-         //                 console.log("row number: " + i + " tte number " + l);
-         //                var cell = row.insertCell(11);
-         //                cell.innerHTML = "<button class=\"recipe-table__del-row-btn ui-btn ui-icon-delete ui-shadow ui-corner-all ui-btn-icon-notext\"></button>";
-         //                cell.className ='recipe-table__cell';
-         //                cell.style.width = "5%";
-         //                 i++;
-         //         }
-         //     }
-
-         // }
-
 
      for (var i = 0; i < rowsToDelete.length; i++) {
         console.log(rowsToDelete);
@@ -759,6 +705,119 @@ $('#toggle-button').addClass('ui-disabled');
      }
 
  }
+
+function backAndSave() {
+    sexualBehavior = [];
+    proceptive_rejection = [];
+    crl = [];
+    tte = [];
+    crlTotal = 0;
+    crlMountTotal = 0;
+    crlIntroTotal = 0;
+    crlEjacTotal = 0;
+    timeToExit = 0;
+    tteTotal = 0;
+    tteMountTotal = 0;
+    tteIntroTotal = 0;
+    tteEjacTotal = 0;
+    introCount = 0;
+    maleIns = 0;
+    maleOuts = 0;
+    stimNumber = 0;
+    mostRecentStim = null;
+    mostRecentStimType = null;
+    newStim = false;
+    lqSum = 0;
+    lqAvg = 0;
+    percentExitMount = 0;
+    percentExitIntro = 0;
+    percentExitEjac = 0;
+    numberExits = 0;
+    ejacCount = 0;
+    introCount_exit_var = 0;
+    mountCount = 0;
+    stimLQOverTwo = 0;
+    pacingexecuted = false;
+    contactReturnLatency = 0;
+    pacinglq = 0;
+    
+    var resultTable = document.getElementById("testBody");
+    var rows = resultTable.rows;
+    var columns = ["drag", "in", "out", "mount", "lq", "intro", "lq", "ejac", "lq", "del"];
+    
+    for (var j=0; j<=rows.length; j++){
+        var cells = rows[j].cells;
+        var secondsIn = cells[1].innerHTML.replace(/[^0-9]/g, '');
+        var secondsMount = cells[3].innerHTML.replace(/[^0-9]/g, '');
+        var lqMount = cells[4].innerHTML.replace(/[^0-9]/g, '');
+        var secondsIntro = cells[5].innerHTML.replace(/[^0-9]/g, '');
+        var lqIntro = cells[6].innerHTML.replace(/[^0-9]/g, '');
+        var secondsEjac = cells[7].innerHTML.replace(/[^0-9]/g, '');
+        var lqEjac = cells[8].innerHTML.replace(/[^0-9]/g, '');
+        var secondsOut = cells[2].innerHTML.replace(/[^0-9]/g, '');
+        
+        if (secondsIn != "") {
+            in_enter(secondsToTime(parseInt(secondsIn)));
+        }
+        if (secondsMount != "") {
+            switch (lqMount) {
+                case "0":
+                    mount_zero(secondsToTime(parseInt(secondsMount)));
+                    break;
+                case "1":
+                    mount_one(secondsToTime(parseInt(secondsMount)));
+                    break;
+                case "2":
+                    mount_two(secondsToTime(parseInt(secondsMount)));
+                    break;
+                case "3":
+                    mount_three(secondsToTime(parseInt(secondsMount)));
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (secondsIntro != "") {
+            switch (lqIntro) {
+                case "0":
+                    intro_zero(secondsToTime(parseInt(secondsIntro)));
+                    break;
+                case "1":
+                    intro_one(secondsToTime(parseInt(secondsIntro)));
+                    break;
+                case "2":
+                    intro_two(secondsToTime(parseInt(secondsIntro)));
+                    break;
+                case "3":
+                    intro_three(secondsToTime(parseInt(secondsIntro)));
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (secondsEjac != "") {
+            switch (lqEjac) {
+                case "0":
+                    ejac_zero(secondsToTime(parseInt(secondsEjac)));
+                    break;
+                case "1":
+                    ejac_one(secondsToTime(parseInt(secondsEjac)));
+                    break;
+                case "2":
+                    ejac_two(secondsToTime(parseInt(secondsEjac)));
+                    break;
+                case "3":
+                    ejac_three(secondsToTime(parseInt(secondsEjac)));
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (secondsOut != "") {
+            out(secondsToTime(parseInt(secondsOut)));
+        }
+    }
+}
 
  /*    for (var j = 0; j < sexualBehavior.length; j++) {
          for (var i = 0; i <= columns.length; i++) {
