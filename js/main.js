@@ -270,6 +270,8 @@ $('#toggle-button').addClass('ui-disabled');
          document.getElementById("intro_count").innerHTML = introCount;
          document.getElementById("mount_count").innerHTML = mountCount;
          document.getElementById("ejac_count").innerHTML = ejacCount;
+         document.getElementById("total_count").innerHTML = introCount + ejacCount;
+
          switch (mostRecentStimType) {
              case "mount":
                  document.getElementById("mostRecentMount").innerHTML = mostRecentStim;
@@ -368,6 +370,11 @@ $('#toggle-button').addClass('ui-disabled');
          document.getElementById("ears_in").innerHTML = "Ears In: " + earsIn;
          document.getElementById("ears_out").innerHTML = "Ears Out: " + earsOut;
          document.getElementById("rejection_beh").innerHTML = "Rejections Beh: " + rejectionBeh;
+     }
+     if (parseInt(document.getElementById("total_count").innerHTML) >= 15) {
+        console.log("True");
+        document.getElementById("total_text").style.backgroundColor = 'green';
+        document.getElementById("total_count").style.backgroundColor = 'green';
      }
  }
 
