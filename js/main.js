@@ -2,9 +2,12 @@
   * Pacing Data Collection App 
   * @author  Joshua Pitkofsky
   * @maintained by Malcolm Mitchell
-  * @version 1.0, 12/17/16
+  * @version 1.0, 12/17/2016
+  * @last updated 12/21/2023
   */
+
  //timer code from Andrew Whitaker on http://stackoverflow.com/questions/26329900/how-do-i-display-millisecond-in-my-stopwatch
+
  var timeBegan = null,
      timeStopped = null,
      stoppedDuration = 0,
@@ -234,11 +237,13 @@ $('#toggle-button').addClass('ui-disabled');
      document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
  }
  
-
+/* 
+Track a specified behavior from the application 
+*/
  function track_beh(stim, opts, time) {
      if (opts['lq'] != null) {
          lq = opts['lq'];
-         secondsTime = timeToSeconds(time);
+         var secondsTime = timeToSeconds(time);
 
          mostRecentStim = time;
          mostRecentStimType = stim;
@@ -304,7 +309,6 @@ $('#toggle-button').addClass('ui-disabled');
                  "time": secondsTime
              });
              if (newStim == true) {
-                 // console.log(Integer.valueOf(time));
                  timeToExit = stringToIntTime(time) - stringToIntTime(mostRecentStim);
                  tte.push({
                      "stimNumber": stimNumber,
@@ -361,7 +365,6 @@ $('#toggle-button').addClass('ui-disabled');
          }
          for (k = 0; k < sexualBehavior.join().length; k++) {
              var str = JSON.stringify(sexualBehavior[k]);
-             //console.log(str);
          }
          document.getElementById("male_ins").innerHTML = "Male Ins: " + maleIns;
          document.getElementById("male_outs").innerHTML = "Male Outs: " + maleOuts;
@@ -372,7 +375,6 @@ $('#toggle-button').addClass('ui-disabled');
          document.getElementById("rejection_beh").innerHTML = "Rejections Beh: " + rejectionBeh;
      }
      if (parseInt(document.getElementById("total_count").innerHTML) >= 15) {
-        console.log("True");
         document.getElementById("total_text").style.backgroundColor = 'green';
         document.getElementById("total_count").style.backgroundColor = 'green';
      }
@@ -944,25 +946,14 @@ function backAndSave() {
      //                     csv += rowDelim;
      //                     csv += formatRows($rows.map(grabRow)) + '"';
 
-     // console.log(csv);
-
-     // Data URI
-
      //var table = $("#tableresults").html();
 
-     var csvContent = "data:text/csv;charset=utf-8,%EF%BB%BF";
-  
-     // console.log(csvContent);
-     //     console.log(csv);
-
-     //  csvContent = csvContent +csv;
-     //csvContent = csvContent.concat(table.innerHTML);
-     //csvContent = csvContent.concat(csv);
-     //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+     var csvContent = "data:text/csv;charset=utf-8,%EF%BB%BF,\n";
      var rows = $("#testBody > tr");
+     console.log("Rows: ", rows)
      var r = rows.length +19;
      
-     csvContent += ',Date,'+date+',,,';
+     csvContent += 'Date,'+date+',,,';
      csvContent += 'Entered by:,,'+experimenter_name+',,,,,,,,,,,,,,,,,,,\n';
      csvContent += 'Female,'+female+',,,,,,,,,,,,,,,,,,,,,,,,\n';
      csvContent += 'Stud,'+stud+'\n';
@@ -989,18 +980,15 @@ function backAndSave() {
     // });
     csvContent += ',,,,,,,,,Contact return,,,,,,,,,,,,,TIME TO EXIT,\n';
     csvContent += ',IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
-     
 
-
-     // csvContent += ",IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ \n"
+    console.log("csv: ", csvContent);
 
     var k = 0;
      for (var i = 0; i < rows.length; ++i) {
-        k=i+1;;
-        csvContent+=k;
+        k = i + 1;
+        csvContent += k;
          var cells = $(rows[i]).find("> td");
-         for (var j = 0; j < cells.length; ++j) {
-            console.log("length",cells.length);
+         for (var j = 0; j < cells.length; j++) {
              if (j != 0) csvContent += ",";
              var str = cells[j].innerHTML;
              if (str.charAt(0) == "<") {
@@ -1027,59 +1015,20 @@ function backAndSave() {
 
          var l = k+18;
          var m = k+19;
-
-
-
-
-        //csvContent += ",";
         csvContent += '"=IF(AND(S'+l+'>0,(OR(T'+l+'>S'+l+',U'+l+'>S'+l+'))),""---"",IF(AND(S'+l+'>0,Q'+m+'>0),Q'+m+'-S'+l+',IF(S'+l+'>0,""---"","""")))","=IF(ISNUMBER(J'+l+'),E'+l+',"""")","=IF(AND(T'+l+'>0,(OR(S'+l+'>T'+l+',U'+l+'>T'+l+'))),""---"",IF(AND(T'+l+'>0,Q'+m+'>0),Q'+m+'-T'+l+',IF(T'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),G'+l+',"""")","=IF(AND(U'+l+'>0,(OR(S'+l+'>U'+l+',T'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,Q'+m+'>0),Q'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),I'+l+',"""")",,"=ROUNDDOWN(B'+l+',-2)/100*60+B'+l+'-ROUNDDOWN(B'+l+',-2)","=ROUNDDOWN(C'+l+',-2)/100*60+C'+l+'-ROUNDDOWN(C'+l+',-2)","=ROUNDDOWN(D'+l+',-2)/100*60+D'+l+'-ROUNDDOWN(D'+l+',-2)","=ROUNDDOWN(F'+l+',-2)/100*60+F'+l+'-ROUNDDOWN(F'+l+',-2)","=ROUNDDOWN(H'+l+',-2)/100*60+H'+l+'-ROUNDDOWN(H'+l+',-2)",=(R'+l+'-Q'+l+'),"=IF(AND(S'+l+'>0,(OR(T'+l+'>S'+l+',U'+l+'>S'+l+'))),""---"",IF(AND(S'+l+'>0,R'+l+'>0),R'+l+'-S'+l+',IF(S'+l+'>0,""---"","""")))","=IF(AND(T'+l+'>0,(OR(S'+l+'>T'+l+',U'+l+'>T'+l+'))),""---"",IF(AND(T'+l+'>0,R'+l+'>0),R'+l+'-T'+l+',IF(T'+l+'>0,""---"","""")))","=IF(AND(U'+l+'>0,(OR(S'+l+'>U'+l+',T'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,R'+l+'>0),R'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))"';
-
-        //csvContent +='"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,S'+m+'>0),S'+m+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(ISNUMBER(L'+l+'),F'+l+',"""")","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,S'+m+'>0),S'+m+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(ISNUMBER(N'+l+'),H'+l+',"""")","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,S'+m+'>0),S'+m+'-W'+l+',IF(W'+l+'>0,""---"","""")))","=IF(ISNUMBER(P'+l+'),J'+l+',"""")",,,,,,,,"=IF(AND(U'+l+'>0,(OR(V'+l+'>U'+l+',W'+l+'>U'+l+'))),""---"",IF(AND(U'+l+'>0,T'+l+'>0),T'+l+'-U'+l+',IF(U'+l+'>0,""---"","""")))","=IF(AND(V'+l+'>0,(OR(U'+l+'>V'+l+',W'+l+'>V'+l+'))),""---"",IF(AND(V'+l+'>0,T'+l+'>0),T'+l+'-V'+l+',IF(V'+l+'>0,""---"","""")))","=IF(AND(W'+l+'>0,(OR(U'+l+'>W'+l+',V'+l+'>W'+l+'))),""---"",IF(AND(W'+l+'>0,T'+l+'>0),T'+l+'-W'+l+',IF(W'+l+'>0,""---"","""")))"';
         csvContent += "\n";
-
-
 
      }
         csvContent += "\n";
 
-        
+     var encodedUri = encodeURI(csvContent); //encode the content to be used for href
 
-     //         if(str.charAt(0)=="<"){
-
-     //         str = str.substr(str.indexOf("</b>")+4);
-     //         console.log("STR not number"+str);
-
-     //             if (str.charAt(0) == "&"){
-     //                 str = str.substr(6);
-     //                 console.log("STR 6: "+(str));
-
-     //                     }
-     //                     str=str.replace(/\&nbsp;/g, '');
-     //         }
-     //         csvContent += str;
-     //     }
-     //     csvContent += "\n";
-     // }
-
-
-     var encodedUri = encodeURI(csvContent);
+     //create an 'a' tag for download, and clcik on the tag using .click()
      var link = document.createElement("a");
      link.setAttribute("href", encodedUri);
      link.setAttribute("download", filename + "_data.csv");
-     document.body.appendChild(link); // Required for FF
+     document.body.appendChild(link); // Required for Firefox
      link.click();
-     //      $( "form" ).validate({
-     //     messages: {
-     //         experiment_title: "Name is required.",
-     //         experiment_name: {
-     //             required: "Email is required.",
-     //             email: "You must provide a valid email address."
-     //         }
-     //     },
-     //     focusInvalid: false
-     // });
-     //debug TTE and CRL
-     //
  }
 
 
