@@ -32,6 +32,7 @@ $('#toggle-cop-button').addClass('ui-disabled');
 //On clicking Partner Preference/COP input information will be validates
 function copValidate() {
 var input = document.getElementById("experiment_title").value;
+
 if (input.indexOf('#') > -1) {
    alert('Experiment Title contains #');
 }
@@ -47,7 +48,7 @@ else {
 function setUpCop() {
 if((document.getElementById("obj_one").value=='') || (document.getElementById("obj_two").value=='')){
     alert("Reload and make sure to enter objects!");
-    window.location.href = "http://joshpitkofsky.com/Beh_Neuro/";
+    window.location.href = "https://carleton.github.io/chambermate/";
 }
 objectOne = document.getElementById("obj_one").value;
 objectTwo = document.getElementById("obj_two").value;
