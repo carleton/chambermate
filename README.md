@@ -14,3 +14,6 @@ Hormones shape the brain during development to enable the expression of mature s
 
 * [Publications & Posters](https://apps.carleton.edu/curricular/psyc/meertslab/publications/) — Some select publications out of the lab.
 
+## Notes on Merge Requests
+
+* When creating a merge request, Github defaults to Josh's original repo for the destination branch. Make sure that the destination is Carleton AT's "master" branch instead of his.
