@@ -324,7 +324,7 @@ withOne = false;
 withTwo = false;
 }
 
-//increments the chew count for either object One or object Two
+//increments the chew count for either object One, object Two, or Center
 function chew() {
 if (withOne) {
     chewOne++;
@@ -332,7 +332,7 @@ if (withOne) {
     chewTwo++;
 }
 }
-//increments the hops count for either object One or object Two
+//increments the hops count for either object One, object Two, or Center
 function hops() {
 if (withOne) {
     hopOne++;
@@ -341,7 +341,7 @@ if (withOne) {
 } else {
     centerHops++;
 }
-//increments the ear movement count for either object One or object Two
+//increments the ear movement count for either object One, object Two, or Center
 }
 function ears() {
     if (withOne) {
@@ -458,7 +458,7 @@ function finishTestCop() {
         }
 
     }
-
+    //removes all empty rows from the table
     var rows = $(resultTable).find(' > tr');
     for (var i = 0; i < rows.length; i++) {
         if (emptyCellsOnly(rows[i])) {
@@ -483,7 +483,7 @@ return true;
 }
 
 
-//downloads the CSV file to local computer
+//Fills in two tables with data from the finished experiment and downloads a CSV file to local computer
 function copDownloadCSV() {
 var date = document.getElementById("date").value;
 var timeWithOne = document.getElementById("time_with_obj_one").innerHTML;
@@ -530,7 +530,7 @@ csvContent += "," + objectOne + ",";
 csvContent += "Center,";
 csvContent += objectTwo + "\n";
 
-
+//removes '&nbsp' from cells in the table
 var rows = $("#copTestBody > tr");
 
 for (var i = 0; i < rows.length; ++i) {
@@ -589,7 +589,7 @@ $(document).on('click', '.recipe-table__del-row-btn', function(e) {
     $row.remove();
     return false;
 });
-//adds table dragginf functionality
+//adds table dragging functionality
 Sortable.create(
     $('#copTestBody')[0], {
         animation: 150,
