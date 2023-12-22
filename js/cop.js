@@ -31,31 +31,28 @@ $('#toggle-cop-button').addClass('ui-disabled');
 
 //On clicking Partner Preference/COP input information will be validates
 function copValidate() {
-var input = document.getElementById("experiment_title").value;
+    var input = document.getElementById("experiment_title").value;
+    if (input.indexOf('#') > -1) {
+        alert('Experiment Title contains #');
+    }
+}
 
-if (input.indexOf('#') > -1) {
-   alert('Experiment Title contains #');
-}
-else {
-    $(location).attr('href', '#cop');
-}
-}
 //Take information entered from that start page and initialize three variables with it.
 //objectOne → leftIn
 //objectTwo → rightIn
 //Title → title of experiment + COP
 //Then modify index.html to have those 3 values
 function setUpCop() {
-if((document.getElementById("obj_one").value=='') || (document.getElementById("obj_two").value=='')){
-    alert("Reload and make sure to enter objects!");
-    window.location.href = "https://carleton.github.io/chambermate/";
-}
-objectOne = document.getElementById("obj_one").value;
-objectTwo = document.getElementById("obj_two").value;
-title = document.getElementById("experiment_title").value;
-document.getElementById("in_obj_1").innerHTML = objectOne;
-document.getElementById("in_obj_2").innerHTML = objectTwo;
-document.getElementById("cop_header").innerHTML = title + " COP";
+    if ((document.getElementById("obj_one").value=='') || (document.getElementById("obj_two").value=='')){
+        return alert("Reload and make sure to enter objects!");
+    }
+    objectOne = document.getElementById("obj_one").value;
+    objectTwo = document.getElementById("obj_two").value;
+    title = document.getElementById("experiment_title").value;
+    document.getElementById("in_obj_1").innerHTML = objectOne;
+    document.getElementById("in_obj_2").innerHTML = objectTwo;
+    document.getElementById("cop_header").innerHTML = title + " COP";
+    $(location).attr('href', '#cop');
 }
 
 //keeps track of user input/ which buttons they press

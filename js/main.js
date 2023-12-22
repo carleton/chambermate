@@ -1,7 +1,7 @@
  /*
   * Pacing Data Collection App 
   * @author  Joshua Pitkofsky
-  * @maintained by Malcolm Mitchell
+  * @maintained by Malcolm Mitchell, John Win
   * @version 1.0, 12/17/2016
   * @last updated 12/21/2023
   */
@@ -386,9 +386,7 @@ Track a specified behavior from the application
  function timeToSeconds(stringTimePassed) {
      //strip out colon
      timeNoColon = stringTimePassed.replace(/:/g, '');
-     //strip out leading 0s
      timesec = parseInt(timeNoColon, 10);
-     // time=time.replace(/^[0]+/g,'');
      return timesec;
  }
 
