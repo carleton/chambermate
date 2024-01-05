@@ -946,7 +946,15 @@ function backAndSave() {
 
      //var table = $("#tableresults").html();
 
-     var csvContent = "data:text/csv;charset=utf-8,%EF%BB%BF,\n";
+     var csvContent = "data:text/csv;charset=utf-8,";
+  
+     // console.log(csvContent);
+     //     console.log(csv);
+
+     //  csvContent = csvContent +csv;
+     //csvContent = csvContent.concat(table.innerHTML);
+     //csvContent = csvContent.concat(csv);
+     //var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
      var rows = $("#testBody > tr");
      console.log("Rows: ", rows)
      var r = rows.length +19;
@@ -963,9 +971,9 @@ function backAndSave() {
      csvContent += ',Hops IN,,'+hopsIn+',,pacing lq,,"=ROUND((COUNTIF(E19:E'+r+',"">=2"")+COUNTIF(G19:G'+r+',"">=2"")+COUNTIF(I19:I'+r+',"">=2""))/(COUNT(D19:I'+r+')/2)*100,2)",,,,,,,,,,,,,,,\n';
      csvContent += ',Ears IN,,'+earsIn+',,pacing lr,,"=ROUND((SUM(E19:E'+r+')+SUM(G19:G'+r+')+SUM(I19:I'+r+'))/(COUNT(E19:E'+r+')+COUNT(G19:G'+r+')+COUNT(I19:I'+r+')),2)",,,,,,,,,,,,,,,\n';
      csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Ears ALONE,,'+earsOut+',,mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Kicks,,'+kicks+',,intros,,=COUNT(F19:F'+r+'),,,,,,,,,,,,,,,\n';
-     csvContent += ',Squeaks,,'+squeaks+',,ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Ears ALONE,,'+earsOut+',,# mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Kicks,,'+kicks+',,# intros,,=COUNT(F19:F'+r+'),,,,,,,,,,,,,,,\n';
+     csvContent += ',Squeaks,,'+squeaks+',,# ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
      csvContent += ',Rolls,,'+rolls+'\n';
      csvContent += ',Rejection Beh,,'+rejectionBeh+'\n';
      csvContent += ',Experiment,,1,\n';
