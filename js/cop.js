@@ -39,7 +39,6 @@ function COPValidate() {
     if((document.getElementById("experiment_title").value=='')   || 
         (document.getElementById("experimenter_name").value=='') ||
         (document.getElementById("female").value=='')            ||
-        (document.getElementById("stud").value=='')              ||
         (document.getElementById("obj_one").value=='')           ||
         (document.getElementById("obj_two").value=='')){
             alert("Reload and make sure to enter objects!");
