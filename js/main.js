@@ -56,6 +56,7 @@ var mountCount = 0;
 var stimLQOverTwo = 0;
 var flags = [];
 var pacingexecuted = false;
+var consecMountCount = 0;
 
 var tmpColDelim = String.fromCharCode(11); // vertical tab character
 var tmpRowDelim = String.fromCharCode(0); // null character
@@ -293,21 +294,23 @@ function track_beh(stim, opts, time) {
         switch (mostRecentStimType) {
             case "mount":
                 document.getElementById("mostRecentMount").innerHTML = mostRecentStim;
-                document.getElementById("mostRecentIntro").innerHTML = "";
-                document.getElementById("mostRecentEjac").innerHTML = "";
+                consecMountCount++;
                 break;
             case "intro":
-                document.getElementById("mostRecentMount").innerHTML = "";
                 document.getElementById("mostRecentIntro").innerHTML = mostRecentStim;
-                document.getElementById("mostRecentEjac").innerHTML = "";
+                consecMountCount = 0;
+                document.getElementById("mount_count").style.backgroundColor = '';
                 break;
             case "ejac":
-                document.getElementById("mostRecentMount").innerHTML = "";
-                document.getElementById("mostRecentIntro").innerHTML = "";
                 document.getElementById("mostRecentEjac").innerHTML = mostRecentStim;
+                consecMountCount = 0;
+                document.getElementById("mount_count").style.backgroundColor = '';
                 break;
             default: 
                 break;
+        }
+        if (consecMountCount >= 5) {
+            document.getElementById("mount_count").style.backgroundColor = 'green';
         }
     } else {
     secondsTime = timeToSeconds(time);
