@@ -249,6 +249,11 @@ function clockRunning() {
         sec = timeElapsed.getUTCSeconds(),
         ms = timeElapsed.getUTCMilliseconds();
     document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
+
+    // const timer = document.querySelector(".display-area");
+    // if (timer/4 == 0) {
+    //     // timer.classList.toggle('blink');
+    // }
 }
 
 /* 
