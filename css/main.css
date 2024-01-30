@@ -190,7 +190,7 @@ body {
     padding: 10px;
 }
 
-/* .blink {
+.blinking-timer {
   animation: blink 1s infinite;
 }
 
@@ -204,7 +204,7 @@ body {
   100% {
     opacity: 1;
   }
-} */
+}
 
 /* ==========================================================================
    From Banana Muffin Recipe CodePen

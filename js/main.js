@@ -250,10 +250,14 @@ function clockRunning() {
         ms = timeElapsed.getUTCMilliseconds();
     document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
 
-    // const timer = document.querySelector(".display-area");
-    // if (timer/4 == 0) {
-    //     // timer.classList.toggle('blink');
-    // }
+    let timer = 60*min + sec;
+    if (timer>=590 && timer<=600 ||
+        timer>=890  && timer<=900) {
+        document.getElementById("display-area").classList.add('blinking-timer')
+    } 
+    else {
+        document.getElementById("display-area").classList.remove('blinking-timer')
+    }
 }
 
 /* 
@@ -314,7 +318,7 @@ function track_beh(stim, opts, time) {
             default: 
                 break;
         }
-        if (consecMountCount >= 5) {
+        if (consecMountCount >= 10) {
             document.getElementById("mount_count").style.backgroundColor = 'green';
         }
     } else {
