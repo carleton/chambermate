@@ -254,9 +254,11 @@ function clockRunning() {
     if (timer>=590 && timer<=600 ||
         timer>=890  && timer<=900) {
         document.getElementById("display-area").classList.add('blinking-timer')
+        document.getElementById("display-area").style.color = 'red';
     } 
     else {
         document.getElementById("display-area").classList.remove('blinking-timer')
+        document.getElementById("display-area").style.color = '';
     }
 }
 
