@@ -50,22 +50,22 @@
                     <!--                 <label for="date_test" class="ui-hidden-accessible"> date_test and Time:</label>
                     <input type="time" name="date_test" id="date_test" placeholder="date_test and Time"> -->
                     <label for="obj_one" class="ui-hidden-accessible">Object One</label>
-                    <input type="text" name="obj_one" id="obj_one" placeholder="Stim (&#9792;) or Stud (&#9794;) or Object (L)">
+                    <input type="text" name="obj_one" id="obj_one" placeholder="Stim(&#9792;) or Stud(&#9794;) or Object(L)">
                     <label for="obj_two" class="ui-hidden-accessible">Object Two</label>
-                    <input type="text" name="obj_two" id="obj_two" placeholder="Stim (&#9792;) or Stud (&#9794;) or Object (R)">
+                    <input type="text" name="obj_two" id="obj_two" placeholder="Stim(&#9792;) or Stud(&#9794;) or Object(L)">
                     <div class="ui-grid-a ui-responsive">
                         <div class="ui-block-a">
-                            <a class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="return setUpCOP()" data-transition="slide">Partner Preference/COP</a>
+                            <a class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="copValidate(); return setUpCop()" data-transition="slide">Partner Preference/COP</a>
                         </div>
                         <div class="ui-block-b">
-                            <a class="ui-btn ui-icon-heart ui-btn-icon-right" onClick="setUpPacing()" data-transition="slide">Pacing</a>
+                            <a class="ui-btn ui-icon-heart ui-btn-icon-right" onClick="validate(); setUp()" data-transition="slide">Pacing</a>
                         </div>
                     </div>
                     
                 </form >
             </div >
 
-             <center><a href="https://apps.carleton.edu/curricular/psyc/meertslab/" target="_blank"><img style="margin-bottom:10%;" src="img/meertslogo.png" alt="Meerts Lab" id="meertslogo"></a></center>
+             <center><a href="https://apps.carleton.edu/curricular/psyc/meertslab/"><img style="margin-bottom:10%;" src="img/meertslogo.png" alt="Meerts Lab" id="meertslogo"></a></center>
                 <!-- Shape graphic by <a href="http://www.flaticon.com/authors/freepik">Freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a> -->
                             <div data-role="footer">
 
@@ -80,7 +80,7 @@
             <div data-role="main" class="ui-content">
                 <a href="#pageone" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
                 
-           <table align="left" id = "live_data" data-role="table" class="ui-responsive">
+                <table align="left" id = "live_data" data-role="table" class="ui-responsive">
                     <thead>
                         <tr>
                             <th style="width: 100%"> COP Test  </th>
@@ -126,26 +126,6 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td ><button id = "hops_in_1"  onClick = "hops()" style ="font-size: 20px" type ="Button">Hops</button></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td><button id = "hops_in_2"  onClick = "hops()" style ="font-size: 20px" type ="Button">Hops</button></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td ><button id = "ears_in_1" onClick = "ears()" style ="font-size: 20px" type ="Button">Ears</button></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            <td ><button id = "ears_in_2" onClick = "ears()" style ="font-size: 20px" type ="Button">Ears</button></td>
-
-                        </tr>
-                        
-                        <tr>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td align="center"><button id = "btncenter" style="font-size: 40px" onClick="centerOne()" type="Button" >Center</button></td>
@@ -153,24 +133,6 @@
                             <td></td>
                             <td></td>
                             
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td ><button id = "hops_center" onClick = hops() style ="font-size: 20px" type ="Button">Hops</button></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td ><button id = "ears_center" onClick = ears() style ="font-size: 20px" type ="Button">Ears</button></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             
@@ -213,13 +175,8 @@
                 <h1 id="experimentHeader">Experiment</h1>
             </div>
             <div data-role="main" class="ui-content">
-                <div class="row-container">
-                    <a href="#pageone" class="ui-btn ui-icon-carat-l ui-btn-icon-left back-btn">Back</a>
-                    <div class="total-container">
-                        <div class="total-text" id="total_text">Total Intro + Ejac Count: </div>
-                        <div class="total-count" id="total_count">0</div>
-                    </div>    
-                </div>
+                <a href="#pageone" class="ui-btn ui-icon-carat-l ui-btn-icon-left">Back</a>
+                
                 <table align="left" id = "live_data" data-role="table" class="ui-responsive">
                     <thead>
                         <tr>
@@ -436,8 +393,7 @@
     <script src="js/main.js"></script>
     <script src="js/cop.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <!-- <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>     -->
-    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
     <script>
     window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
     ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
