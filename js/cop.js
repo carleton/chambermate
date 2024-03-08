@@ -226,13 +226,25 @@ $('#finish-test-cop').addClass('ui-disabled');
 }
 
 function clockRunningCop() {
-var currentTime = new Date(),
-    timeElapsed = new Date(currentTime - copTimeBegan - copStoppedDuration),
-    hour = timeElapsed.getUTCHours(),
-    min = timeElapsed.getUTCMinutes(),
-    sec = timeElapsed.getUTCSeconds(),
-    ms = timeElapsed.getUTCMilliseconds();
-document.getElementById("clock-area").innerHTML = (min > 9 ? min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
+    var currentTime = new Date(),
+        timeElapsed = new Date(currentTime - copTimeBegan - copStoppedDuration),
+        hour = timeElapsed.getUTCHours(),
+        min = timeElapsed.getUTCMinutes(),
+        sec = timeElapsed.getUTCSeconds(),
+        ms = timeElapsed.getUTCMilliseconds();
+    document.getElementById("clock-area").innerHTML = (min > 9 ? min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
+
+
+    let timer = 60*min + sec;
+    if (timer>=590 && timer<=600 ||
+        timer>=890  && timer<=900) {
+        document.getElementById("clock-area").classList.add('blinking-timer')
+        document.getElementById("clock-area").style.color = 'red';
+    } 
+    else {
+        document.getElementById("clock-area").classList.remove('blinking-timer')
+        document.getElementById("clock-area").style.color = '';
+    }
 }
 
 

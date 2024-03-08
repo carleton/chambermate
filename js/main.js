@@ -249,17 +249,6 @@ function clockRunning() {
         sec = timeElapsed.getUTCSeconds(),
         ms = timeElapsed.getUTCMilliseconds();
     document.getElementById("display-area").innerHTML = (min > 9 ? hour*60 + min : hour > 0 ? hour*60 + min : "0" + min) + ":" + (sec > 9 ? sec : "0" + sec);
-
-    let timer = 60*min + sec;
-    if (timer>=590 && timer<=600 ||
-        timer>=890  && timer<=900) {
-        document.getElementById("display-area").classList.add('blinking-timer')
-        document.getElementById("display-area").style.color = 'red';
-    } 
-    else {
-        document.getElementById("display-area").classList.remove('blinking-timer')
-        document.getElementById("display-area").style.color = '';
-    }
 }
 
 /* 
