@@ -42,6 +42,7 @@
         }
         </script>
     </head>
+
     <body onbeforeunload="return myFunction()">
         <div data-role="page" id="pageone" data-theme="b">
             <div data-role="header">
@@ -68,10 +69,10 @@
                     <input type="text" name="obj_two" id="obj_two" placeholder="Stim (&#9792;) or Stud (&#9794;) or Object (R)">
                     <div class="ui-grid-a ui-responsive">
                         <div class="ui-block-a">
-                            <a class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="return setUpCOP()" data-transition="slide">Partner Preference/COP</a>
+                            <a id = "partner" class="ui-btn ui-icon-clock ui-btn-icon-right" onClick="return setUpCOP()" data-transition="slide">Partner Preference/COP</a>
                         </div>
                         <div class="ui-block-b">
-                            <a class="ui-btn ui-icon-heart ui-btn-icon-right" onClick="setUpPacing()" data-transition="slide">Pacing</a>
+                            <a id = "pacing" class="ui-btn ui-icon-heart ui-btn-icon-right" onClick="setUpPacing()" data-transition="slide">Pacing</a>
                         </div>
                     </div>
                     
@@ -104,8 +105,8 @@
                             <td style = "text-align: center;font-size: 30px"> <output id="clock-area">00:00</output></td>
                         </tr>
                     </tbody>
-                </table>
-                <table id ="cop_test_buttons" align="center" data-role="table" class="ui-responsive">
+            </table>
+            <table id ="cop_test_buttons" align="center" data-role="table" class="ui-responsive">
                     <thead>
                         <tr>
                             <th> </th>
