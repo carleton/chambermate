@@ -177,7 +177,8 @@ document.getElementById("time_with_obj_two").innerHTML = (min > 9 ? min : "0" + 
 function startCop() {
 $('#toggle-cop-button').removeClass('ui-disabled');
 
-
+obj_one_StoppedDuration = 0;
+obj_two_StoppedDuration = 0;
 if (withTwo || withOne) {
     document.getElementById('in_1').disabled = true;
     document.getElementById('in_2').disabled = true;
@@ -220,6 +221,7 @@ if (copTimeBegan === null) {
 if (copTimeStopped !== null) {
     copStoppedDuration += (new Date() - copTimeStopped);
 }
+copStoppedDuration += obj_one_StoppedDuration + obj_two_StoppedDuration;
 copStarted = setInterval(clockRunningCop, 10);
 document.getElementById("startCop").disabled = true;
 $('#finish-test-cop').addClass('ui-disabled');
