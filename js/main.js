@@ -68,6 +68,10 @@ var rowDelim = '"\r\n"';
 // Grab text from table into CSV formatted string
 var csv = '"';
 document.getElementById("in_enter").disabled = true;
+document.getElementById('hop').disabled = true;
+document.getElementById('ears').disabled = true;
+document.getElementById('roll').disabled = true;
+document.getElementById('squeak').disabled = true;
 $('#toggle-button').addClass('ui-disabled');
 
 function pacingValidate() {
@@ -137,6 +141,10 @@ function start() {
     $('#toggle-button').removeClass('ui-disabled');
     $('#finish-test').addClass('ui-disabled');
     document.getElementById("in_enter").disabled = false;
+    document.getElementById('hop').disabled = false;
+    document.getElementById('ears').disabled = false;
+    document.getElementById('roll').disabled = false;
+    document.getElementById('squeak').disabled = false;
 
     document.getElementById("download-csv").disabled = true;
     if (timeBegan === null) {
@@ -186,7 +194,25 @@ function stop() {
     clearInterval(started);
     $('#finish-test').removeClass('ui-disabled');
     document.getElementById('in_enter').disabled = true;
-
+    document.getElementById('hop').disabled = true;
+    document.getElementById('ears').disabled = true;
+    document.getElementById('roll').disabled = true;
+    document.getElementById('squeak').disabled = true;
+    // <p id = "male_ins">male ins</p>
+    // <p id = "male_outs">male outs</p>
+    // <p id = "hops_in">Hops In</p>
+    // <p id = "hops_out">Hops Out</p>
+    // <p id = "ears_in">Ears In</p>
+    // <p id = "ears_out">Ears Out</p>
+    // <p id = "rejection_beh">Rejection Beh</p>
+    // <p id = "time_with_male">Time with male</p>
+    // <p id = "time_with_obj_one">Time with obj 1</p>
+    // <p id = "time_with_obj_two">Time with obj 2</p>
+    // <p id = "lqAvg">lrAvg</p>
+    // <p id = "percentExitMount">percent exit mount</p>
+    // <p id = "percentExitIntro">percent exit intro</p>
+    // <p id = "percentExitEjac">percent exit ejac</p>
+    // <p id = "pacingLq">pacing lq</p>
     document.getElementById("start").disabled = false;
     $('#toggle-button').addClass('ui-disabled');
     var x = document.getElementsByClassName('withMale');
@@ -585,6 +611,10 @@ function in_enter(aTime = document.getElementById("display-area").innerHTML) {
         x[i].disabled = false;
     }
     document.getElementById('in_enter').disabled = true;
+    document.getElementById('hop').disabled = true;
+    document.getElementById('ears').disabled = true;
+    document.getElementById('roll').disabled = true;
+    document.getElementById('squeak').disabled = true;
 }
 
 function out(aTime = document.getElementById("display-area").innerHTML) {
@@ -597,6 +627,10 @@ function out(aTime = document.getElementById("display-area").innerHTML) {
         x[i].disabled = true;
     }
     document.getElementById('in_enter').disabled = false;
+    document.getElementById('hop').disabled = false;
+    document.getElementById('ears').disabled = false;
+    document.getElementById('roll').disabled = false;
+    document.getElementById('squeak').disabled = false;
 }
 var x = document.getElementsByClassName('withMale');
 if (!withMale) {
