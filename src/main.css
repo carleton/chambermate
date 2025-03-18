@@ -1,16 +1,12 @@
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
 
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-   html {
+/* Base styles */
+html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
   }
   
-  /* Remove text-shadow in selection highlight */
   ::-moz-selection {
     background: #b3d4fc;
     text-shadow: none;
@@ -21,7 +17,6 @@
     text-shadow: none;
   }
   
-  /* A better looking default horizontal rule */
   hr {
     display: block;
     height: 1px;
@@ -31,7 +26,6 @@
     padding: 0;
   }
   
-  /* Remove the gap between media elements and their containers */
   audio,
   canvas,
   iframe,
@@ -41,22 +35,17 @@
     vertical-align: middle;
   }
   
-  /* Remove default fieldset styles */
   fieldset {
     border: 0;
     margin: 0;
     padding: 0;
   }
   
-  /* Allow only vertical resizing of textareas */
   textarea {
     resize: vertical;
   }
   
-  /* ==========================================================================
-     Browser Upgrade Prompt
-     ========================================================================== */
-  
+  /* Browser Upgrade Prompt */
   .browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
@@ -64,11 +53,7 @@
     padding: 0.2em 0;
   }
   
-  /* ==========================================================================
-     Author's custom styles
-     ========================================================================== */
-  
-  /* Global background and text color */
+  /* Global styles */
   body {
     background-color: black;
     color: white;
@@ -144,12 +129,10 @@
     100% { opacity: 1; }
   }
   
-  /* ==========================================================================
-     Input styling for full-width text boxes
-     ========================================================================== */
+  /* Input styles for full-width text boxes */
   .fullWidthInput {
     display: block;
-    width: 100%;
+    width: 98%;
     margin-bottom: 1rem;
     background-color: black;
     color: white;
@@ -163,10 +146,7 @@
     box-shadow: 0 0 8px 2px blue;
   }
   
-  /* ==========================================================================
-     Additional styles from Banana Muffin Recipe CodePen
-     ========================================================================== */
-  
+  /* Additional styles for recipe/pacing tables */
   .recipe {
     padding: 1em;
   }
@@ -334,24 +314,21 @@
     color: #fff;
   }
   
+  /* Layout helpers */
   .back-btn {
     width: 25%;
   }
-  
   .row-container,
   .total-container {
     display: flex;
     align-items: center;
   }
-  
   .row-container {
     justify-content: space-between;
   }
-  
   .total-container {
     width: 60%;
   }
-  
   .total-text,
   .total-count {
     width: 100%;
@@ -362,23 +339,17 @@
     color: white;
     background-color: #731630;
   }
-  
   .total-text {
     text-align: right;
   }
-  
   .total-count {
     text-align: left;
   }
   
-  /* ==========================================================================
-     Helper classes
-     ========================================================================== */
-  
+  /* Helper classes */
   .hidden {
     display: none !important;
   }
-  
   .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -390,7 +361,6 @@
     width: 1px;
     white-space: nowrap;
   }
-  
   .visuallyhidden.focusable:active,
   .visuallyhidden.focusable:focus {
     clip: auto;
@@ -401,35 +371,28 @@
     width: auto;
     white-space: inherit;
   }
-  
   .invisible {
     visibility: hidden;
   }
-  
   .clearfix:before,
   .clearfix:after {
     content: " ";
     display: table;
   }
-  
   .clearfix:after {
     clear: both;
   }
   
-  /* ==========================================================================
-     Responsive Media Queries
-     ========================================================================== */
+  /* Responsive Media Queries */
   @media only screen and (min-width: 35em) {
-    /* Adjust styles for larger screens here */
+    /* Styles for larger screens */
   }
-  
   @media print,
-         (-webkit-min-device-pixel-ratio: 1.25),
-         (min-resolution: 1.25dppx),
-         (min-resolution: 120dpi) {
-    /* High resolution print adjustments */
+  (-webkit-min-device-pixel-ratio: 1.25),
+  (min-resolution: 1.25dppx),
+  (min-resolution: 120dpi) {
+    /* Print adjustments */
   }
-  
   @media (max-width: 760px) {
     .total-text,
     .total-count {
@@ -441,17 +404,12 @@
       height: 40px !important;
     }
   }
-  
   @media (max-width: 450px) {
     .total-text,
     .total-count {
       height: 80px;
     }
   }
-  
-  /* ==========================================================================
-     Print styles
-     ========================================================================== */
   @media print {
     *, *:before, *:after,
     p:first-letter, div:first-letter, blockquote:first-letter, li:first-letter,

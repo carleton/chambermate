@@ -9,20 +9,21 @@ function getFormattedDate() {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const month = monthNames[now.getMonth()];
   const year = now.getFullYear();
-  
+
   let hour = now.getHours();
   const minute = now.getMinutes();
   const ampm = hour >= 12 ? 'pm' : 'am';
-  hour = hour % 12 || 12; // Convert '0' to '12'
-  
+  hour = hour % 12 || 12;
+
   const minuteStr = minute < 10 ? '0' + minute : minute;
-  
+
   return `${day} ${month} ${year} ${hour}:${minuteStr}${ampm}`;
 }
 
 function ChamberMate() {
-  // Page state (simulate multiple pages)
-  const [currentPage, setCurrentPage] = useState('pageone'); // 'pageone', 'cop', 'copResults'
+  // Pages: "pageone" (main form), "cop" (COP test), "pagetwo" (Pacing/Experiment),
+  // "pagethree" (Pacing Results), "copResults" (COP Results)
+  const [currentPage, setCurrentPage] = useState("pageone");
 
   // Form fields
   const [experimentTitle, setExperimentTitle] = useState('');
@@ -33,26 +34,26 @@ function ChamberMate() {
   const [objOne, setObjOne] = useState('');
   const [objTwo, setObjTwo] = useState('');
 
-  // Timer states for COP clock
+  // COP Timer states
   const [copTimeBegan, setCopTimeBegan] = useState<Date | null>(null);
   const [copTimeStopped, setCopTimeStopped] = useState<Date | null>(null);
   const [copStoppedDuration, setCopStoppedDuration] = useState(0);
   const [clockTime, setClockTime] = useState("00:00");
 
-  // Timer states for Object One
+  // Object One Timer states
   const [objOneTimeBegan, setObjOneTimeBegan] = useState<Date | null>(null);
   const [objOneTimeStopped, setObjOneTimeStopped] = useState<Date | null>(null);
   const [objOneStoppedDuration, setObjOneStoppedDuration] = useState(0);
   const [timeWithObjOne, setTimeWithObjOne] = useState("00:00");
 
-  // Timer states for Object Two
+  // Object Two Timer states
   const [objTwoTimeBegan, setObjTwoTimeBegan] = useState<Date | null>(null);
   const [objTwoTimeStopped, setObjTwoTimeStopped] = useState<Date | null>(null);
   const [objTwoStoppedDuration, setObjTwoStoppedDuration] = useState(0);
   const [timeWithObjTwo, setTimeWithObjTwo] = useState("00:00");
 
-  // Behavior tracking arrays and counters
-  const [copBehavior, setCopBehavior] = useState<{stim: string, time: number}[]>([]);
+  // COP behavior tracking
+  const [copBehavior, setCopBehavior] = useState<{ stim: string; time: number }[]>([]);
   const [flagscop, setFlagscop] = useState<string[]>([]);
   const [withOne, setWithOne] = useState(false);
   const [withTwo, setWithTwo] = useState(false);
@@ -66,33 +67,38 @@ function ChamberMate() {
   const [centerEars, setCenterEars] = useState(0);
 
   // -----------------------
-  // Helper functions
-  // -----------------------
-  const COPValidate = () => {
-    if (experimentTitle.indexOf('#') > -1) {
-      alert('Experiment Title contains #');
-      return false;
-    }
-    if (!experimentTitle || !experimenterName || !female || !objOne || !objTwo) {
-      alert("Please fill in all required fields (and make sure objects are entered)!");
-      return false;
-    }
-    return true;
+  // Dummy functions for pacing actions (stubs)
+  const hop = () => { console.log("hop"); };
+  const ears = () => { console.log("ears"); };
+  const mount_zero = () => { console.log("mount 0"); };
+  const intro_zero = () => { console.log("intro 0"); };
+  const ejac_zero = () => { console.log("ejac 0"); };
+  const roll = () => { console.log("roll"); };
+  const mount_one = () => { console.log("mount 1"); };
+  const intro_one = () => { console.log("intro 1"); };
+  const ejac_one = () => { console.log("ejac 1"); };
+  const squeak = () => { console.log("squeak"); };
+  const mount_two = () => { console.log("mount 2"); };
+  const intro_two = () => { console.log("intro 2"); };
+  const ejac_two = () => { console.log("ejac 2"); };
+  const kick = () => { console.log("kick"); };
+  const mount_three = () => { console.log("mount 3"); };
+  const intro_three = () => { console.log("intro 3"); };
+  const ejac_three = () => { console.log("ejac 3"); };
+  const in_enter = () => { console.log("in_enter"); };
+  const out = () => { console.log("out"); };
+  const backAndSave = () => { 
+    console.log("back and save pacing data"); 
+    setCurrentPage("pagetwo"); 
   };
 
-  const setUpCOP = () => {
-    if (COPValidate()) {
-      setCurrentPage('cop');
-    }
-  };
-
   // -----------------------
-  // COP Timer Effects
+  // COP Timer Effect
   // -----------------------
   useEffect(() => {
     let timerId: number;
     if (copTimeBegan) {
-      timerId = setInterval(() => {
+      timerId = window.setInterval(() => {
         const now = new Date();
         if (copTimeBegan) {
           const elapsed = new Date(now.getTime() - copTimeBegan.getTime() - copStoppedDuration);
@@ -101,8 +107,8 @@ function ChamberMate() {
           setClockTime(`${min > 9 ? min : "0" + min}:${sec > 9 ? sec : "0" + sec}`);
         }
       }, 10);
+      return () => window.clearInterval(timerId);
     }
-    return () => clearInterval(timerId);
   }, [copTimeBegan, copStoppedDuration]);
 
   // -----------------------
@@ -115,7 +121,7 @@ function ChamberMate() {
     if (objOneTimeStopped) {
       setObjOneStoppedDuration(prev => prev + (new Date().getTime() - objOneTimeStopped.getTime()));
     }
-    const id = setInterval(() => {
+    const id = window.setInterval(() => {
       if (objOneTimeBegan) {
         const now = new Date();
         const elapsed = new Date(now.getTime() - objOneTimeBegan.getTime() - objOneStoppedDuration);
@@ -129,7 +135,7 @@ function ChamberMate() {
 
   const stopObjOne = (intervalId: number) => {
     setObjOneTimeStopped(new Date());
-    clearInterval(intervalId);
+    window.clearInterval(intervalId);
   };
 
   // -----------------------
@@ -142,7 +148,7 @@ function ChamberMate() {
     if (objTwoTimeStopped) {
       setObjTwoStoppedDuration(prev => prev + (new Date().getTime() - objTwoTimeStopped.getTime()));
     }
-    const id = setInterval(() => {
+    const id = window.setInterval(() => {
       if (objTwoTimeBegan) {
         const now = new Date();
         const elapsed = new Date(now.getTime() - objTwoTimeBegan.getTime() - objTwoStoppedDuration);
@@ -156,11 +162,11 @@ function ChamberMate() {
 
   const stopObjTwo = (intervalId: number) => {
     setObjTwoTimeStopped(new Date());
-    clearInterval(intervalId);
+    window.clearInterval(intervalId);
   };
 
   // -----------------------
-  // Behavior tracking
+  // Behavior Tracking for COP
   // -----------------------
   const trackBehCop = (stim: string) => {
     const timeNumeric = parseInt(clockTime.replace(":", ""), 10);
@@ -170,14 +176,14 @@ function ChamberMate() {
   };
 
   // -----------------------
-  // Event Handlers for COP interactions
+  // COP Event Handlers
   // -----------------------
   const handleInObjectOne = () => {
     const timerId = startObjOne();
     trackBehCop("inOne");
     setWithOne(true);
     setWithTwo(false);
-    // (Optional: store timerId if you need to clear it later)
+    // Optionally store timerId if needed
   };
 
   const handleInObjectTwo = () => {
@@ -212,12 +218,41 @@ function ChamberMate() {
   };
 
   const finishTestCop = () => {
-    setCurrentPage('copResults');
+    setCurrentPage("copResults");
   };
 
+//   // Validate form similar to original COPValidate
+//   const COPValidateForm = () => {
+//     if (experimentTitle.indexOf('#') > -1) {
+//       alert('Experiment Title contains #');
+//       return false;
+//     }
+//     if (!experimentTitle || !experimenterName || !female || !objOne || !objTwo) {
+//       alert("Please fill in all required fields (and make sure objects are entered)!");
+//       return false;
+//     }
+//     return true;
+//   };
+
+  const COPValidateForm = () => {
+    console.log("Validating form", { experimentTitle, experimenterName, female, objOne, objTwo });
+    if (experimentTitle.indexOf('#') > -1) {
+      alert('Experiment Title contains #');
+      return false;
+    }
+    if (!experimentTitle || !experimenterName || !female || !objOne || !objTwo) {
+      alert("Please fill in all required fields (and make sure objects are entered)!");
+      return false;
+    }
+    return true;
+  };
+  
+
   // -----------------------
-  // Render functions for different pages
+  // Render Functions for Each Page
   // -----------------------
+
+  // Main Form Page (pageone)
   const renderPageOne = () => (
     <div>
       <Helmet>
@@ -290,8 +325,11 @@ function ChamberMate() {
           className="fullWidthInput"
         />
         <div>
-          <button type="button" onClick={setUpCOP}>
+          <button type="button" onClick={() => { if(COPValidateForm()) renderCopPage(); }}>
             Partner Preference / COP
+          </button>
+          <button type="button" onClick={() => setCurrentPage("pagetwo")}>
+            Pacing
           </button>
         </div>
       </form>
@@ -307,6 +345,7 @@ function ChamberMate() {
     </div>
   );
 
+  // COP Test Page (cop)
   const renderCopPage = () => (
     <div>
       <Helmet>
@@ -343,42 +382,239 @@ function ChamberMate() {
     </div>
   );
 
+  // Pacing / Experiment Page (pagetwo)
+  const renderPacingPage = () => (
+    <div>
+      <Helmet>
+        <title>{experimentTitle} Experiment</title>
+      </Helmet>
+      <h1 id="experimentHeader">Experiment</h1>
+      <div className="ui-content">
+        <div className="row-container">
+          <button onClick={() => setCurrentPage("pageone")} className="ui-btn ui-icon-carat-l ui-btn-icon-left back-btn">
+            Back
+          </button>
+          <div className="total-container">
+            <div className="total-text" id="total_text">Total Intro + Ejac Count: </div>
+            <div className="total-count" id="total_count">0</div>
+          </div>
+        </div>
+        <table id="live_data" className="ui-responsive">
+          <thead>
+            <tr>
+              <th style={{ width: "25%" }}>Test Time</th>
+              <th style={{ width: "25%" }}>Mount Count</th>
+              <th style={{ width: "25%" }}>Intro Count</th>
+              <th style={{ width: "25%" }}>Ejac Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ textAlign: "center" }}>
+                <output id="display-area">00:00</output>
+              </td>
+              <td style={{ textAlign: "center" }} id="mount_count">0</td>
+              <td style={{ textAlign: "center" }} id="intro_count">0</td>
+              <td style={{ textAlign: "center" }} id="ejac_count">0</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td style={{ textAlign: "center", height: "25px" }} id="mostRecentMount"></td>
+              <td style={{ textAlign: "center", height: "25px" }} id="mostRecentIntro"></td>
+              <td style={{ textAlign: "center", height: "25px" }} id="mostRecentEjac"></td>
+            </tr>
+          </tbody>
+        </table>
+        <table id="test_buttons" className="ui-responsive">
+          <thead>
+            <tr>
+              <th></th>
+              <th style={{ textAlign: "center" }}>Mount</th>
+              <th style={{ textAlign: "center" }}>Intro</th>
+              <th style={{ textAlign: "center" }}>Ejac</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><button type="button" onClick={hop}>Hops</button></td>
+              <td><button className="withMale" type="button" onClick={mount_zero}>0</button></td>
+              <td><button className="withMale" type="button" onClick={intro_zero}>0</button></td>
+              <td><button className="withMale" type="button" onClick={ejac_zero}>0</button></td>
+              <td><button type="button" onClick={roll}>Roll</button></td>
+            </tr>
+            <tr>
+              <td><button type="button" onClick={ears}>Ears</button></td>
+              <td><button className="withMale" type="button" onClick={mount_one}>1</button></td>
+              <td><button className="withMale" type="button" onClick={intro_one}>1</button></td>
+              <td><button className="withMale" type="button" onClick={ejac_one}>1</button></td>
+              <td><button type="button" onClick={squeak}>Squeak</button></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><button className="withMale" style={{ fontSize: "40px" }} type="button" onClick={mount_two}>2</button></td>
+              <td><button className="withMale" style={{ fontSize: "40px" }} type="button" onClick={intro_two}>2</button></td>
+              <td><button className="withMale" style={{ fontSize: "40px" }} type="button" onClick={ejac_two}>2</button></td>
+              <td><button className="withMale" type="button" onClick={kick}>Kick</button></td>
+            </tr>
+            <tr>
+              <td><button id="in_enter" type="button" style={{ fontSize: "30px" }} onClick={in_enter}>In</button></td>
+              <td><button className="withMale" type="button" onClick={mount_three}>3</button></td>
+              <td><button className="withMale" type="button" onClick={intro_three}>3</button></td>
+              <td><button className="withMale" type="button" onClick={ejac_three}>3</button></td>
+              <td><button className="withMale" type="button" style={{ fontSize: "30px" }} onClick={out}>Out</button></td>
+            </tr>
+            <tr>
+              <td align="center"><button id="start" onClick={() => console.log("start pacing")}>Start</button></td>
+              <td align="center">
+                <button id="toggle-button" className="ui-btn ui-icon-delete ui-btn-icon-right" onClick={() => console.log("stop pacing")}>
+                  Stop
+                </button>
+              </td>
+              <td>
+                <button id="flag" onClick={() => console.log("flag pacing")} className="ui-btn ui-icon-tag ui-btn-icon-right" type="button">Flag</button>
+              </td>
+              <td align="center">
+                <a href="#" className="ui-btn" id="finish-test" onClick={() => { return false; }}>
+                  Finish Test
+                </a>
+              </td>
+              <td align="center">
+                <button id="download-csv" className="ui-btn ui-icon-action ui-btn-icon-right" onClick={() => console.log("download CSV")}>CSV</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="ui-footer">
+        <h1></h1>
+      </div>
+      {/* Hidden elements for pacing data */}
+      <div id="hidden" hidden>
+        <p id="male_ins">male ins</p>
+        <p id="male_outs">male outs</p>
+        <p id="hops_in">Hops In</p>
+        <p id="hops_out">Hops Out</p>
+        <p id="ears_in">Ears In</p>
+        <p id="ears_out">Ears Out</p>
+        <p id="rejection_beh">Rejection Beh</p>
+        <p id="time_with_male">Time with male</p>
+        <p id="time_with_obj_one">Time with obj 1</p>
+        <p id="time_with_obj_two">Time with obj 2</p>
+        <p id="lqAvg">lrAvg</p>
+        <p id="percentExitMount">percent exit mount</p>
+        <p id="percentExitIntro">percent exit intro</p>
+        <p id="percentExitEjac">percent exit ejac</p>
+        <p id="pacingLq">pacing lq</p>
+        <ul id="CRL">CRL_TTE</ul>
+      </div>
+      <div className="ui-footer">
+        <h1></h1>
+      </div>
+    </div>
+  );
+
+  // Pacing Results Page (pagethree)
+  const renderPacingResultsPage = () => (
+    <div>
+      <Helmet>
+        <title>{experimentTitle} Pacing Results</title>
+      </Helmet>
+      <h1 id="resultsHeader">Results</h1>
+      <div className="ui-content">
+        <table id="tableresults" className="ui-responsive">
+          <thead>
+            <tr>
+              <th></th>
+              <th>IN</th>
+              <th>OUT</th>
+              <th>Mount</th>
+              <th>LQ</th>
+              <th>Intro</th>
+              <th>LQ</th>
+              <th>Ejac</th>
+              <th>LQ</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="testBody">
+            {/* Rows can be dynamically generated */}
+          </tbody>
+        </table>
+        <div className="pacing-table__add-row">
+          <span className="pacing-table__add-row-btn">+</span>
+        </div>
+        <div className="ui-collapsible" style={{ paddingTop: '25px' }}>
+          <h3>Flags</h3>
+          <p id="paragraphFlags"></p>
+        </div>
+        <button onClick={backAndSave} className="ui-btn ui-icon-carat-l ui-btn-icon-left">
+          Back
+        </button>
+        <div id="hidden" hidden>
+          <p id="male_ins">male ins</p>
+          <p id="male_outs">male outs</p>
+          <p id="hops_in">Hops In</p>
+          <p id="hops_out">Hops Out</p>
+          <p id="ears_in">Ears In</p>
+          <p id="ears_out">Ears Out</p>
+          <p id="rejection_beh">Rejection Beh</p>
+          <p id="time_with_male">Time with male</p>
+          <p id="time_with_obj_one">Time with obj 1</p>
+          <p id="time_with_obj_two">Time with obj 2</p>
+          <p id="lqAvg">lrAvg</p>
+          <p id="percentExitMount">percent exit mount</p>
+          <p id="percentExitIntro">percent exit intro</p>
+          <p id="percentExitEjac">percent exit ejac</p>
+          <p id="pacingLq">pacing lq</p>
+          <ul id="CRL">CRL_TTE</ul>
+        </div>
+        <div className="ui-footer">
+          <h1></h1>
+        </div>
+      </div>
+    </div>
+  );
+
+  // COP Results Page
   const renderCopResults = () => (
     <div>
       <Helmet>
-        <title>{experimentTitle} Results</title>
+        <title>{experimentTitle} COP Results</title>
       </Helmet>
-      <h1>{experimentTitle} Results</h1>
+      <h1>{experimentTitle} COP Results</h1>
       <div>
         <p>Flags: {flagscop.join(', ')}</p>
         <p>
-          COP Behavior:{' '}
+          COP Behavior:{" "}
           {copBehavior.map((event, idx) => (
             <span key={idx}>
-              {event.stim}({event.time}){' '}
+              {event.stim}({event.time}){" "}
             </span>
           ))}
         </p>
       </div>
-      <button onClick={() => setCurrentPage('cop')}>Back</button>
+      <button onClick={() => setCurrentPage("cop")}>Back</button>
     </div>
   );
 
   return (
     <div>
-      {currentPage === 'pageone' && renderPageOne()}
-      {currentPage === 'cop' && renderCopPage()}
-      {currentPage === 'copResults' && renderCopResults()}
+      {currentPage === "pageone" && renderPageOne()}
+      {currentPage === "cop" && renderCopPage()}
+      {currentPage === "pagetwo" && renderPacingPage()}
+      {currentPage === "pagethree" && renderPacingResultsPage()}
+      {currentPage === "copResults" && renderCopResults()}
     </div>
   );
 }
 
-const rootElement = document.getElementById('root') as HTMLElement;
+const rootElement = document.getElementById("root") as HTMLElement;
 const root = ReactDOM.createRoot(rootElement);
 root.render(
-    <HelmetProvider>
-      <ChamberMate />
-    </HelmetProvider>
-  );
+  <HelmetProvider>
+    <ChamberMate />
+  </HelmetProvider>
+);
 
 export default ChamberMate;
