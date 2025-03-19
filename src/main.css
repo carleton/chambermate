@@ -5,132 +5,144 @@ html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
-  }
-  
-  ::-moz-selection {
+}
+
+::-moz-selection {
     background: #b3d4fc;
     text-shadow: none;
-  }
-  
-  ::selection {
+}
+
+::selection {
     background: #b3d4fc;
     text-shadow: none;
-  }
-  
-  hr {
+}
+
+hr {
     display: block;
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
-  }
-  
-  audio,
-  canvas,
-  iframe,
-  img,
-  svg,
-  video {
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
     vertical-align: middle;
-  }
-  
-  fieldset {
+}
+
+fieldset {
     border: 0;
     margin: 0;
     padding: 0;
-  }
-  
-  textarea {
+}
+
+textarea {
     resize: vertical;
-  }
-  
-  /* Browser Upgrade Prompt */
-  .browserupgrade {
+}
+
+/* Browser Upgrade Prompt */
+.browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
     color: #000;
     padding: 0.2em 0;
-  }
-  
-  /* Global styles */
-  body {
+}
+
+/* Global styles */
+body {
     background-color: black;
     color: white;
     margin: 0;
     font-family: sans-serif;
-  }
-  
-  /* Table styles */
-  #tableresults,
-  #coptableresults,
-  #coptwotableresults {
+}
+
+/* Table styles */
+#tableresults,
+#coptableresults,
+#coptwotableresults {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     padding: 3px;
-  }
-  
-  #coptableresults td, #coptableresults th,
-  #coptwotableresults td, #coptwotableresults th,
-  #tableresults td, #tableresults th,
-  #live_data td, #live_data th {
+}
+
+#coptableresults td,
+#coptableresults th,
+#coptwotableresults td,
+#coptwotableresults th,
+#tableresults td,
+#tableresults th,
+#live_data td,
+#live_data th {
     border: 1px solid #111;
     padding: 8px;
-  }
-  
-  #tableresults tr:nth-child(even),
-  #coptableresults tr:nth-child(even),
-  #coptwotableresults tr:nth-child(even),
-  #live_data tr:nth-child(even) {
+}
+
+#tableresults tr:nth-child(even),
+#coptableresults tr:nth-child(even),
+#coptwotableresults tr:nth-child(even),
+#live_data tr:nth-child(even) {
     background-color: #40152a;
-  }
-  
-  #tableresults tr:nth-child(odd) {
+}
+
+#tableresults tr:nth-child(odd) {
     background-color: #261822;
-  }
-  
-  #coptableresults tr:nth-child(odd),
-  #coptwotableresults tr:nth-child(odd) {
+}
+
+#coptableresults tr:nth-child(odd),
+#coptwotableresults tr:nth-child(odd) {
     background-color: #261822;
-  }
-  
-  #tableresults tr:hover,
-  #coptableresults tr:hover,
-  #coptwotableresults tr:hover {
+}
+
+#tableresults tr:hover,
+#coptableresults tr:hover,
+#coptwotableresults tr:hover {
     background-color: #731630;
-  }
-  
-  #tableresults th,
-  #coptableresults th,
-  #live_data th {
+}
+
+#tableresults th,
+#coptableresults th,
+#live_data th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     background-color: #731630;
     color: white;
-  }
-  
-  #meertslogo {
+}
+
+#meertslogo {
     margin: auto;
     display: block;
     width: 10%;
     padding: 10px;
-  }
-  
-  /* Blinking timer animation */
-  .blinking-timer {
+}
+
+/* Blinking timer animation */
+.blinking-timer {
     animation: blink 1s infinite;
-  }
-  
-  @keyframes blink {
-    0% { opacity: 1; } 
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  
-  /* Input styles for full-width text boxes */
-  .fullWidthInput {
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Input styles for full-width text boxes */
+.fullWidthInput {
     display: block;
     width: 98%;
     margin-bottom: 1rem;
@@ -139,21 +151,81 @@ html {
     border: 1px solid #ccc;
     padding: 0.5rem;
     transition: box-shadow 0.3s ease;
-  }
-  
-  .fullWidthInput:focus {
+}
+
+.fullWidthInput:focus {
     outline: none;
     box-shadow: 0 0 8px 2px blue;
-  }
-  
-  /* Additional styles for recipe/pacing tables */
-  .recipe {
+}
+
+/* Additional styles for recipe/pacing tables */
+
+/* Make the table scale to 98% of the screen width and center it */
+.scaled-table {
+    width: 98%;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 1.2em;
+    /* increase font size */
+    text-align: center;
+    /* centers text horizontally */
+    vertical-align: middle;
+    /* centers content vertically */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style all buttons inside the scaled table */
+.scaled-table button {
+    background-color: #d3d3d391;
+    /* light grey background */
+    color: #000;
+    /* black text */
+    border: none;
+    border-radius: 10px;
+    /* rounded corners */
+    font-weight: bold;
+    padding: 1em 2em;
+    /* adjust these values for a "double-sized" look */
+    cursor: pointer;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Optional: Add a hover effect */
+.scaled-table button:hover {
+    background-color: #c0c0c0;
+}
+
+.locationText {
+    font-size: 2em;
+}
+
+
+/* Extra-large button */
+.bigButton {
+    /* height: 60px; */
+    /* Increase the height */
+    font-size: 2em;
+    /* Larger text */
+    padding: 0.8em;
+    /* Increase padding */
+    /* Optionally adjust margin or other properties if needed */
+    /* vertical-align: middle; */
+    /* centers content vertically */
+}
+
+
+.recipe {
     padding: 1em;
-  }
-  .recipe__title {
+}
+
+.recipe__title {
     margin-top: 0;
-  }
-  .recipe__info {
+}
+
+.recipe__info {
     vertical-align: top;
     text-align: right;
     padding: 0 1em 0 0;
@@ -163,22 +235,26 @@ html {
     border-right: 1px dotted #EEE;
     width: 300px;
     float: left;
-  }
-  .recipe__ingredients {
+}
+
+.recipe__ingredients {
     float: left;
-  }
-  .recipe-table {
+}
+
+.recipe-table {
     position: relative;
     padding: 1em;
     border: 1px solid #DDD;
     box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
     z-index: 10;
-  }
-  .recipe-table__cell {
+}
+
+.recipe-table__cell {
     vertical-align: top;
     padding: 3px 5px;
-  }
-  .recipe__text-field {
+}
+
+.recipe__text-field {
     margin: 0;
     padding: 0.45em 0.92em;
     font-size: 1em;
@@ -186,14 +262,16 @@ html {
     color: #555555;
     background-color: #FFF;
     border: 1px solid #CCC;
-  }
-  .recipe-table__add-row {
+}
+
+.recipe-table__add-row {
     margin-top: 0;
     position: relative;
     border-top: 1px solid #EEE;
     z-index: 8;
-  }
-  .recipe-table__add-row-btn {
+}
+
+.recipe-table__add-row-btn {
     display: block;
     cursor: pointer;
     position: absolute;
@@ -211,11 +289,13 @@ html {
     background: #16A085;
     height: 1.5em;
     line-height: 1.5em;
-  }
-  .recipe-table__add-row-btn:hover {
+}
+
+.recipe-table__add-row-btn:hover {
     opacity: 1;
-  }
-  .recipe-table__del-row-btn {
+}
+
+.recipe-table__del-row-btn {
     cursor: pointer;
     display: inline-block;
     padding: 0.45em 0.92em;
@@ -227,39 +307,44 @@ html {
     transition: all 0.3s;
     text-align: center;
     background-color: #fff;
-  }
-  .recipe-table__del-row-btn:hover {
+}
+
+.recipe-table__del-row-btn:hover {
     background: #F39C12;
     color: #fff;
-  }
-  .drag-handler {
+}
+
+.drag-handler {
     width: 1.4em;
     position: relative;
     background-color: #333;
     background-image: linear-gradient(45deg, #333, #333 2px, #252525 2px, #252525 4px, #333 4px, #333 9px, #252525 9px, #252525 11px, #333 11px, #333 16px, #252525 16px, #252525 18px, #333 18px, #333 22px);
-    background-size: 10px 20px; 
+    background-size: 10px 20px;
     cursor: move;
     border-top: 2px solid #FFF;
     border-bottom: 2px solid #FFF;
-  }
-  .drag-handler:active {
+}
+
+.drag-handler:active {
     background-image: linear-gradient(45deg, #bab86c, #bab86c 2px, #333 2px, #333 4px, #bab86c 4px, #bab86c 9px, #333 9px, #333 11px, #bab86c 11px, #bab86c 16px, #333 16px, #333 18px, #bab86c 18px, #bab86c 22px);
-    background-size: 10px 20px; 
-  }
-  
-  /* Pacing table styles */
-  .pacing-table {
+    background-size: 10px 20px;
+}
+
+/* Pacing table styles */
+.pacing-table {
     position: relative;
     padding: 1em;
     border: 1px solid #DDD;
     box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
     z-index: 10;
-  }
-  .pacing-table__cell {
+}
+
+.pacing-table__cell {
     vertical-align: top;
     padding: 3px 5px;
-  }
-  .pacing__text-field {
+}
+
+.pacing__text-field {
     margin: 0;
     padding: 0.45em 0.92em;
     font-size: 1em;
@@ -267,14 +352,16 @@ html {
     color: #555555;
     background-color: #FFF;
     border: 1px solid #CCC;
-  }
-  .pacing-table__add-row {
+}
+
+.pacing-table__add-row {
     margin-top: 0;
     position: relative;
     border-top: 1px solid #EEE;
     z-index: 8;
-  }
-  .pacing-table__add-row-btn {
+}
+
+.pacing-table__add-row-btn {
     display: block;
     cursor: pointer;
     position: absolute;
@@ -292,11 +379,13 @@ html {
     background: #16A085;
     height: 1.5em;
     line-height: 1.5em;
-  }
-  .pacing-table__add-row-btn:hover {
+}
+
+.pacing-table__add-row-btn:hover {
     opacity: 1;
-  }
-  .pacing-table__del-row-btn {
+}
+
+.pacing-table__del-row-btn {
     cursor: pointer;
     display: inline-block;
     padding: 0.45em 0.92em;
@@ -308,29 +397,34 @@ html {
     transition: all 0.3s;
     text-align: center;
     background-color: #fff;
-  }
-  .pacing-table__del-row-btn:hover {
+}
+
+.pacing-table__del-row-btn:hover {
     background: #F39C12;
     color: #fff;
-  }
-  
-  /* Layout helpers */
-  .back-btn {
+}
+
+/* Layout helpers */
+.back-btn {
     width: 25%;
-  }
-  .row-container,
-  .total-container {
+}
+
+.row-container,
+.total-container {
     display: flex;
     align-items: center;
-  }
-  .row-container {
+}
+
+.row-container {
     justify-content: space-between;
-  }
-  .total-container {
+}
+
+.total-container {
     width: 60%;
-  }
-  .total-text,
-  .total-count {
+}
+
+.total-text,
+.total-count {
     width: 100%;
     height: 22px;
     font-size: 16px;
@@ -338,19 +432,22 @@ html {
     padding: 0.7em 1em;
     color: white;
     background-color: #731630;
-  }
-  .total-text {
+}
+
+.total-text {
     text-align: right;
-  }
-  .total-count {
+}
+
+.total-count {
     text-align: left;
-  }
-  
-  /* Helper classes */
-  .hidden {
+}
+
+/* Helper classes */
+.hidden {
     display: none !important;
-  }
-  .visuallyhidden {
+}
+
+.visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -360,9 +457,10 @@ html {
     position: absolute;
     width: 1px;
     white-space: nowrap;
-  }
-  .visuallyhidden.focusable:active,
-  .visuallyhidden.focusable:focus {
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
     clip: auto;
     height: auto;
     margin: 0;
@@ -370,86 +468,121 @@ html {
     position: static;
     width: auto;
     white-space: inherit;
-  }
-  .invisible {
+}
+
+.invisible {
     visibility: hidden;
-  }
-  .clearfix:before,
-  .clearfix:after {
+}
+
+.clearfix:before,
+.clearfix:after {
     content: " ";
     display: table;
-  }
-  .clearfix:after {
+}
+
+.clearfix:after {
     clear: both;
-  }
-  
-  /* Responsive Media Queries */
-  @media only screen and (min-width: 35em) {
+}
+
+/* Responsive Media Queries */
+@media only screen and (min-width: 35em) {
     /* Styles for larger screens */
-  }
-  @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+}
+
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
     /* Print adjustments */
-  }
-  @media (max-width: 760px) {
+}
+
+@media (max-width: 760px) {
+
     .total-text,
     .total-count {
-      height: 44px;
+        height: 44px;
     }
+
     #mostRecentMount,
     #mostRecentIntro,
     #mostRecentEjac {
-      height: 40px !important;
+        height: 40px !important;
     }
-  }
-  @media (max-width: 450px) {
+}
+
+@media (max-width: 450px) {
+
     .total-text,
     .total-count {
-      height: 80px;
+        height: 80px;
     }
-  }
-  @media print {
-    *, *:before, *:after,
-    p:first-letter, div:first-letter, blockquote:first-letter, li:first-letter,
-    p:first-line, div:first-line, blockquote:first-line, li:first-line {
-      background: transparent !important;
-      color: #000 !important;
-      box-shadow: none !important;
-      text-shadow: none !important;
+}
+
+@media print {
+
+    *,
+    *:before,
+    *:after,
+    p:first-letter,
+    div:first-letter,
+    blockquote:first-letter,
+    li:first-letter,
+    p:first-line,
+    div:first-line,
+    blockquote:first-line,
+    li:first-line {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
     }
-    a, a:visited {
-      text-decoration: underline;
+
+    a,
+    a:visited {
+        text-decoration: underline;
     }
+
     a[href]:after {
-      content: " (" attr(href) ")";
+        content: " (" attr(href) ")";
     }
+
     abbr[title]:after {
-      content: " (" attr(title) ")";
+        content: " (" attr(title) ")";
     }
-    a[href^="#"]:after, a[href^="javascript:"]:after {
-      content: "";
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
     }
+
     pre {
-      white-space: pre-wrap !important;
+        white-space: pre-wrap !important;
     }
-    pre, blockquote {
-      border: 1px solid #999;
-      page-break-inside: avoid;
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
     }
+
     thead {
-      display: table-header-group;
+        display: table-header-group;
     }
-    tr, img {
-      page-break-inside: avoid;
+
+    tr,
+    img {
+        page-break-inside: avoid;
     }
-    p, h2, h3 {
-      orphans: 3;
-      widows: 3;
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
     }
-    h2, h3 {
-      page-break-after: avoid;
+
+    h2,
+    h3 {
+        page-break-after: avoid;
     }
-  }
-  
+}
