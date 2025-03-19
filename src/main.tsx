@@ -235,14 +235,16 @@ function ChamberMate() {
 //   };
 
   const COPValidateForm = () => {
-    console.log("Validating form", { experimentTitle, experimenterName, female, objOne, objTwo });
+    // console.log("Validating form", { experimentTitle, experimenterName, female, objOne, objTwo });
     if (experimentTitle.indexOf('#') > -1) {
-      alert('Experiment Title contains #');
-      return false;
+        console.log("Contains # error.");
+        alert('Experiment Title contains #');
+        return false;
     }
     if (!experimentTitle || !experimenterName || !female || !objOne || !objTwo) {
-      alert("Please fill in all required fields (and make sure objects are entered)!");
-      return false;
+        console.log("Field(s) empty error.");
+        alert("Please fill in all required fields (and make sure objects are entered)!");
+        return false;
     }
     return true;
   };
@@ -325,7 +327,7 @@ function ChamberMate() {
           className="fullWidthInput"
         />
         <div>
-          <button type="button" onClick={() => { if(COPValidateForm()) renderCopPage(); }}>
+          <button type="button" onClick={() => { if(COPValidateForm()) setCurrentPage("cop") }}>
             Partner Preference / COP
           </button>
           <button type="button" onClick={() => setCurrentPage("pagetwo")}>
