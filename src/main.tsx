@@ -40,23 +40,23 @@ function ChamberMate() {
     const [copStoppedDuration, setCopStoppedDuration] = useState(0);
     const [clockTime, setClockTime] = useState("00:00");
 
-    // Object One Timer states
-    const [objOneTimeBegan, setObjOneTimeBegan] = useState<Date | null>(null);
-    const [objOneTimeStopped, setObjOneTimeStopped] = useState<Date | null>(null);
-    const [objOneStoppedDuration, setObjOneStoppedDuration] = useState(0);
-    const [timeWithObjOne, setTimeWithObjOne] = useState("00:00");
+    // // Object One Timer states
+    // const [objOneTimeBegan, setObjOneTimeBegan] = useState<Date | null>(null);
+    // const [objOneTimeStopped, setObjOneTimeStopped] = useState<Date | null>(null);
+    // const [objOneStoppedDuration, setObjOneStoppedDuration] = useState(0);
+    // const [timeWithObjOne, setTimeWithObjOne] = useState("00:00");
 
-    // Object Two Timer states
-    const [objTwoTimeBegan, setObjTwoTimeBegan] = useState<Date | null>(null);
-    const [objTwoTimeStopped, setObjTwoTimeStopped] = useState<Date | null>(null);
-    const [objTwoStoppedDuration, setObjTwoStoppedDuration] = useState(0);
-    const [timeWithObjTwo, setTimeWithObjTwo] = useState("00:00");
+    // // Object Two Timer states
+    // const [objTwoTimeBegan, setObjTwoTimeBegan] = useState<Date | null>(null);
+    // const [objTwoTimeStopped, setObjTwoTimeStopped] = useState<Date | null>(null);
+    // const [objTwoStoppedDuration, setObjTwoStoppedDuration] = useState(0);
+    // const [timeWithObjTwo, setTimeWithObjTwo] = useState("00:00");
 
     // COP behavior tracking
     const [copBehavior, setCopBehavior] = useState<{ stim: string; time: number }[]>([]);
     const [flagscop, setFlagscop] = useState<string[]>([]);
     const [withOne, setWithOne] = useState(false);
-    const [withCenter, setWithCenter] = useState(false);
+    const [withCenter, setWithCenter] = useState(true);
     const [withTwo, setWithTwo] = useState(false);
     const [chewOne, setChewOne] = useState(0);
     const [chewTwo, setChewTwo] = useState(0);
@@ -145,6 +145,52 @@ function ChamberMate() {
         setWithCenter(true);
         setWithTwo(false);
     };
+
+    const handleChew = () => {
+        if (withOne) {
+            setChewOne(prev => prev + 1);
+            trackBehCop("chewOne");
+        } else if (withTwo) {
+            setChewTwo(prev => prev + 1);
+            trackBehCop("chewTwo");
+        } else if (withCenter) {
+            // If you wish to track a chew event for center as well
+            trackBehCop("chewCenter");
+        } else {
+            console.log("No object selected for chew");
+        }
+    };
+
+    const handleHops = () => {
+        if (withOne) {
+            setHopOne(prev => prev + 1);
+            trackBehCop("hopOne");
+        } else if (withTwo) {
+            setHopTwo(prev => prev + 1);
+            trackBehCop("hopTwo");
+        } else if (withCenter) {
+            setCenterHops(prev => prev + 1);
+            trackBehCop("centerHops");
+        } else {
+            console.log("No object selected for hops");
+        }
+    };
+
+    const handleEars = () => {
+        if (withOne) {
+            setEarsOne(prev => prev + 1);
+            trackBehCop("earsOne");
+        } else if (withTwo) {
+            setEarsTwo(prev => prev + 1);
+            trackBehCop("earsTwo");
+        } else if (withCenter) {
+            setCenterEars(prev => prev + 1);
+            trackBehCop("centerEars");
+        } else {
+            console.log("No object selected for ears");
+        }
+    };
+
 
     const startCop = () => {
         if (!copTimeBegan) {
@@ -341,9 +387,49 @@ function ChamberMate() {
                     </tr>
                     <tr>
                         <td></td>
-                        <td><button onClick={handleInObjectOne} className="bigButton">In</button></td>
+                        <td>
+                            <button onClick={handleInObjectOne} className="bigButton" disabled={!withCenter}>In</button></td>
+                        <td>
+                            <button onClick={handleChew}>Chew</button>
+                        </td>
+                        <td>
+                            <button onClick={handleInObjectTwo} className="bigButton" disabled={!withCenter}>In</button>
+                        </td>
                         <td></td>
-                        <td><button onClick={handleInObjectTwo} className="bigButton">In</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onClick={handleHops} disabled={!withOne}>Hops</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button onClick={handleHops} disabled={!withTwo}>Hops</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onClick={handleEars} disabled={!withOne}>Ears</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button onClick={handleEars} disabled={!withTwo}>Ears</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><button onClick={handleInCenter} className="bigButton" disabled={withCenter}>Center</button></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><button onClick={handleHops}>Hops</button></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><button onClick={handleEars}>Ears</button></td>
+                        <td></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -352,13 +438,6 @@ function ChamberMate() {
                         <td></td>
                         <td></td>
                         <td><button onClick={finishTestCop}>Finish Test</button></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><button onClick={handleInCenter} className="bigButton">Center</button></td>
-                        <td></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td><button onClick={stopCop}>Stop COP</button></td>
