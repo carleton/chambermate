@@ -9,6 +9,9 @@ Hormones shape the brain during development to enable the expression of mature s
 
 * [Publications & Posters](https://apps.carleton.edu/curricular/psyc/meertslab/publications/) — Some select publications out of the lab.
 
+## Developers
+Alexei Mendez
+
 ## Developer Notes 
 
 ### Merge Requests
