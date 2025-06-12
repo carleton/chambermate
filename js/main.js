@@ -875,6 +875,7 @@ function backAndSave() {
          }
      } */
 
+/*
  //iterate through sexual behavior
  //fill out a table, for each column, if the next key has that type put it there, 
  //otherwise go to the next column (Add a comma and move on)
@@ -900,7 +901,7 @@ function backAndSave() {
  //newStim is false if female went in and out without a stim
  //set newStim false when in is clicked, and true when stim
  //push crl and tte only on last stim - use stim id
-
+*/
 
 
 function downloadCSV() {
@@ -923,39 +924,40 @@ function downloadCSV() {
     console.log("final earsIn ", earsIn)
     console.log("final earsOut ", earsOut)
 
-    var data = [
-        [],
-        ["Date", " ", date],
-        ["Female", " ", female],
-        ["Stud", " ", stud],
-        ["Male Ins", " ", maleIns],
-        ["Male Outs", " ", maleOuts],
-        ["Time", " ", time],
-        ["Hops IN", " ", hopsIn],
-        ["Ears IN", " ", earsIn],
-        ["Hops ALONE", " ", hopsOut],
-        ["Ears ALONE", " ", earsOut],
-        ["Kicks", " ", kicks],
-        ["Squeaks", " ", squeaks],
-        ["Rolls", " ", rolls],
-        ["Rejection Beh", " ", rejectionBeh],
-        // ["time with male", " ", timeWithMale],
-        // ["# mounts", " ", mountCount],
-        // ["# intros", " ", introCount_exit_var],
-        // ["# ejacs", " ", ejacCount],
-        // ["% exit mount", " ", percentExitMount],
-        // ["% exit intro", " ", percentExitIntro],
-        // ["% exit ejac", " ", percentExitEjac],
-        // ["pacing lq", " ", pacingLq],
-        // ["pacing lr", " ", lqAvg],
-        // ["Mean Contact Return Mount", " ", crlMountAvg],
-        // ["Mean Contact Return Intro", " ", crlIntroAvg],
-        // ["Mean Contact Return Ejac", " ", crlEjacAvg],
-        // ["Mean Time To Exit Mount", " ", tteMountAvg],
-        // ["Mean Time To Exit Intro", " ", tteIntroAvg],
-        // ["Mean Time To Exit Ejac", " ", tteEjacAvg],
-        []
-    ];
+    // Not currently used:
+    // var data = [
+    //     [],
+    //     ["Date", " ", date],
+    //     ["Female", " ", female],
+    //     ["Stud", " ", stud],
+    //     ["Male Ins", " ", maleIns],
+    //     ["Male Outs", " ", maleOuts],
+    //     ["Time", " ", time],
+    //     ["Hops IN", " ", hopsIn],
+    //     ["Ears IN", " ", earsIn],
+    //     ["Hops ALONE", " ", hopsOut],
+    //     ["Ears ALONE", " ", earsOut],
+    //     ["Kicks", " ", kicks],
+    //     ["Squeaks", " ", squeaks],
+    //     ["Rolls", " ", rolls],
+    //     ["Rejection Beh", " ", rejectionBeh],
+    //     // ["time with male", " ", timeWithMale],
+    //     // ["# mounts", " ", mountCount],
+    //     // ["# intros", " ", introCount_exit_var],
+    //     // ["# ejacs", " ", ejacCount],
+    //     // ["% exit mount", " ", percentExitMount],
+    //     // ["% exit intro", " ", percentExitIntro],
+    //     // ["% exit ejac", " ", percentExitEjac],
+    //     // ["pacing lq", " ", pacingLq],
+    //     // ["pacing lr", " ", lqAvg],
+    //     // ["Mean Contact Return Mount", " ", crlMountAvg],
+    //     // ["Mean Contact Return Intro", " ", crlIntroAvg],
+    //     // ["Mean Contact Return Ejac", " ", crlEjacAvg],
+    //     // ["Mean Time To Exit Mount", " ", tteMountAvg],
+    //     // ["Mean Time To Exit Intro", " ", tteIntroAvg],
+    //     // ["Mean Time To Exit Ejac", " ", tteEjacAvg],
+    //     []
+    // ];
 
 
     //                var $headers = $('#resultstable').find('tr:has(th)')
@@ -980,27 +982,33 @@ function downloadCSV() {
     csvContent += 'Stud,'+stud+'\n';
 
     csvContent +=',,,,,,,Mount,,Intro,,Ejac\n'
-    csvContent +=',Male Ins,,'+maleIns+',,% exit,,"=ROUND(COUNT(J19:J'+r+')/COUNT(D19:D'+r+')*100,2)",,"=ROUND(COUNT(L19:L'+r+')/COUNT(F19:F'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(H19:H'+r+')*100,2)",,,,,,,,,,,\n';
-    csvContent += ',Male Outs,,'+maleOuts+',,mean contact return,,"=ROUND(AVERAGE(J19:J'+r+'),2)",,"=ROUND(AVERAGE(L19:L'+r+'),2)",,"=ROUND(AVERAGE(N19:N'+r+'),2)",,,,,,,,,,,\n';
-    csvContent += ',Seconds,,'+seconds+',,mean time to exit,,"=ROUND(AVERAGE(W19:W'+r+'),2)",,"=ROUND(AVERAGE(X19:X'+r+'),2)",,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,,,,,,,,,,\n';
+    csvContent +=',Male Ins,,=COUNT(B19:B'+r+'),,% exit,,"=ROUND(COUNT(J19:J'+r+')/COUNT(D19:D'+r+')*100,2)",,"=ROUND(COUNT(L19:L'+r+')/COUNT(F19:F'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(H19:H'+r+')*100,2)",,,,,,,,,,,\n';
+    csvContent += ',Male Outs,,=COUNT(C19:C'+r+'),,mean contact return,,"=ROUND(AVERAGE(J19:J'+r+'),2)",,"=ROUND(AVERAGE(L19:L'+r+'),2)",,"=ROUND(AVERAGE(N19:N'+r+'),2)",,,,,,,,,,,\n';
+    csvContent += ',Seconds,,=MAX(C19:C'+r+'),,mean time to exit,,"=ROUND(AVERAGE(W19:W'+r+'),2)",,"=ROUND(AVERAGE(X19:X'+r+'),2)",,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,,,,,,,,,,\n';
     csvContent += ',Hops IN,,'+hopsIn+',,pacing lq,,"=ROUND((COUNTIF(E19:E'+r+',"">=2"")+COUNTIF(G19:G'+r+',"">=2"")+COUNTIF(I19:I'+r+',"">=2""))/(COUNT(D19:I'+r+')/2)*100,2)",,,,,,,,,,,,,,,\n';
-    csvContent += ',Ears IN,,'+earsIn+',,pacing lr,,"=ROUND((SUM(E19:E'+r+')+SUM(G19:G'+r+')+SUM(I19:I'+r+'))/(COUNT(E19:E'+r+')+COUNT(G19:G'+r+')+COUNT(I19:I'+r+')),2)",,,,,,,,,,,,,,,\n';
-    csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,,,,,,,,,,,,,,\n';
-    csvContent += ',Ears ALONE,,'+earsOut+',,mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,,,\n';
+    csvContent += ',Ears IN,,'+earsIn+',,pacing lr,,"=ROUND((SUM(E19:E'+r+')+SUM(G19:G'+r+')+SUM(I19:I'+r+'))/(COUNT(E19:E'+r+')+COUNT(G19:G'+r+')+COUNT(I19:I'+r+')),2)",,ProcIN per min,,"=ROUND((SUM(D8:D9)/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60))), 2)",,,,,,,,,,,,,\n';
+    csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,p.twm,,"=ROUND(SUM(V19:V'+r+')/(QUOTIENT(MAX(C19:C'+r+'),100)*60+(MOD(MAX(C19:C'+r+'), 100)))*100, 2)",,,,,,,,,\n';
+    csvContent += ',Ears ALONE,,'+earsOut+',,mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,\n';
+
     csvContent += ',Kicks,,'+kicks+',,intros,,=COUNT(F19:F'+r+'),,,,,,,,,,,,,,,\n';
     csvContent += ',Squeaks,,'+squeaks+',,ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
     csvContent += ',Rolls,,'+rolls+',,flags,,'+flags+',,,,,,,,,,,,,,,\n';
-    csvContent += ',Rejection Beh,,'+rejectionBeh+'\n';
-    csvContent += ',Experiment,,1,\n';
+    csvContent += ',Rejection Beh,,'+rejectionBeh+',,rej per min,,"=ROUND(D15/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,,,\n';
+    csvContent += ',Experiment,,1,,act_per_min,,"=ROUND((COUNT(B19:B+'+r+')+COUNT(C19:C'+r+'))/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,\n';
      
 
+    // Possible future features: iii Calculation
+    // iii,,=AVERAGE(Z19:Z'+r+')
+    // Need to include iii calculation
+    // make a new Row Z that follows this formula
+    // =IF(ISNUMBER(F19), IF(10000=MIN(10000, F20:F64, H20:H64), "", 60*(QUOTIENT(MIN(F20:F64, H20:H64), 100) - QUOTIENT(F19, 100)) + MOD(MIN(F20:F64, H20:H64), 100) - MOD(F19, 100)), "")
 
     // data.forEach(function(infoArray, index) {
     //      dataString = infoArray.join(",");
     //     csvContent += index < data.length ? dataString + "\n" : dataString;
     // });
     csvContent += ',,,,,,,,,Contact return,,,,,,,,,,,,,TIME TO EXIT,\n';
-    csvContent += ',IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac \n';
+    csvContent += ',IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac,Time since last stim \n';
 
     console.log("csv: ", csvContent);
 
