@@ -1,23 +1,69 @@
-# chambermate
-[Chambermate homepage](https://carleton.github.io/chambermate/)
+# React + TypeScript + Vite
 
-## The [Meerts Lab](https://apps.carleton.edu/curricular/psyc/meertslab/)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Our laboratory investigates the neural and hormonal factors involved in the expression and development of motivated behaviors. Specifically, we are working to better understand the role of the brain, hormones and sensory inputs that contribute to the rewarding nature of mating behavior in female rats.
+Currently, two official plugins are available:
 
-Hormones shape the brain during development to enable the expression of mature social behaviors in adulthood. We are investigating the interactions between hormones and the brain that occur during puberty in female rats that are necessary for adult social interactions. To examine these questions, we combine behavioral observation and classical conditioning procedures with pharmacological and neuroanatomical techniques.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-* [Publications & Posters](https://apps.carleton.edu/curricular/psyc/meertslab/publications/) — Some select publications out of the lab.
+## Expanding the ESLint configuration
 
-## Developers
-Alexei Mendez
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Developer Notes 
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-### Merge Requests
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-* When creating a merge request, Github defaults to Josh's original repo for the destination branch. Make sure that the destination is Carleton AT's "master" branch instead of his.
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
 
-### Testing 
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-* Before pushing and merging, please make sure to test if CSV download, CSV tables, CSV data-crunching are working properly. 
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+]);
+```
