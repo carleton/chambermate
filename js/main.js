@@ -646,6 +646,7 @@ function finishTest() {
     var date = document.getElementById("date").innerHTML;
     var female = document.getElementById("female").innerHTML;
     var stud = document.getElementById("stud").innerHTML;
+    var condition = document.getElementById("condition").innerHTML;
     var columns = ["drag", "in", "out", "mount", "lq", "intro", "lq", "ejac", "lq", "del"];
     var resultTable = document.getElementById("testBody");
     var numberRows = 0;
