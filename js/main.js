@@ -909,6 +909,7 @@ function downloadCSV() {
     var female = document.getElementById("female").value;
     var stud = document.getElementById("stud").value;
     var experimenter_name = document.getElementById("experimenter_name").value;
+    var experiment = document.getElementById("experiment").value;
     var filename = document.getElementById("experiment_title").value;
     var seconds = (parseInt(document.getElementById("display-area").innerHTML.split(':')[0])*60 + parseInt(document.getElementById("display-area").innerHTML.split(':')[1])).toString();
     var time = document.getElementById("display-area").innerHTML;
@@ -994,7 +995,7 @@ function downloadCSV() {
     csvContent += ',Squeaks,,'+squeaks+',,ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
     csvContent += ',Rolls,,'+rolls+',,flags,,'+flags+',,,,,,,,,,,,,,,\n';
     csvContent += ',Rejection Beh,,'+rejectionBeh+',,rej per min,,"=ROUND(D15/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,,,\n';
-    csvContent += ',Experiment,,1,,act per min,,"=ROUND((COUNT(B19:B+'+r+')+COUNT(C19:C'+r+'))/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,\n';
+    csvContent += ',Experiment,,'+experiment+',,act per min,,"=ROUND((COUNT(B19:B+'+r+')+COUNT(C19:C'+r+'))/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,\n';
      
 
     // Possible future features: iii Calculation
