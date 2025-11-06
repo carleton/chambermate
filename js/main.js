@@ -985,17 +985,17 @@ function downloadCSV() {
     csvContent +=',,,,,,,Mount,,Intro,,Ejac\n'
     csvContent +=',Male Ins,,=COUNT(B19:B'+r+'),,% exit,,"=ROUND(COUNT(J19:J'+r+')/COUNT(D19:D'+r+')*100,2)",,"=ROUND(COUNT(L19:L'+r+')/COUNT(F19:F'+r+')*100,2)",,"=ROUND(COUNT(N19:N'+r+')/COUNT(H19:H'+r+')*100,2)",,,,,,,,,,,\n';
     csvContent += ',Male Outs,,=COUNT(C19:C'+r+'),,mean contact return,,"=ROUND(AVERAGE(J19:J'+r+'),2)",,"=ROUND(AVERAGE(L19:L'+r+'),2)",,"=ROUND(AVERAGE(N19:N'+r+'),2)",,,,,,,,,,,\n';
-    csvContent += ',Seconds,,=MAX(C19:C'+r+'),,mean time to exit,,"=ROUND(AVERAGE(W19:W'+r+'),2)",,"=ROUND(AVERAGE(X19:X'+r+'),2)",,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,,,,,,,,,,\n';
+    csvContent += ',Seconds,,"=MAX(R19:R'+r+')",,mean time to exit,,"=ROUND(AVERAGE(W19:W'+r+'),2)",,"=ROUND(AVERAGE(X19:X'+r+'),2)",,"=ROUND(AVERAGE(Y19:Y'+r+'),2)",,,,,,,,,,,\n';
     csvContent += ',Hops IN,,'+hopsIn+',,pacing lq,,"=ROUND((COUNTIF(E19:E'+r+',"">=2"")+COUNTIF(G19:G'+r+',"">=2"")+COUNTIF(I19:I'+r+',"">=2""))/(COUNT(D19:I'+r+')/2)*100,2)",,,,,,,,,,,,,,,\n';
-    csvContent += ',Ears IN,,'+earsIn+',,pacing lr,,"=ROUND((SUM(E19:E'+r+')+SUM(G19:G'+r+')+SUM(I19:I'+r+'))/(COUNT(E19:E'+r+')+COUNT(G19:G'+r+')+COUNT(I19:I'+r+')),2)",,proc in per min,,"=ROUND((SUM(D8:D9)/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60))), 2)",,,,,,,,,,,,,\n';
-    csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,% twm,,"=ROUND(SUM(V19:V'+r+')/(QUOTIENT(MAX(C19:C'+r+'),100)*60+(MOD(MAX(C19:C'+r+'), 100)))*100, 2)",,,,,,,,,\n';
+    csvContent += ',Ears IN,,'+earsIn+',,pacing lr,,"=ROUND((SUM(E19:E'+r+')+SUM(G19:G'+r+')+SUM(I19:I'+r+'))/(COUNT(E19:E'+r+')+COUNT(G19:G'+r+')+COUNT(I19:I'+r+')),2)",,proc in per min,,"=ROUND(SUM(D8:D9)/(D7/60), 2)",,,,,,,,,,,,,\n';
+    csvContent += ',Hops ALONE,,'+hopsOut+',,time with male,,=SUM(V19:V'+r+'),,% twm,,"=ROUND(H10/D7 *100,2)",,,,,,,,,\n';
     csvContent += ',Ears ALONE,,'+earsOut+',,mounts,,=COUNT(D19:D'+r+'),,,,,,,,,,,,,\n';
 
     csvContent += ',Kicks,,'+kicks+',,intros,,=COUNT(F19:F'+r+'),,,,,,,,,,,,,,,\n';
     csvContent += ',Squeaks,,'+squeaks+',,ejacs,,=COUNT(H19:H'+r+'),,,,,,,,,,,,,,,\n';
     csvContent += ',Rolls,,'+rolls+',,flags,,'+flags+',,,,,,,,,,,,,,,\n';
-    csvContent += ',Rejection Beh,,'+rejectionBeh+',,rej per min,,"=ROUND(D15/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,,,\n';
-    csvContent += ',Experiment,,'+condition+',,act per min,,"=ROUND((COUNT(B19:B+'+r+')+COUNT(C19:C'+r+'))/(QUOTIENT(MAX(C19:C'+r+'),100)+(MOD(MAX(C19:C'+r+'), 60)/60)), 2)",,,,,\n';
+    csvContent += ',Rejection Beh,,'+rejectionBeh+',,rej per min,,"=ROUND(D15/(D7/60), 2)",,,,,,,\n';
+    csvContent += ',Experiment,,'+condition+',,act per min,,"=ROUND((COUNT(B19:B'+r+')+COUNT(C19:C'+r+'))/(D7/60), 2)",,,,,\n';
      
 
     // Possible future features: iii Calculation
