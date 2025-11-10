@@ -769,6 +769,7 @@ function backAndSave() {
     pacingexecuted = false;
     contactReturnLatency = 0;
     pacinglq = 0;
+    condition = 1;
     
     var resultTable = document.getElementById("testBody");
     var rows = resultTable.rows;
@@ -910,7 +911,12 @@ function downloadCSV() {
     var female = document.getElementById("female").value;
     var stud = document.getElementById("stud").value;
     var experimenter_name = document.getElementById("experimenter_name").value;
-    var condition = document.getElementById("condition").value;
+    var condition;
+    if(document.getElementById("condition").value != ""){
+        condition = document.getElementById("condition").value
+    } else {
+        condition = 0;
+    }
     var filename = document.getElementById("experiment_title").value;
     var seconds = (parseInt(document.getElementById("display-area").innerHTML.split(':')[0])*60 + parseInt(document.getElementById("display-area").innerHTML.split(':')[1])).toString();
     var time = document.getElementById("display-area").innerHTML;
@@ -999,16 +1005,18 @@ function downloadCSV() {
     csvContent += ',Experiment,,'+condition+',,act per min,,"=ROUND((COUNT(B19:B'+r+')+COUNT(C19:C'+r+'))/(D7/60), 2)",,,,,\n';
      
 
-    // Possible future features: iii Calculation
-    // iii,,=AVERAGE(Z19:Z'+r+')
-    // Need to include iii calculation
-    // make a new Row Z that follows this formula
-    // =IF(ISNUMBER(F19), IF(10000=MIN(10000, F20:F64, H20:H64), "", 60*(QUOTIENT(MIN(F20:F64, H20:H64), 100) - QUOTIENT(F19, 100)) + MOD(MIN(F20:F64, H20:H64), 100) - MOD(F19, 100)), "")
+    /* 
+    Possible future features: iii Calculation
+    iii,,=AVERAGE(Z19:Z'+r+')
+    Need to include iii calculation
+    make a new Row Z that follows this formula
+    =IF(ISNUMBER(F19), IF(10000=MIN(10000, F20:F64, H20:H64), "", 60*(QUOTIENT(MIN(F20:F64, H20:H64), 100) - QUOTIENT(F19, 100)) + MOD(MIN(F20:F64, H20:H64), 100) - MOD(F19, 100)), "")
 
-    // data.forEach(function(infoArray, index) {
-    //      dataString = infoArray.join(",");
-    //     csvContent += index < data.length ? dataString + "\n" : dataString;
-    // });
+    data.forEach(function(infoArray, index) {
+            dataString = infoArray.join(",");
+        csvContent += index < data.length ? dataString + "\n" : dataString;
+    }); 
+    */
     csvContent += ',,,,,,,,,Contact return,,,,,,,,,,,,,TIME TO EXIT,\n';
     csvContent += ',IN,OUT,Mount,LQ,Intro,LQ,Ejac,LQ,MOUNT,LQ,INTRO,LQ,EJAC,LQ,,,,,,,,Mount,Intro,Ejac,Time since last stim \n';
 
