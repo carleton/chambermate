@@ -530,7 +530,7 @@ var data = [
     ["Time with " + objectTwo, " ", stringToIntTime(timeWithTwo)],
     [objectOne + " Chews", " ", chewOne],
     [objectOne + " Hops", " ", hopOne ],
-    [objectOne + " Ears", " ", earsTwo],
+    [objectOne + " Ears", " ", earsOne],
     ["Center" + " Hops", " ", centerHops],
     ["Center" + " Ears", " ", centerEars],
     [objectTwo + " Chews", " ", chewTwo],
