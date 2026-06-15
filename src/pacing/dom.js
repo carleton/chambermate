@@ -416,9 +416,9 @@ function downloadCSV() {
       if (j !== 0) csvContent += ',';
       let str = td.innerHTML;
       if (str.charAt(0) === '<') {
-        str = str.substr(str.indexOf('</b>') + 4);
+        str = str.slice(str.indexOf('</b>') + 4);
         if (str.charAt(0) === 't') str = '';
-        if (str.charAt(0) === '&') str = str.substr(6);
+        if (str.charAt(0) === '&') str = str.slice(6);
         str = str.replace(/\&nbsp;/g, '');
       }
       if (str.includes('del')) str = '';
